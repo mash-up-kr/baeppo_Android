@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ipdam</string>
+    <string name="navermap_clientid">uj5pdp7rc1</string>
 </resources>
