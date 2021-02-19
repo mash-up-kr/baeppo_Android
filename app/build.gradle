@@ -45,18 +45,30 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+<<<<<<< HEAD
 
+=======
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+>>>>>>> feat: floating search view와 profile 버튼 추가
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // KTX
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+<<<<<<< HEAD
     // KTX
     implementation "androidx.fragment:fragment-ktx:1.3.0"
     implementation 'androidx.core:core-ktx:1.3.2'
+=======
+    // Naver Maps
+    implementation 'com.naver.maps:map-sdk:3.10.2'
+>>>>>>> feat: floating search view와 profile 버튼 추가
 
     // Naver Maps
     implementation 'com.naver.maps:map-sdk:3.10.2'
