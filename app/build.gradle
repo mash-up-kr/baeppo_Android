@@ -53,4 +53,8 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //Naver Maps
+    implementation 'com.naver.maps:map-sdk:3.10.2'
+
 }
