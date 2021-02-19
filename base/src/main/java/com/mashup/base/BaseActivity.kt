@@ -24,7 +24,14 @@ abstract class BaseActivity<T : ViewDataBinding>(
 
         binding = DataBindingUtil.setContentView(this, layoutRes)
         binding.lifecycleOwner = this
+
+        initLayout()
+        observeViewModel()
     }
+
+    open fun initLayout() {}
+
+    open fun observeViewModel() {}
 
     override fun onDestroy() {
         super.onDestroy()

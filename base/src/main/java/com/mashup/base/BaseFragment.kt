@@ -32,8 +32,15 @@ abstract class BaseFragment<T : ViewDataBinding>(
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        initLayout()
+        observeViewModel()
+
         return binding.root
     }
+
+    open fun initLayout() {}
+
+    open fun observeViewModel() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
