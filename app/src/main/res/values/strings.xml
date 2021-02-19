@@ -4,4 +4,7 @@
     <string name="menu_bookmarks">관심입담</string>
     <string name="menu_myipdam">마이입담</string>
     <string name="menu_profile">마이페이지</string>
+
+    <string name="navermap_clientid">uj5pdp7rc1</string>
+
 </resources>
