@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Ipdam</string>
+    <string name="menu_home">홈</string>
+    <string name="menu_bookmarks">관심입담</string>
+    <string name="menu_myipdam">마이입담</string>
+    <string name="menu_profile">마이페이지</string>
 </resources>
