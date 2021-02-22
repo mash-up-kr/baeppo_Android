@@ -22,14 +22,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val profileFragment by lazy { ProfileFragment() }
 
     override fun initLayout() {
-
         navigateFragment(MainType.HOME)
-
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
     }
 
-    private val bottomNavigationListener : (menu : MenuItem) -> Boolean = { menu ->
-        when(menu.itemId) {
+    private val bottomNavigationListener: (menu: MenuItem) -> Boolean = { menu ->
+        when (menu.itemId) {
             R.id.action_home -> {
                 navigateFragment(MainType.HOME)
                 true
@@ -51,32 +49,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun navigateFragment(mainType: MainType) {
-
         val fragment = getFragment(mainType)
-
         val primaryFragment = supportFragmentManager.primaryNavigationFragment
 
         supportFragmentManager.commit {
             show(fragment)
 
-            primaryFragment?.let {
-                supportFragmentManager.commit { hide(primaryFragment) }
-            }
-
+            primaryFragment?.let { supportFragmentManager.commit { hide(it) } }
             setPrimaryNavigationFragment(fragment)
         }
     }
 
-    private fun getFragment(mainType: MainType) = when(mainType) {
+    private fun getFragment(mainType: MainType) = when (mainType) {
         MainType.HOME -> homeFragment
         MainType.BOOKMARKS -> bookmarksFragment
         MainType.MYIPDAM -> myIpdamFragment
         MainType.PROFILE -> profileFragment
     }.apply {
         if (!isAdded) {
-            supportFragmentManager.commit {
-                add(R.id.frameLayout, this@apply)
-            }
+            supportFragmentManager.beginTransaction()
+                .add(R.id.frameLayout, this).commit()
         }
     }
 
