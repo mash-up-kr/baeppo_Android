@@ -1,7 +1,7 @@
 package com.mashup.ipdam.home
 
 import android.graphics.PointF
-import android.util.Log
+import androidx.fragment.app.activityViewModels
 import com.mashup.base.BaseFragment
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.FragmentHomeBinding
@@ -15,6 +15,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override var logTag: String = "HomeFragment"
 
     private lateinit var map: NaverMap
+    private val viewModel by activityViewModels<HomeViewModel>()
 
     override fun initLayout() {
         binding.map.getMapAsync(this)
@@ -22,7 +23,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun getMapBoundsOnScreen() {
         val locationOnScreen = getMapLocation()
-        Log.d(logTag, "x=${locationOnScreen[0]} y=${locationOnScreen[1]}")
         val topLeftPointF = PointF(0f, 0f)
         val bottomLeftPointF = PointF(0f, locationOnScreen[1].toFloat())
         val topRightPointF = PointF(locationOnScreen[0].toFloat(), 0f)
@@ -34,8 +34,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         val bottomLeftCoord = projection.fromScreenLocation(bottomLeftPointF)
         val bottomRightCoord = projection.fromScreenLocation(bottomRightPointF)
 
-        Log.d(logTag, "topLeft: $topLeftCoord topRight: $topRightCoord" +
-                "bottomLeft: $bottomLeftCoord bottomRight: $bottomRightCoord")
     }
 
     private fun getMapLocation() = intArrayOf(0, 0).apply {
@@ -45,7 +43,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     override fun onMapReady(map: NaverMap) {
-        this.map = map
-        getMapBoundsOnScreen()
+        this.map = map.apply {
+            minZoom = MIN_MAX_ZOOM
+            maxZoom = MAP_MAX_ZOOM
+        }
+        initMapListener()
+        initMapUi()
+    }
+
+    private fun initMapListener() {
+        map.setOnSymbolClickListener { symbol ->
+            viewModel.showIpdamInfo(symbol.position)
+            false
+        }
+
+        map.addOnCameraIdleListener {
+            viewModel.getIpdamList()
+        }
+    }
+
+    private fun initMapUi() {
+        map.uiSettings.apply {
+            isZoomControlEnabled = false
+            isLocationButtonEnabled = true
+            isScaleBarEnabled = false
+        }
+    }
+
+    companion object {
+        const val MAP_MAX_ZOOM = 18.0
+        const val MIN_MAX_ZOOM = 5.0
     }
 }
