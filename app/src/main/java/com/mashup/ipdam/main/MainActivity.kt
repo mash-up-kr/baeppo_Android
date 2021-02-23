@@ -54,7 +54,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         supportFragmentManager.commit {
             show(fragment)
-
             primaryFragment?.let { supportFragmentManager.commit { hide(it) } }
             setPrimaryNavigationFragment(fragment)
         }
