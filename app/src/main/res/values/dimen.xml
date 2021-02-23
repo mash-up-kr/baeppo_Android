@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="radius_corner">8dp</dimen>
-    <dimen name="size_navigation_icon">20dp</dimen>
-    <dimen name="size_add_button">50dp</dimen>
-</resources>

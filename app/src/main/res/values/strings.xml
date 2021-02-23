@@ -1,16 +1,10 @@
 <resources>
     <string name="app_name">Ipdam</string>
-<<<<<<< HEAD
     <string name="menu_home">홈</string>
     <string name="menu_bookmarks">관심입담</string>
     <string name="menu_myipdam">마이입담</string>
     <string name="menu_profile">마이페이지</string>
 
-    <string name="navermap_clientid">uj5pdp7rc1</string>
-
-=======
     <string name="clientid_navermap">uj5pdp7rc1</string>
-    <string name="menu_home">홈</string>
     <string name="hint_search">장소, 빌딩명, 주소 검색</string>
->>>>>>> feat: floating search view와 profile 버튼 추가
 </resources>
