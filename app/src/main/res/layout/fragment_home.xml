@@ -31,6 +31,7 @@
             android:background="@drawable/bg_corner"
             android:backgroundTint="@color/white"
             android:drawableRight="@drawable/ic_search"
+            android:elevation="@dimen/elevation_search"
             android:hint="@string/hint_search"
             android:lines="1"
             android:paddingLeft="16dp"
