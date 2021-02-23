@@ -22,6 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun getMapBoundsOnScreen() {
         val locationOnScreen = getMapLocation()
+        Log.d(logTag, "x=${locationOnScreen[0]} y=${locationOnScreen[1]}")
         val topLeftPointF = PointF(0f, 0f)
         val bottomLeftPointF = PointF(0f, locationOnScreen[1].toFloat())
         val topRightPointF = PointF(locationOnScreen[0].toFloat(), 0f)
@@ -37,11 +38,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 "bottomLeft: $bottomLeftCoord bottomRight: $bottomRightCoord")
     }
 
-    /**
-     * @return IntArray : 절대 좌표 x, y
-     */
     private fun getMapLocation() = intArrayOf(0, 0).apply {
         binding.map.getLocationOnScreen(this)
+        this[0] += binding.map.width
+        this[1] += binding.map.height
     }
 
     override fun onMapReady(map: NaverMap) {
