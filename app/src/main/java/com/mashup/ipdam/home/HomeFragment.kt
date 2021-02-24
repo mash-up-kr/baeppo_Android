@@ -1,6 +1,5 @@
 package com.mashup.ipdam.home
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.view.View
@@ -11,6 +10,11 @@ import com.mashup.base.ext.checkSelfPermissionCompat
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
+import com.mashup.ipdam.data.map.MapConstants.LOCATION_MAP_PERMISSION
+import com.mashup.ipdam.data.map.MapConstants.LOCATION_PERMISSION_REQUEST_CODE
+import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
+import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
+import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
@@ -24,7 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override var logTag: String = "HomeFragment"
 
     private lateinit var map: NaverMap
-    private lateinit var locationSource: FusedLocationSource
+    private lateinit var mapLocationSource: FusedLocationSource
     private val viewModel by activityViewModels<HomeViewModel>()
 
     private val requestPermissionLauncher =
@@ -41,7 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
 
     override fun initLayout() {
-        locationSource =
+        mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         binding.map.getMapAsync(this)
     }
@@ -50,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         this.map = map.apply {
             minZoom = MIN_MAX_ZOOM
             maxZoom = MAP_MAX_ZOOM
-            locationSource = locationSource
+            locationSource = mapLocationSource
         }
         requestMapLocationPermission()
         initMapListener()
@@ -127,20 +131,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun showLocationButton() {
-        locationSource.onRequestPermissionsResult(
+        mapLocationSource.onRequestPermissionsResult(
             LOCATION_PERMISSION_REQUEST_CODE,
             arrayOf(LOCATION_MAP_PERMISSION), intArrayOf(PackageManager.PERMISSION_GRANTED)
         )
         binding.locationView.visibility = View.VISIBLE
         binding.locationView.map = map
         map.locationTrackingMode = LOCATION_TRACKING_MODE
-    }
-
-    companion object {
-        private const val LOCATION_MAP_PERMISSION = ACCESS_FINE_LOCATION
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
-        private val LOCATION_TRACKING_MODE = LocationTrackingMode.Follow
-        private const val MAP_MAX_ZOOM = 18.0
-        private const val MIN_MAX_ZOOM = 5.0
     }
 }
