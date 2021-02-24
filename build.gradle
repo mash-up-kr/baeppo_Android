@@ -34,5 +34,6 @@ task clean(type: Delete) {
 ext {
     glide_version = '4.11.0'
     fragment_version = '1.2.5'
+    activity_version = '1.3.0-alpha02'
     hilt_lifecycle_version = '1.0.0-alpha03'
 }
