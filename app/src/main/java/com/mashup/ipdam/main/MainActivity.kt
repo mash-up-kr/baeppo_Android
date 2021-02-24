@@ -16,10 +16,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override var logTag: String = "MainActivity"
 
-    private val homeFragment by lazy { HomeFragment() }
-    private val bookmarksFragment by lazy { BookmarksFragment() }
-    private val myIpdamFragment by lazy { MyIpdamFragment() }
-    private val profileFragment by lazy { ProfileFragment() }
+    private val homeFragment by lazy { HomeFragment.getInstance() }
+    private val bookmarksFragment by lazy { BookmarksFragment.getInstance() }
+    private val myIpdamFragment by lazy { MyIpdamFragment.getInstance() }
+    private val profileFragment by lazy { ProfileFragment.getInstance() }
 
     override fun initLayout() {
         navigateFragment(MainType.HOME)
