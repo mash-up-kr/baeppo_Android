@@ -134,4 +134,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.locationView.map = map
         map.locationTrackingMode = LOCATION_TRACKING_MODE
     }
+
+    companion object {
+        fun getInstance() = HomeFragment()
+    }
 }
