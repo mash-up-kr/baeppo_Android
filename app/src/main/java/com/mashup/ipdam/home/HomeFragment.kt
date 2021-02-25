@@ -85,16 +85,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private fun getMapBoundsOnScreen() {
         val locationOnScreen = getMapLocation()
         val topLeftPointF = PointF(0f, 0f)
-        val bottomLeftPointF = PointF(0f, locationOnScreen[1].toFloat())
-        val topRightPointF = PointF(locationOnScreen[0].toFloat(), 0f)
         val bottomRightPointF = PointF(locationOnScreen[0].toFloat(), locationOnScreen[1].toFloat())
 
         val projection = map.projection
         val topLeftCoord = projection.fromScreenLocation(topLeftPointF)
-        val topRightCoord = projection.fromScreenLocation(topRightPointF)
-        val bottomLeftCoord = projection.fromScreenLocation(bottomLeftPointF)
         val bottomRightCoord = projection.fromScreenLocation(bottomRightPointF)
-
     }
 
     private fun getMapLocation() = intArrayOf(0, 0).apply {
