@@ -8,5 +8,5 @@ object MapConstants {
     const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     val LOCATION_TRACKING_MODE = LocationTrackingMode.Follow
     const val MAP_MAX_ZOOM = 18.0
-   const val MIN_MAX_ZOOM = 5.0
+    const val MIN_MAX_ZOOM = 5.0
 }
