@@ -10,6 +10,7 @@ import com.mashup.base.ext.checkSelfPermissionCompat
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
+import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_MAP_PERMISSION
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_PERMISSION_REQUEST_CODE
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
@@ -42,7 +43,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 hideLocationButton()
             }
         }
-
 
     override fun initLayout() {
         mapLocationSource =
@@ -82,14 +82,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
     }
 
-    private fun getMapBoundsOnScreen() {
+    private fun getMapBoundaryOnScreen(): MapBoundary {
         val locationOnScreen = getMapLocation()
         val topLeftPointF = PointF(0f, 0f)
         val bottomRightPointF = PointF(locationOnScreen[0].toFloat(), locationOnScreen[1].toFloat())
 
         val projection = map.projection
-        val topLeftCoord = projection.fromScreenLocation(topLeftPointF)
-        val bottomRightCoord = projection.fromScreenLocation(bottomRightPointF)
+        val topLeftLatLng = projection.fromScreenLocation(topLeftPointF)
+        val bottomRightLatLng = projection.fromScreenLocation(bottomRightPointF)
+
+        return MapBoundary(topLeftLatLng, bottomRightLatLng)
     }
 
     private fun getMapLocation() = intArrayOf(0, 0).apply {
@@ -100,13 +102,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initMapListener() {
         map.setOnSymbolClickListener { symbol ->
-            viewModel.showIpdamInfo(symbol.position)
+            viewModel.getIpdamBySymbol(symbol.position)
             false
         }
-
-        map.addOnCameraIdleListener {
-            viewModel.getIpdamList()
-        }
+        map.addOnCameraIdleListener { viewModel.getIpdamInBoundary(getMapBoundaryOnScreen()) }
     }
 
     private fun initMapUi() {
@@ -115,7 +114,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             isScaleBarEnabled = false
             isLocationButtonEnabled = false
         }
-
         binding.locationView.map = map
     }
 
