@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="height_statusbar">24dp</dimen>
-    <dimen name="radius_corner">16dp</dimen>
-    <dimen name="height_search">40dp</dimen>
+    <dimen name="radius_corner">48dp</dimen>
+    <dimen name="height_search">48dp</dimen>
     <dimen name="elevation_search">8dp</dimen>
     <dimen name="margin_bottom_location_button">56dp</dimen>
     <dimen name="peek_height_bottom_sheet">48dp</dimen>
