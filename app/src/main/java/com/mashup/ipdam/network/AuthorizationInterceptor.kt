@@ -1,6 +1,5 @@
 package com.mashup.ipdam.network
 
-import android.content.SharedPreferences
 import com.mashup.ipdam.data.datastore.AuthorizationDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -15,6 +14,7 @@ class AuthorizationInterceptor @Inject constructor(
 
     companion object {
         private const val KEY_ACCESS_TOKEN = "authorization"
+        private const val KAKAO_AUTHORIZATION = "Authorization"
     }
 
     override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(
@@ -25,6 +25,7 @@ class AuthorizationInterceptor @Inject constructor(
                     val accessToken = authorizationDataStore.getAccessToken().first()
                     if (!accessToken.isEmpty()) {
                         header(KEY_ACCESS_TOKEN, accessToken)
+                        header(KAKAO_AUTHORIZATION, "KaKaoAK cebbe69291069180ea7e957572c9998f")
                     }
                 }
             }

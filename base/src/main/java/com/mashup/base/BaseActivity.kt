@@ -26,7 +26,6 @@ abstract class BaseActivity<T : ViewDataBinding>(
         binding = DataBindingUtil.setContentView(this, layoutRes)
         binding.lifecycleOwner = this
 
-        setStatusBarTransparent()
         initLayout()
         observeViewModel()
     }
