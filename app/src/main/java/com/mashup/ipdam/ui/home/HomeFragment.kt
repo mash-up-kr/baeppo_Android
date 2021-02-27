@@ -1,10 +1,13 @@
 package com.mashup.ipdam.ui.home
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.view.doOnLayout
@@ -26,6 +29,7 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
+import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
@@ -59,6 +63,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
 
     override fun initLayout() {
+        binding.searchView.setOnEditorActionListener(
+            TextView.OnEditorActionListener { _, actionId, _ ->
+                when(actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        showSearchActivity()
+                        true
+                    }
+                    else -> false
+                }
+            })
+
         mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         binding.viewModel = homeViewModel
@@ -90,6 +105,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     resources.getDimension(R.dimen.margin_bottom_search)
             height = bottomSheetHeight.toInt()
         }
+    }
+
+    private fun showSearchActivity() {
+        val intent = Intent(requireActivity(), SearchActivity::class.java)
+        requireActivity().startActivity(intent)
     }
 
     override fun onMapReady(naverMap: NaverMap) {

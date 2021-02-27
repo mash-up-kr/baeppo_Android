@@ -24,7 +24,7 @@
     <string name="login_button">로그인하기</string>
     <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
     <string name="login_create_account">&lt;u>입담 회원가입&lt;/u></string>
-<!--    회원 가입 페이지-->
+    <!--    회원 가입 페이지-->
     <string name="register_title">회원가입</string>
     <string name="register_id_text">아이디</string>
     <string name="register_id_hint">6~12자 영문, 숫자 조합하여 만들어주세요. </string>
@@ -39,4 +39,7 @@
     <string name="register_id_result_success">멋진 아이디에요!</string>
     <string name="register_password_result_failed">비밀번호가 달라요!</string>
     <string name="register_password_result_success">확인되었습니다!</string>
+    <!--    검색 페이지-->
+    <string name="search_place_header">%1$s 검색결과</string>
+    <string name="search_result_none">검색한 결과가 없습니다.</string>
 </resources>
