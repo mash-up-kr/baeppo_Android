@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object IpdamRetrofit {
     // TODO Replace end-point
-    private const val API_END_POINT = "https://example.com/api"
+    const val API_END_POINT = "https://example.com/api"
 
     fun <T> create(
         service: Class<T>,
@@ -21,4 +21,12 @@ object IpdamRetrofit {
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(SchedulerProvider.io()))
         .build()
         .create(service)
+
+    inline fun <reified T : Any> create(
+        client: OkHttpClient,
+        httpUrl: String = API_END_POINT
+    ): T {
+        require(httpUrl.isNotBlank()) { "Parameter httpUrl cannot be blank." }
+        return create(service = T::class.java, httpUrl = httpUrl, client = client)
+    }
 } 
