@@ -5,10 +5,13 @@ import android.graphics.PointF
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.view.marginTop
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.ext.checkSelfPermissionCompat
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
+import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.R
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_MAP_PERMISSION
@@ -30,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private lateinit var map: NaverMap
     private lateinit var mapLocationSource: FusedLocationSource
-    private val viewModel by activityViewModels<HomeViewModel>()
+    private val homeViewModel by activityViewModels<HomeViewModel>()
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -47,7 +50,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun initLayout() {
         mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+        binding.viewModel = homeViewModel
         binding.map.getMapAsync(this)
+        initBottomSheet()
+    }
+
+    private fun initBottomSheet() {
+
+        BottomSheetBehavior.from(binding.bottomSheet.root)
+            .addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    //TODO: 입담 리뷰 세세한 리스트 화면에 보여주기
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+                }
+            })
+    }
+
+    override fun observeViewModel() {
+        homeViewModel.ipdamDialogEvent
+            .observeOn(SchedulerProvider.ui())
+            .subscribe { event ->
+                if (event) {
+                    showIpdamBottomSheet()
+                } else {
+                    hideIpdamBottomSheet()
+                }
+            }.addToDisposable()
     }
 
     override fun onMapReady(map: NaverMap) {
@@ -102,10 +133,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initMapListener() {
         map.setOnSymbolClickListener { symbol ->
-            viewModel.getIpdamBySymbol(symbol.position)
+            homeViewModel.getIpdamBySymbol(symbol.position)
             false
         }
-        map.addOnCameraIdleListener { viewModel.getIpdamInBoundary(getMapBoundaryOnScreen()) }
+        map.addOnCameraIdleListener { homeViewModel.getIpdamInBoundary(getMapBoundaryOnScreen()) }
     }
 
     private fun initMapUi() {
@@ -131,6 +162,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.locationView.visibility = View.VISIBLE
         binding.locationView.map = map
         map.locationTrackingMode = LOCATION_TRACKING_MODE
+    }
+
+    private fun showIpdamBottomSheet() {
+        setIpdamBottomSheetHeight()
+        BottomSheetBehavior.from(binding.bottomSheet.root).run {
+            state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
+    private fun setIpdamBottomSheetHeight() {
+        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
+            val bottomSheetHeight = binding.root.height - binding.searchView.height -
+                    binding.searchView.marginTop * 2
+            height = bottomSheetHeight
+        }
+        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
+    }
+
+    private fun hideIpdamBottomSheet() {
+        BottomSheetBehavior.from(binding.bottomSheet.root).run {
+            state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     companion object {
