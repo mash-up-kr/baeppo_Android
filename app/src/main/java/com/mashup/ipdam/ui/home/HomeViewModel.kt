@@ -1,4 +1,4 @@
-package com.mashup.ipdam.home
+package com.mashup.ipdam.ui.home
 
 import com.mashup.base.BaseViewModel
 import com.mashup.ipdam.data.map.MapBoundary
