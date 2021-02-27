@@ -1,4 +1,4 @@
-package com.mashup.ipdam.myipdam
+package com.mashup.ipdam.ui.myipdam
 
 import com.mashup.base.BaseFragment
 import com.mashup.ipdam.R
