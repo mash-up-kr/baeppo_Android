@@ -13,7 +13,7 @@
         tools:context=".ui.main.MainActivity">
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/statusBar"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_statusbar"
             android:background="@color/status_color"
@@ -32,6 +32,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationIndicator"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_indicator"
+            app:itemBackground="@drawable/bg_selection_indicator"
+            app:itemIconSize="0dp"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/navigation_main" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -43,7 +55,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/navigation_main" />
-
 
         <ImageButton
             android:id="@+id/imageButton"
