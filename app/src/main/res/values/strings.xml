@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Ipdam</string>
     <string name="menu_home">홈</string>
-    <string name="menu_bookmarks">관심입담</string>
-    <string name="menu_myipdam">마이입담</string>
+    <string name="menu_bookmarks">관심리뷰</string>
+    <string name="menu_myipdam">마이리뷰</string>
     <string name="menu_profile">마이페이지</string>
     <string name="clientid_navermap">uj5pdp7rc1</string>
     <string name="hint_search">어느 곳의 입담 리뷰를 찾아볼까요?</string>
