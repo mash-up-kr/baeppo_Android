@@ -5,6 +5,8 @@ import android.graphics.PointF
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
@@ -20,10 +22,14 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -90,6 +96,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         requestMapLocationPermission()
         initMapListener()
         initMapUi()
+        initUniversityMarker()
     }
 
     private fun requestMapLocationPermission() {
@@ -137,6 +144,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             false
         }
         map.addOnCameraIdleListener { homeViewModel.getIpdamInBoundary(getMapBoundaryOnScreen()) }
+    }
+
+    private fun initUniversityMarker() {
+        val marker = Marker().apply {
+            position = LatLng(37.557277, 126.9009433)
+            icon = OverlayImage.fromResource(R.drawable.ic_marker)
+            width = resources.getDimension(R.dimen.width_marker).toInt()
+            height = resources.getDimension(R.dimen.height_marker).toInt()
+        }
+        marker.map = map
     }
 
     private fun initMapUi() {
