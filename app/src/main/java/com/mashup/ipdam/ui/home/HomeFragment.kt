@@ -1,4 +1,4 @@
-package com.mashup.ipdam.home
+package com.mashup.ipdam.ui.home
 
 import android.content.pm.PackageManager
 import android.graphics.PointF

@@ -1,4 +1,4 @@
-package com.mashup.ipdam.profile
+package com.mashup.ipdam.ui.profile
 
 import com.mashup.base.BaseFragment
 import com.mashup.ipdam.R

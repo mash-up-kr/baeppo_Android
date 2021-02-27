@@ -1,14 +1,14 @@
-package com.mashup.ipdam.main
+package com.mashup.ipdam.ui.main
 
 import android.view.MenuItem
 import androidx.fragment.app.commit
 import com.mashup.base.BaseActivity
 import com.mashup.ipdam.R
-import com.mashup.ipdam.bookmarks.BookmarksFragment
+import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.databinding.ActivityMainBinding
-import com.mashup.ipdam.home.HomeFragment
-import com.mashup.ipdam.myipdam.MyIpdamFragment
-import com.mashup.ipdam.profile.ProfileFragment
+import com.mashup.ipdam.ui.home.HomeFragment
+import com.mashup.ipdam.ui.myipdam.MyIpdamFragment
+import com.mashup.ipdam.ui.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override var logTag: String = "MainActivity"
 
     private val homeFragment by lazy { HomeFragment.getInstance() }
-    private val bookmarksFragment by lazy { BookmarksFragment.getInstance() }
+    private val bookmarksFragment by lazy { BookmarkFragment.getInstance() }
     private val myIpdamFragment by lazy { MyIpdamFragment.getInstance() }
     private val profileFragment by lazy { ProfileFragment.getInstance() }
 
