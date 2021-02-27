@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="com.mashup.ipdam.home.HomeViewModel" />
+        <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
 
         <variable
             name="viewModel"
