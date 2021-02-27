@@ -12,6 +12,15 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <View
+            android:id="@+id/statusBar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_statusbar"
+            android:background="@color/status_color"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -21,6 +30,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationIndicator"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_indicator"
+            app:itemBackground="@drawable/bg_selection_indicator"
+            app:itemIconSize="0dp"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/navigation_main" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -35,13 +56,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/navigation_main" />
 
-
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="@dimen/size_add_button"
             android:layout_height="@dimen/size_add_button"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_corner"
+            android:background="@drawable/bg_circle"
             android:elevation="9dp"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"
