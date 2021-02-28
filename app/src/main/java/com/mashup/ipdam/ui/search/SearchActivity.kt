@@ -34,8 +34,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
             //TODO: 주소 반환?
             finish()
         }
-
-        hideResultExistLayout()
     }
 
     override fun observeViewModel() {

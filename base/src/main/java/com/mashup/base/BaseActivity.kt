@@ -6,7 +6,6 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.mashup.base.ext.setStatusBarTransparent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

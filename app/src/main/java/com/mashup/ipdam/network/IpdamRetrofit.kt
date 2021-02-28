@@ -8,8 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object IpdamRetrofit {
     // TODO Replace end-point
-    const val IPDAM_API_END_POINT = "https://example.com/api"
-    const val KAKAO_API_END_POINT = "https://dapi.kakao.com"
+    const val IPDAM_API_END_POINT = "https://example.com/api/"
+    const val KAKAO_API_END_POINT = "https://dapi.kakao.com/"
 
     fun <T> create(
         service: Class<T>,
