@@ -14,10 +14,9 @@ class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : BaseViewModel() {
     override var logTag: String = "SearchViewModel"
+    val keyword = MutableLiveData<String>("")
 
-    private val _keyword = MutableLiveData<String>("")
-    val keyword: LiveData<String> = _keyword
-    private val _placeList = MutableLiveData<List<Documents>>()
+    private val _placeList = MutableLiveData<List<Documents>>(emptyList())
     val placeList: LiveData<List<Documents>> = _placeList
 
     fun getPlaceByKeyword() {
@@ -30,5 +29,4 @@ class SearchViewModel @Inject constructor(
                 }
         }
     }
-
 }

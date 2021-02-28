@@ -5,7 +5,7 @@ import android.view.MenuItem
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.commit
 import com.mashup.base.BaseActivity
-import com.mashup.base.ext.setStatusBarTransparent
+import com.mashup.base.ext.initStatusBarTransparent
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.databinding.ActivityMainBinding
@@ -25,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val profileFragment by lazy { ProfileFragment.getInstance() }
 
     override fun initLayout() {
-        setStatusBarTransparent()
+        initStatusBarTransparent()
         navigateFragment(MainType.HOME)
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
     }
