@@ -17,13 +17,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="186dp"
+<<<<<<< HEAD
             android:src="@drawable/title_ipdam"
+=======
+            android:src="@drawable/title_splash"
+>>>>>>> feat: Splash 화면 제작
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+<<<<<<< HEAD
             android:id="@+id/splashContent"
+=======
+            android:id="@+id/textView"
+>>>>>>> feat: Splash 화면 제작
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -38,7 +46,11 @@
             android:id="@+id/splashIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:src="@drawable/ic_ipdam"
+=======
+            android:src="@drawable/ic_splash"
+>>>>>>> feat: Splash 화면 제작
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
