@@ -20,6 +20,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         Observable.timer(2000L, TimeUnit.MILLISECONDS)
             .observeOn(SchedulerProvider.ui())
             .subscribe({
+                //TODO: Login 화면으로 이후 연결
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
