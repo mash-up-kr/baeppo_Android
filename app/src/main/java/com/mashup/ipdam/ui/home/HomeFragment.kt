@@ -2,9 +2,12 @@ package com.mashup.ipdam.ui.home
 
 import android.content.pm.PackageManager
 import android.graphics.PointF
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
@@ -25,6 +28,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -56,7 +60,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun initBottomSheet() {
-
+        binding.root.doOnLayout {
+            initBottomSheetHeight()
+        }
         BottomSheetBehavior.from(binding.bottomSheet.root)
             .addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -69,16 +75,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             })
     }
 
-    override fun observeViewModel() {
-        homeViewModel.ipdamDialogEvent
-            .observeOn(SchedulerProvider.ui())
-            .subscribe { event ->
-                if (event) {
-                    showIpdamBottomSheet()
-                } else {
-                    hideIpdamBottomSheet()
-                }
-            }.addToDisposable()
+    private fun initBottomSheetHeight() {
+        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
+            height = binding.root.measuredHeight - binding.searchView.measuredHeight -
+                    binding.searchView.marginTop * 2
+        }
+        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
     }
 
     override fun onMapReady(map: NaverMap) {
@@ -162,28 +164,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.locationView.visibility = View.VISIBLE
         binding.locationView.map = map
         map.locationTrackingMode = LOCATION_TRACKING_MODE
-    }
-
-    private fun showIpdamBottomSheet() {
-        setIpdamBottomSheetHeight()
-        BottomSheetBehavior.from(binding.bottomSheet.root).run {
-            state = BottomSheetBehavior.STATE_COLLAPSED
-        }
-    }
-
-    private fun setIpdamBottomSheetHeight() {
-        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
-            val bottomSheetHeight = binding.root.height - binding.searchView.height -
-                    binding.searchView.marginTop * 2
-            height = bottomSheetHeight
-        }
-        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
-    }
-
-    private fun hideIpdamBottomSheet() {
-        BottomSheetBehavior.from(binding.bottomSheet.root).run {
-            state = BottomSheetBehavior.STATE_HIDDEN
-        }
     }
 
     companion object {
