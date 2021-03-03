@@ -7,11 +7,7 @@ import com.mashup.base.BaseActivity
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySplashBinding
-<<<<<<< HEAD
 import com.mashup.ipdam.ui.login.LoginActivity
-=======
-import com.mashup.ipdam.ui.main.MainActivity
->>>>>>> feat: Splash 화면 제작
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
