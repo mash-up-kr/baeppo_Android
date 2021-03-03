@@ -11,6 +11,7 @@
     <string name="ipdam_header_text">%1$s 자취방 리뷰 &lt;font color=\"%2$s\">%3$d&lt;/font>개</string>
     <!-- Splash 화면 -->
     <string name="splash_text">입주자들의 솔직한 이야기를 만나보세요</string>
+<!--    로그인 화면-->
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
     <string name="login_button">로그인하기</string>
