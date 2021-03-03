@@ -8,11 +8,13 @@ import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
+import com.mashup.base.BaseRecyclerView
 import com.mashup.base.ext.checkSelfPermissionCompat
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.R
+import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_MAP_PERMISSION
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_PERMISSION_REQUEST_CODE
@@ -20,11 +22,13 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
+import com.mashup.ipdam.databinding.ItemBottomsheetBinding
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.databinding.library.baseAdapters.BR
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -64,9 +68,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                    //slideOffset은 0에서 1 사이
                 }
             })
+        binding.bottomSheet.recyclerView.adapter =
+            object : BaseRecyclerView.Adapter<Review, ItemBottomsheetBinding>(
+                R.layout.item_bottomsheet,
+                BR.review
+            ) {}
     }
 
     override fun observeViewModel() {
