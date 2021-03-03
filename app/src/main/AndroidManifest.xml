@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ipdam">
 
-        <activity android:name=".ui.login.LoginActivity"></activity>
+        <activity android:name=".ui.register.RegisterActivity"/>
+        <activity android:name=".ui.login.LoginActivity" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
