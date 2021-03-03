@@ -29,48 +29,49 @@
             android:layout_marginTop="22dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginLogo"
+            app:layout_constraintTop_toBottomOf="@id/loginLogo"
             app:srcCompat="@drawable/title_ipdam_black" />
 
         <EditText
             android:id="@+id/loginId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/height_edittext"
             android:layout_marginStart="18dp"
             android:layout_marginTop="72dp"
             android:layout_marginEnd="18dp"
+            android:background="@drawable/bg_corner_stroke"
             android:ems="10"
             android:hint="@string/login_id"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:lines="1"
+            android:minHeight="@dimen/height_edittext"
             android:paddingStart="11dp"
             android:paddingEnd="78dp"
-            android:background="@drawable/bg_corner_stroke"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginTitle" />
+            app:layout_constraintTop_toBottomOf="@id/loginTitle" />
 
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/height_edittext"
             android:layout_marginStart="18dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="18dp"
+            android:background="@drawable/bg_corner_stroke"
             android:ems="10"
             android:hint="@string/login_password"
+            android:inputType="textPassword"
             android:lines="1"
-            android:background="@drawable/bg_corner_stroke"
-            android:textSize="16sp"
+            android:minHeight="@dimen/height_edittext"
             android:paddingStart="11dp"
             android:paddingEnd="78dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginId" />
+            app:layout_constraintTop_toBottomOf="@id/loginId" />
 
         <Button
             android:id="@+id/loginButton"
@@ -86,29 +87,29 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+            app:layout_constraintTop_toBottomOf="@id/loginPassword" />
 
         <TextView
             android:id="@+id/loginFindAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:text="@string/login_find_account"
             android:textColor="@color/black"
             android:textSize="14sp"
+            setHtmlText="@{@string/login_find_account}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+            app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
         <TextView
             android:id="@+id/loginCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_create_account"
-            android:textSize="14sp"
             android:textColor="@color/black"
+            android:textSize="14sp"
+            setHtmlText="@{@string/login_create_account}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginFindAccount" />
+            app:layout_constraintTop_toBottomOf="@id/loginFindAccount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
