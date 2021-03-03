@@ -13,6 +13,10 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         binding.registerBackButton.setOnClickListener {
             finish()
         }
+
+        binding.registerButton.setOnClickListener {
+            //TODO: 회원가입 로직 작성
+        }
     }
 
     fun showIdCheckSuccessLayout() {
