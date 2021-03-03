@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.register.RegisterActivity">
+
+        <ImageView
+            android:id="@+id/registerBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="42dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_x_mark" />
+
+        <TextView
+            android:id="@+id/registerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:text="@string/register_title"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/registerIdTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="23dp"
+            android:text="@string/register_id_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/registerTitle" />
+
+        <EditText
+            android:id="@+id/registerIdEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_edittext"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:paddingStart="12dp"
+            android:background="@drawable/bg_corner_stroke"
+            android:paddingEnd="12dp"
+            android:importantForAutofill="no"
+            android:textSize="14sp"
+            android:lines="1"
+            android:hint="@string/register_id_hint"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerIdTitle" />
+
+        <TextView
+            android:id="@+id/registerPasswordTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/register_password_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerIdEditText" />
+
+        <EditText
+            android:id="@+id/registerPasswordEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_edittext"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:paddingStart="12dp"
+            android:background="@drawable/bg_corner_stroke"
+            android:paddingEnd="12dp"
+            android:importantForAutofill="no"
+            android:textSize="14sp"
+            android:lines="1"
+            android:hint="@string/register_password_hint"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerPasswordTitle" />
+
+        <TextView
+            android:id="@+id/registerPasswordCheckTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/register_password_check_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerPasswordEditText" />
+
+        <EditText
+            android:id="@+id/registerPasswordCheckEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_edittext"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:paddingStart="12dp"
+            android:background="@drawable/bg_corner_stroke"
+            android:paddingEnd="12dp"
+            android:importantForAutofill="no"
+            android:textSize="14sp"
+            android:lines="1"
+            android:hint="@string/register_password_check_hint"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerPasswordCheckTitle" />
+
+        <TextView
+            android:id="@+id/registerSchoolTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:gravity="center"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/register_school_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerPasswordCheckEditText" />
+
+        <EditText
+            android:id="@+id/registerSchoolEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_edittext"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:paddingStart="12dp"
+            android:background="@drawable/bg_corner_stroke"
+            android:paddingEnd="12dp"
+            android:importantForAutofill="no"
+            android:textSize="14sp"
+            android:drawableRight="@drawable/ic_search"
+            android:lines="1"
+            android:hint="@string/register_school_hint"
+            android:inputType="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerSchoolTitle" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/register_button"
+            android:background="@drawable/bg_corner_solid"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:backgroundTint="@color/primary_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerSchoolEditText" />
+
+        <TextView
+            android:id="@+id/registerIdResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/register_id_result_failed"
+            android:textColor="@color/red_color"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/registerIdEditText"
+            app:layout_constraintStart_toEndOf="@+id/registerIdTitle" />
+
+        <TextView
+            android:id="@+id/registerPasswordResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/register_password_result_success"
+            android:textColor="@color/primary_color"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/registerPasswordCheckEditText"
+            app:layout_constraintStart_toEndOf="@+id/registerPasswordCheckTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

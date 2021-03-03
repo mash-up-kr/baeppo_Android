@@ -5,6 +5,7 @@ import com.mashup.base.BaseActivity
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityLoginBinding
 import com.mashup.ipdam.ui.main.MainActivity
+import com.mashup.ipdam.ui.register.RegisterActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
     override var logTag: String = "LoginActivity"
@@ -17,7 +18,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             finish()
         }
         binding.loginCreateAccount.setOnClickListener {
-            //TODO: 회원가입 로직
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
         }
         binding.loginFindAccount.setOnClickListener {
             //TODO: 아이디 및 비밀번호 찾끼 로직
