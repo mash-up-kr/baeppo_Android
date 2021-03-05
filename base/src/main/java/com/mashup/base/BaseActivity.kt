@@ -6,7 +6,6 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.mashup.base.ext.setStatusBarTransparent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -26,7 +25,6 @@ abstract class BaseActivity<T : ViewDataBinding>(
         binding = DataBindingUtil.setContentView(this, layoutRes)
         binding.lifecycleOwner = this
 
-        setStatusBarTransparent()
         initLayout()
         observeViewModel()
     }

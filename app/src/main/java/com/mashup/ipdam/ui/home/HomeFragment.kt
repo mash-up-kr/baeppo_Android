@@ -1,5 +1,6 @@
 package com.mashup.ipdam.ui.home
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.PointF
@@ -10,6 +11,12 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.view.ViewCompat
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
@@ -28,10 +35,15 @@ import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
 import com.mashup.ipdam.databinding.ItemBottomsheetBinding
+import com.mashup.ipdam.ui.search.SearchActivity
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
@@ -60,6 +72,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
 
     override fun initLayout() {
+        binding.searchView.setOnEditorActionListener(
+            TextView.OnEditorActionListener { _, actionId, _ ->
+                when(actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        showSearchActivity()
+                        true
+                    }
+                    else -> false
+                }
+            })
+
         mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         binding.viewModel = homeViewModel
@@ -120,6 +143,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         ViewCompat.setNestedScrollingEnabled(binding.bottomSheet.loBottomSheetByMarker.rvThumbnail, false)
     }
 
+    private fun showSearchActivity() {
+        val intent = Intent(requireActivity(), SearchActivity::class.java)
+        requireActivity().startActivity(intent)
+    }
+
     override fun observeViewModel() {
         homeViewModel.bottomSheetState.observe(this, Observer {
             when (it!!) {
@@ -138,6 +166,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         requestMapLocationPermission()
         initMapListener()
         initMapUi()
+        initUniversityMarker()
     }
 
     private fun requestMapLocationPermission() {
@@ -188,6 +217,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         map.addOnCameraIdleListener {
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
         }
+    }
+
+    private fun initUniversityMarker() {
+        val marker = Marker().apply {
+            position = LatLng(37.557277, 126.9009433)
+            icon = OverlayImage.fromResource(R.drawable.ic_marker)
+            width = resources.getDimension(R.dimen.width_marker).toInt()
+            height = resources.getDimension(R.dimen.height_marker).toInt()
+        }
+        marker.map = map
     }
 
     private fun initMapUi() {

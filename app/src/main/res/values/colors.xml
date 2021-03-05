@@ -9,5 +9,6 @@
     <color name="status_color">#7fFFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#000000</color>
-    <color name="surface_color">#888888</color>
+    <color name="accent_color">#6B37FF</color>
+    <color name="surface_color">#696969</color>
 </resources>

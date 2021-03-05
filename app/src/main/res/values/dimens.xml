@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="height_statusbar">24dp</dimen>
-    <dimen name="radius_corner">16dp</dimen>
-    <dimen name="height_search">40dp</dimen>
-    <dimen name="elevation_search">8dp</dimen>
+    <dimen name="radius_corner">48dp</dimen>
+    <dimen name="height_search">48dp</dimen>
+    <dimen name="elevation_search">4dp</dimen>
     <dimen name="margin_bottom_location_button">56dp</dimen>
     <dimen name="peek_height_bottom_sheet_by_map">71dp</dimen>
     <dimen name="peek_height_bottom_sheet_by_marker">125dp</dimen>
@@ -12,4 +12,6 @@
     <dimen name="size_navigation_icon">20dp</dimen>
     <dimen name="size_add_button">50dp</dimen>
     <dimen name="bottom_sheet_marigin_top">30dp</dimen>
+    <dimen name="height_marker">60dp</dimen>
+    <dimen name="width_marker">44dp</dimen>
 </resources>

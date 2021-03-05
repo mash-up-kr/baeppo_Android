@@ -1,6 +1,5 @@
 package com.mashup.ipdam.network
 
-import android.content.SharedPreferences
 import com.mashup.ipdam.data.datastore.AuthorizationDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
