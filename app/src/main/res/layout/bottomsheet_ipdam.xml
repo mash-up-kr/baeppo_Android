@@ -7,6 +7,10 @@
 
         <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
 
+        <import type="com.mashup.ipdam.ui.home.BottomSheetState" />
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="HomeViewModel" />
@@ -14,12 +18,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_top_corner"
         android:backgroundTint="@android:color/white"
         app:behavior_hideable="true"
-        app:behavior_peekHeight="@dimen/peek_height_bottom_sheet"
+        app:behavior_peekHeight="@dimen/peek_height_bottom_sheet_by_map"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <include
+            android:id="@+id/lo_bottomSheetByMarker"
+            layout="@layout/bottomsheet_by_marker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{(viewModel.bottomSheetState==BottomSheetState.MARKER_CLICKED)? View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/ipdamHeader"
@@ -27,63 +41,85 @@
             ipdamCount="@{viewModel.ipdamCount}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
+            android:visibility="@{(viewModel.bottomSheetState==BottomSheetState.MAP_MOVED)? View.VISIBLE:View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/v_line" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            replaceAll="@{viewModel.reviews}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="18dp"
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="50dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:alpha="1"
+            android:background="#000000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toTopOf="parent">
+
+        </View>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_placeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
-            android:text="대학교명"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            android:alpha="0"
+            android:text="@{viewModel.address}"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_marker"
+            app:layout_constraintStart_toEndOf="@+id/iv_marker"
+            app:layout_constraintTop_toTopOf="@+id/iv_marker" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_marker"
             android:layout_width="16dp"
             android:layout_height="22dp"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="49dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="46dp"
+            android:alpha="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/marker" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_placeNameAndCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
             android:layout_marginTop="18dp"
+            android:alpha="0"
             android:text="대학교명 자취방 리뷰"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_marker" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/sp_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
             android:layout_marginEnd="18dp"
+            android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_reviews"
+            replaceAll="@{viewModel.reviews}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_placeNameAndCount"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

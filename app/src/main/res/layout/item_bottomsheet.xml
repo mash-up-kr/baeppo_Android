@@ -15,7 +15,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp">
+        android:layout_height="280dp"
+        android:layout_marginBottom="16dp">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_photoViewPager"
