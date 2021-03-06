@@ -62,7 +62,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             setBackgroundColor(ResourcesCompat.getColor(resources, R.color.status_color, null))
             elevation = 1f
         }
-        binding.statusBar.elevation = 0f
     }
 
     private fun setStatusBarColor() {
