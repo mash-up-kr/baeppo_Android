@@ -63,23 +63,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
 
     override fun initLayout() {
-        binding.searchView.setOnEditorActionListener(
-            TextView.OnEditorActionListener { _, actionId, _ ->
-                when(actionId) {
-                    EditorInfo.IME_ACTION_DONE -> {
-                        showSearchActivity()
-                        true
-                    }
-                    else -> false
-                }
-            })
-
         mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         binding.viewModel = homeViewModel
         binding.map.getMapAsync(this)
         initBottomSheet()
+        initSearchLayout()
+    }
 
+    override fun observeViewModel() {
+        observeSearchLiveData()
+    }
+
+    private fun initSearchLayout() {
+        binding.searchView.setOnEditorActionListener(
+            TextView.OnEditorActionListener { _, actionId, _ ->
+                when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        homeViewModel.getResultBySearchAddress()
+                        true
+                    }
+                    else -> false
+                }
+            })
     }
 
     private fun initBottomSheet() {
@@ -110,6 +116,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private fun showSearchActivity() {
         val intent = Intent(requireActivity(), SearchActivity::class.java)
         requireActivity().startActivity(intent)
+    }
+
+    private fun observeSearchLiveData() {
+        homeViewModel.isSearchAddressEmpty.observe(this) { isEmpty ->
+            if (isEmpty) {
+                requireContext().toast(getString(R.string.empty_search_address))
+            }
+        }
+        homeViewModel.showSearchResultEvent.observe(this) { event ->
+            if (event) {
+                showSearchActivity()
+            }
+        }
     }
 
     override fun onMapReady(naverMap: NaverMap) {

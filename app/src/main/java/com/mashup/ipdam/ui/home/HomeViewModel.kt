@@ -20,6 +20,11 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
 
     private val _bottomSheetVisible = MutableLiveData<Boolean>()
     val bottomSheetVisible = _bottomSheetVisible
+    val searchAddress = MutableLiveData("")
+    private val _isSearchAddressEmpty = MutableLiveData(false)
+    val isSearchAddressEmpty = _isSearchAddressEmpty
+    private val _showSearchResultEvent = MutableLiveData(false)
+    val showSearchResultEvent = _showSearchResultEvent
 
     fun getIpdamBySymbol(symbolPosition: LatLng) {
 
@@ -32,4 +37,14 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
         _ipdamCount.value = 72
         _bottomSheetVisible.value = true
     }
+
+    fun getResultBySearchAddress() {
+        if (searchAddress.value.isNullOrEmpty()) {
+            _isSearchAddressEmpty.value = true
+            _showSearchResultEvent.value = true
+        } else {
+            _isSearchAddressEmpty.value = false
+        }
+    }
+
 }

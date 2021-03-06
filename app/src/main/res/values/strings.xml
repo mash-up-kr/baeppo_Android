@@ -43,4 +43,5 @@
     <!--    검색 페이지-->
     <string name="search_place_header">%1$s 검색결과</string>
     <string name="search_result_none">검색한 결과가 없습니다.</string>
+    <string name="empty_search_address">검색할 장소를 입력해주세요</string>
 </resources>
