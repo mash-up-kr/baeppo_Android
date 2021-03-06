@@ -18,6 +18,7 @@ import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.ext.checkSelfPermissionCompat
+import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.base.schedulers.SchedulerProvider
@@ -127,6 +128,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         homeViewModel.showSearchResultEvent.observe(this) { event ->
             if (event) {
                 showSearchActivity()
+            }
+        }
+        homeViewModel.isSearchingPlace.observe(this) { isSearching ->
+            if (isSearching) {
+                requireActivity().hideSoftKeyBoard()
             }
         }
     }

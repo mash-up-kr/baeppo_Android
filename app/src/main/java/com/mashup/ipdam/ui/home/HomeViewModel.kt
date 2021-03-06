@@ -25,6 +25,8 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     val isSearchAddressEmpty = _isSearchAddressEmpty
     private val _showSearchResultEvent = MutableLiveData(false)
     val showSearchResultEvent = _showSearchResultEvent
+    private val _isSearchingPlace = MutableLiveData(false)
+    val isSearchingPlace = _isSearchingPlace
 
     fun getIpdamBySymbol(symbolPosition: LatLng) {
 
@@ -39,6 +41,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun getResultBySearchAddress() {
+        _isSearchingPlace.value = true
         if (searchAddress.value.isNullOrEmpty()) {
             _isSearchAddressEmpty.value = true
             _showSearchResultEvent.value = true

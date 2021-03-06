@@ -32,11 +32,11 @@
         <EditText
             android:id="@+id/searchView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/height_search"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_search"
             android:layout_marginTop="18dp"
             android:background="@drawable/bg_corner"
             android:backgroundTint="@color/white"
-            android:drawableRight="@drawable/ic_search"
             android:elevation="@dimen/elevation_search"
             android:hint="@string/hint_address_search"
             android:layout_marginEnd="19dp"
@@ -46,10 +46,23 @@
             android:paddingLeft="16dp"
             android:paddingRight="12dp"
             android:text="@={viewModel.keyword}"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/search_back"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:background="@null"
+            android:elevation="4dp"
+            android:onClick="@{() -> viewModel.getPlaceByKeyword()}"
+            app:layout_constraintBottom_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="@id/searchView"
+            app:layout_constraintTop_toTopOf="@id/searchView"
+            app:srcCompat="@drawable/ic_search" />
 
 
         <ImageView
@@ -69,7 +82,7 @@
             android:layout_marginTop="17dp"
             android:text="@string/search_result_none"
             android:textColor="@color/surface_color"
-            android:textSize="14dp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultNoneImage" />
@@ -94,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:textColor="#222222"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView"
