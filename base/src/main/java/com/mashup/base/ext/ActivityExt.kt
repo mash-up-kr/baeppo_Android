@@ -4,16 +4,17 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
-import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+import android.view.WindowInsetsController
 
 
 fun Activity.setStatusBarTransparent() {
     when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.show(WindowInsets.Type.navigationBars())
+            window.setDecorFitsSystemWindows(true)
+            window.insetsController?.run {
+                setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+            }
         }
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
             @Suppress("DEPRECATION")
