@@ -38,7 +38,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     fun showPasswordCheckSuccessLayout() {
         binding.registerPasswordResult.run {
             visibility = View.VISIBLE
-            text = getString(R.string.register_id_result_success)
+            text = getString(R.string.register_password_result_success)
             setTextColor(ContextCompat.getColor(context, R.color.primary_color))
         }
     }
@@ -46,7 +46,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     fun showPasswordCheckFailedLayout() {
         binding.registerPasswordResult.run {
             visibility = View.VISIBLE
-            text = getString(R.string.register_id_result_failed)
+            text = getString(R.string.register_password_result_failed)
             setTextColor(ContextCompat.getColor(context, R.color.red_color))
         }
     }
