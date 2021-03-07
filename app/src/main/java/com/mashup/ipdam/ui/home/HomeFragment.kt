@@ -174,8 +174,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private fun setIpdamBottomSheetHeight() {
         val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
             val bottomSheetHeight = binding.root.height - binding.searchView.height -
-                    binding.searchView.marginTop
-            height = bottomSheetHeight
+                    binding.searchView.marginTop -
+                    resources.getDimension(R.dimen.margin_bottom_search)
+            height = bottomSheetHeight.toInt()
         }
         binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
     }

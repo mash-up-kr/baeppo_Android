@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
 
         <variable
@@ -34,15 +33,16 @@
             <EditText
                 android:id="@+id/searchView"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/height_search"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="16dp"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/height_search"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/bg_corner"
                 android:backgroundTint="@color/white"
                 android:drawableRight="@drawable/ic_search"
                 android:elevation="@dimen/elevation_search"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:hint="@string/hint_search"
                 android:lines="1"
                 android:paddingLeft="16dp"
