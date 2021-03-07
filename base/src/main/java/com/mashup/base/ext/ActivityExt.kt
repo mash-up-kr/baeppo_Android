@@ -10,7 +10,7 @@ import android.view.WindowInsetsController
 fun Activity.setStatusBarTransparent() {
     when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-            window.setDecorFitsSystemWindows(true)
+            window.setDecorFitsSystemWindows(false)
             window.insetsController?.run {
                 setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)

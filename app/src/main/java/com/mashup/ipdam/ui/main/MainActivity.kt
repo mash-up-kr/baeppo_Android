@@ -42,6 +42,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             binding.root.setPadding(0, 0, 0, getNavigationBarHeight())
+            binding.bottomNavigationIndicator.setOnApplyWindowInsetsListener(null)
+            binding.bottomNavigationView.setOnApplyWindowInsetsListener(null)
         }
     }
 
