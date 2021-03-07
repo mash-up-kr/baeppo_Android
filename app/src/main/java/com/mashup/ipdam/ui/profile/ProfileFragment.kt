@@ -24,6 +24,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             binding.profileVersionValue.text = packageInfo.versionName
         } catch (e : PackageManager.NameNotFoundException) {
             Log.e(logTag, e.message ?: "PackageManagerName Not Found")
+            binding.profileVersionValue.text = getString(R.string.profile_not_found_version)
         }
     }
 
