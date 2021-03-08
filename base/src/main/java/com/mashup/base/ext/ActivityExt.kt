@@ -7,7 +7,7 @@ import android.view.View
 import android.view.WindowInsetsController
 
 
-fun Activity.setStatusBarTransparent() {
+fun Activity.setDecorFitStatusBar() {
     when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
             window.setDecorFitsSystemWindows(false)

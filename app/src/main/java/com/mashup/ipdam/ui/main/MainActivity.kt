@@ -3,14 +3,13 @@ package com.mashup.ipdam.ui.main
 import android.graphics.Color
 import android.os.Build
 import android.view.MenuItem
-import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
 import com.mashup.base.BaseActivity
 import com.mashup.base.ext.getNavigationBarHeight
 import com.mashup.base.ext.getStatusBarHeight
-import com.mashup.base.ext.setStatusBarTransparent
+import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.databinding.ActivityMainBinding
@@ -36,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initStatusBar() {
-        setStatusBarTransparent()
+        setDecorFitStatusBar()
         binding.fakeStatusBar.updateLayoutParams {
             height = getStatusBarHeight()
         }
