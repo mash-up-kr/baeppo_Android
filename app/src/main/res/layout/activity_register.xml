@@ -190,28 +190,32 @@
 
         <TextView
             android:id="@+id/registerIdResult"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
             android:layout_marginBottom="4dp"
             android:text="@string/register_id_result_failed"
             android:textColor="@color/red_color"
-            android:textStyle="bold"
             android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/registerIdEditText"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/registerIdTitle" />
 
         <TextView
             android:id="@+id/registerPasswordResult"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
             android:layout_marginBottom="4dp"
             android:text="@string/register_password_result_success"
             android:textColor="@color/primary_color"
-            android:textStyle="bold"
             android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/registerPasswordCheckEditText"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/registerPasswordCheckTitle" />
 
 
