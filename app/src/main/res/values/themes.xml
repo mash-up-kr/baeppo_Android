@@ -23,5 +23,4 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:windowBackground">@color/primary_color</item>
     </style>
-
 </resources>
