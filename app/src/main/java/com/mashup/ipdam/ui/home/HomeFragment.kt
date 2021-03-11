@@ -3,16 +3,12 @@ package com.mashup.ipdam.ui.home
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
-import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.view.doOnLayout
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -21,7 +17,6 @@ import com.mashup.base.ext.checkSelfPermissionCompat
 import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
-import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.R
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_MAP_PERMISSION
@@ -38,9 +33,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -203,7 +196,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             width = resources.getDimension(R.dimen.width_marker).toInt()
             height = resources.getDimension(R.dimen.height_marker).toInt()
         }
-        marker.map = map
+        marker.map = myMap
     }
 
     private fun initMapUi() {
