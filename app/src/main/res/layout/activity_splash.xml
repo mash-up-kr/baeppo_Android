@@ -20,7 +20,8 @@
             android:src="@drawable/title_ipdam"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/splashContent"
@@ -29,7 +30,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/splash_text"
             android:textColor="@color/splash_text_color"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/splashTitle" />
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_ipdam"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
