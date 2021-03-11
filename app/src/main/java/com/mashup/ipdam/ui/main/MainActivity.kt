@@ -1,10 +1,15 @@
 package com.mashup.ipdam.ui.main
 
 import android.graphics.Color
+import android.os.Build
 import android.view.MenuItem
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.commit
 import com.mashup.base.BaseActivity
+import com.mashup.base.ext.getNavigationBarHeight
+import com.mashup.base.ext.getStatusBarHeight
+import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.databinding.ActivityMainBinding
@@ -26,6 +31,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun initLayout() {
         navigateFragment(MainType.HOME)
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
+        initStatusBar()
+    }
+
+    private fun initStatusBar() {
+        setDecorFitStatusBar()
+        binding.fakeStatusBar.updateLayoutParams {
+            height = getStatusBarHeight()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            binding.root.setPadding(0, 0, 0, getNavigationBarHeight())
+            binding.bottomNavigationIndicator.setOnApplyWindowInsetsListener(null)
+            binding.bottomNavigationView.setOnApplyWindowInsetsListener(null)
+        }
     }
 
     private val bottomNavigationListener: (menu: MenuItem) -> Boolean = { menu ->
@@ -35,40 +53,31 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         when (menu.itemId) {
             R.id.action_home -> {
                 navigateFragment(MainType.HOME)
-                setStatusBarTransparent()
+                setFakeStatusBarColor(ResourcesCompat.getColor(resources, R.color.status_color, null))
                 true
             }
             R.id.action_bookmarks -> {
                 navigateFragment(MainType.BOOKMARKS)
-                setStatusBarColor()
+                setFakeStatusBarColor(statusBarColor)
                 true
             }
             R.id.action_myipdam -> {
                 navigateFragment(MainType.MYIPDAM)
-                setStatusBarColor()
+                setFakeStatusBarColor(statusBarColor)
                 true
             }
             R.id.action_profile -> {
                 navigateFragment(MainType.PROFILE)
-                setStatusBarColor()
+                setFakeStatusBarColor(statusBarColor)
                 true
             }
             else -> false
         }
     }
 
-    private fun setStatusBarTransparent() {
-        binding.statusBar.apply {
-            setBackgroundColor(ResourcesCompat.getColor(resources, R.color.status_color, null))
-            elevation = 1f
-        }
-        binding.statusBar.elevation = 0f
-    }
-
-    private fun setStatusBarColor() {
-        binding.statusBar.apply {
-            setBackgroundColor(statusBarColor)
-            elevation = 0f
+    private fun setFakeStatusBarColor(color: Int) {
+        binding.fakeStatusBar.apply {
+            setBackgroundColor(color)
         }
     }
 

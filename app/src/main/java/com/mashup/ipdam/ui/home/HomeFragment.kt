@@ -3,6 +3,7 @@ package com.mashup.ipdam.ui.home
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.PointF
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,9 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.view.ViewCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
+import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.BaseRecyclerView
@@ -37,13 +40,14 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import com.mashup.ipdam.databinding.ItemBottomsheetByMarkerBinding
 import kotlin.math.min
+import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
 
     override var logTag: String = "HomeFragment"
 
-    private lateinit var map: NaverMap
+    private lateinit var myMap: NaverMap
     private lateinit var mapLocationSource: FusedLocationSource
     private val homeViewModel by activityViewModels<HomeViewModel>()
 
@@ -72,14 +76,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun initBottomSheet() {
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                setIpdamBottomSheetHeight()
-                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-            }
-        })
-
+        binding.root.doOnLayout {
+            setIpdamBottomSheetHeight()
+        }
         BottomSheetBehavior.from(binding.bottomSheet.root)
             .addBottomSheetCallback(
                 object : BottomSheetBehavior.BottomSheetCallback() {
@@ -129,8 +128,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         })
     }
 
-    override fun onMapReady(map: NaverMap) {
-        this.map = map.apply {
+    override fun onMapReady(naverMap: NaverMap) {
+        myMap = naverMap.apply {
             minZoom = MIN_MAX_ZOOM
             maxZoom = MAP_MAX_ZOOM
             locationSource = mapLocationSource
@@ -167,7 +166,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         val bottomRightPointF =
             PointF(locationOnScreen[0].toFloat(), locationOnScreen[1].toFloat())
 
-        val projection = map.projection
+        val projection = myMap.projection
         val topLeftLatLng = projection.fromScreenLocation(topLeftPointF)
         val bottomRightLatLng = projection.fromScreenLocation(bottomRightPointF)
 
@@ -181,28 +180,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun initMapListener() {
-        map.setOnSymbolClickListener { symbol ->
+        myMap.setOnSymbolClickListener { symbol ->
             homeViewModel.getIpdamBySymbol(symbol.position)
             false
         }
-        map.addOnCameraIdleListener {
+        myMap.addOnCameraIdleListener {
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
         }
     }
 
     private fun initMapUi() {
-        map.uiSettings.apply {
+        myMap.uiSettings.apply {
             isZoomControlEnabled = false
             isScaleBarEnabled = false
             isLocationButtonEnabled = false
         }
-        binding.locationView.map = map
+        binding.locationView.map = myMap
     }
 
     private fun hideLocationButton() {
         binding.locationView.visibility = View.GONE
         binding.locationView.map = null
-        map.locationTrackingMode = LocationTrackingMode.None
+        myMap.locationTrackingMode = LocationTrackingMode.None
     }
 
     private fun showLocationButton() {
@@ -211,8 +210,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             arrayOf(LOCATION_MAP_PERMISSION), intArrayOf(PackageManager.PERMISSION_GRANTED)
         )
         binding.locationView.visibility = View.VISIBLE
-        binding.locationView.map = map
-        map.locationTrackingMode = LOCATION_TRACKING_MODE
+        binding.locationView.map = myMap
+        myMap.locationTrackingMode = LOCATION_TRACKING_MODE
     }
 
     private fun showIpdamBottomSheetByMarker() {
@@ -236,12 +235,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun setIpdamBottomSheetHeight() {
-        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
+        binding.bottomSheet.root.updateLayoutParams {
             val bottomSheetHeight = binding.root.height - binding.searchView.height -
                     binding.searchView.marginTop - resources.getDimensionPixelSize(R.dimen.bottom_sheet_marigin_top)
-            height = bottomSheetHeight
+            height = bottomSheetHeight.toInt()
         }
-        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
     }
 
     companion object {

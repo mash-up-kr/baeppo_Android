@@ -12,21 +12,21 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-        <View
-            android:id="@+id/statusBar"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_statusbar"
-            android:background="@color/status_color"
-            android:elevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/fakeStatusBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/status_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
             android:layout_width="@dimen/size_add_button"
             android:layout_height="@dimen/size_add_button"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_circle"
+            android:background="@drawable/bg_corner_solid"
             android:elevation="9dp"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"
