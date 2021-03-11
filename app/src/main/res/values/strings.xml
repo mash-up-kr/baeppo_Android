@@ -24,7 +24,7 @@
     <string name="login_button">로그인하기</string>
     <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
     <string name="login_create_account">&lt;u>입담 회원가입&lt;/u></string>
-<!--    회원 가입 페이지-->
+    <!--    회원 가입 페이지-->
     <string name="register_title">회원가입</string>
     <string name="register_id_text">아이디</string>
     <string name="register_id_hint">6~12자 영문, 숫자 조합하여 만들어주세요. </string>
@@ -39,4 +39,17 @@
     <string name="register_id_result_success">멋진 아이디에요!</string>
     <string name="register_password_result_failed">비밀번호가 달라요!</string>
     <string name="register_password_result_success">확인되었습니다!</string>
+    <!--    만든이-->
+    <string name="creator_title">만든이</string>
+    <string name="creator_design">Design</string>
+    <string name="creator_design_member">박수아 황지은</string>
+    <string name="creator_android">Android</string>
+    <string name="creator_android_member">강다현 최민정 양민욱</string>
+    <string name="creator_web">WEB</string>
+    <string name="creator_web_member">김지혜 박민수 박영진</string>
+    <string name="creator_spring">Spring</string>
+    <string name="creator_spring_member">김승현 김종현 김대윤 김지희</string>
+    <string name="creator_mashup">MASH UP 10기&lt;br>
+        Team 6 배뽀&lt;br>
+        2021.02.27</string>
 </resources>
