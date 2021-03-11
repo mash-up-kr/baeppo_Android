@@ -17,6 +17,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     val ipdamCount: LiveData<Int> = _ipdamCount
     private val _address = MutableLiveData("")
     val address: LiveData<String> = _address
+
     private val _bottomSheetVisible = MutableLiveData<Boolean>()
     val bottomSheetVisible = _bottomSheetVisible
 

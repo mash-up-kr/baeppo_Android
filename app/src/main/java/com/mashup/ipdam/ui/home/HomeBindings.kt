@@ -1,4 +1,4 @@
-package com.mashup.ipdam.home
+package com.mashup.ipdam.ui.home
 
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -10,7 +10,7 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
 
 @BindingAdapter(value = ["ipdamAddress", "ipdamCount"], requireAll = true)
-fun setIpdamBottomSheetHeaderText(view: TextView, address: String, count: Int) {
+fun showIpdamHeader(view: TextView, address: String, count: Int) {
     val mainColor = ResourcesCompat.getColor(view.resources, R.color.main_color, null)
     val mainHexColor = ColorUtils.getHexColor(mainColor)
     view.setHtmlText(
@@ -25,7 +25,7 @@ fun setIpdamBottomSheetHeaderText(view: TextView, address: String, count: Int) {
 
 @BindingAdapter("bottomSheetVisible")
 fun setVisibleBottomSheet(bottomSheetRootView: ConstraintLayout, visible: Boolean) {
-    val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetRootView).run {
+    BottomSheetBehavior.from(bottomSheetRootView).run {
         state = if (visible) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
     }
 }

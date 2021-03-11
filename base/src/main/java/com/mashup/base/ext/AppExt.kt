@@ -17,6 +17,18 @@ fun Context.toast(@StringRes messageId: Int) {
     Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show()
 }
 
+fun Context.getStatusBarHeight() : Int {
+    val resourceId = resources.getIdentifier("status_bar_height",
+        "dimen", "android")
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
+}
+
+fun Context.getNavigationBarHeight() : Int {
+    val resourceId = resources.getIdentifier("navigation_bar_height",
+        "dimen", "android")
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
+}
+
 fun Fragment.toast(message: CharSequence?) {
     if (message.isNullOrEmpty()) return
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
