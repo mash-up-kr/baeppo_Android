@@ -18,6 +18,7 @@
         android:backgroundTint="@android:color/white"
         app:behavior_hideable="true"
         app:behavior_peekHeight="@dimen/peek_height_bottom_sheet"
+        bottomSheetVisible="@{viewModel.bottomSheetVisible}"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <TextView

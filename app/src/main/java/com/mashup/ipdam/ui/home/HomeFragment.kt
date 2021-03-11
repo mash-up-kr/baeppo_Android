@@ -2,9 +2,12 @@ package com.mashup.ipdam.ui.home
 
 import android.content.pm.PackageManager
 import android.graphics.PointF
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
@@ -25,6 +28,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -53,6 +57,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.viewModel = homeViewModel
         binding.map.getMapAsync(this)
         initBottomSheet()
+
+    }
+
+    private fun initBottomSheet() {
+        binding.root.doOnLayout {
+            initBottomSheetHeight()
+        }
+        BottomSheetBehavior.from(binding.bottomSheet.root)
+            .addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    //TODO: 입담 리뷰 세세한 리스트 화면에 보여주기
+                }
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+                }
+            })
+    }
+
+    private fun initBottomSheetHeight() {
+        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
+        val bottomSheetHeight = binding.root.height - binding.searchView.height -
+                    binding.searchView.marginTop -
+                    resources.getDimension(R.dimen.margin_bottom_search)
+            height = bottomSheetHeight.toInt()
+        }
+        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
     }
 
     private fun initBottomSheet() {
@@ -165,20 +196,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun showIpdamBottomSheet() {
-        setIpdamBottomSheetHeight()
         BottomSheetBehavior.from(binding.bottomSheet.root).run {
             state = BottomSheetBehavior.STATE_COLLAPSED
         }
-    }
-
-    private fun setIpdamBottomSheetHeight() {
-        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
-            val bottomSheetHeight = binding.root.height - binding.searchView.height -
-                    binding.searchView.marginTop -
-                    resources.getDimension(R.dimen.margin_bottom_search)
-            height = bottomSheetHeight.toInt()
-        }
-        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
     }
 
     private fun hideIpdamBottomSheet() {
