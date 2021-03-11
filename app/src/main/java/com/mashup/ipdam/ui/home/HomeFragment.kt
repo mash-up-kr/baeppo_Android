@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
+import androidx.core.view.updateLayoutParams
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.ext.checkSelfPermissionCompat
@@ -77,39 +78,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun initBottomSheetHeight() {
-        val bottomSheetLayoutParams = binding.bottomSheet.root.layoutParams.apply {
-        val bottomSheetHeight = binding.root.height - binding.searchView.height -
+        binding.bottomSheet.root.updateLayoutParams {
+            val bottomSheetHeight = binding.root.height - binding.searchView.height -
                     binding.searchView.marginTop -
                     resources.getDimension(R.dimen.margin_bottom_search)
             height = bottomSheetHeight.toInt()
         }
-        binding.bottomSheet.root.layoutParams = bottomSheetLayoutParams
-    }
-
-    private fun initBottomSheet() {
-
-        BottomSheetBehavior.from(binding.bottomSheet.root)
-            .addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    //TODO: 입담 리뷰 세세한 리스트 화면에 보여주기
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-                }
-            })
-    }
-
-    override fun observeViewModel() {
-        homeViewModel.ipdamDialogEvent
-            .observeOn(SchedulerProvider.ui())
-            .subscribe { event ->
-                if (event) {
-                    showIpdamBottomSheet()
-                } else {
-                    hideIpdamBottomSheet()
-                }
-            }.addToDisposable()
     }
 
     override fun onMapReady(naverMap: NaverMap) {

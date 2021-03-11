@@ -1,8 +1,10 @@
 package com.mashup.ipdam.ui.home
 
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.ext.setHtmlText
 import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
@@ -19,4 +21,11 @@ fun showIpdamHeader(view: TextView, address: String, count: Int) {
             count
         )
     )
+}
+
+@BindingAdapter("bottomSheetVisible")
+fun setVisibleBottomSheet(bottomSheetRootView: ConstraintLayout, visible: Boolean) {
+    BottomSheetBehavior.from(bottomSheetRootView).run {
+        state = if (visible) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
+    }
 }
