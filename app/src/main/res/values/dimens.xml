@@ -2,7 +2,7 @@
 <resources>
     <dimen name="radius_corner">8dp</dimen>
     <dimen name="height_edittext">40dp</dimen>
-    <dimen name="elevation_search">8dp</dimen>
+    <dimen name="elevation_search">4dp</dimen>
     <dimen name="margin_bottom_search">8dp</dimen>
     <dimen name="margin_bottom_location_button">56dp</dimen>
     <dimen name="peek_height_bottom_sheet">48dp</dimen>

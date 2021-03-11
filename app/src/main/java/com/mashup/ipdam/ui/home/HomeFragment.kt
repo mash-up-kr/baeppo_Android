@@ -1,5 +1,6 @@
 package com.mashup.ipdam.ui.home
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
@@ -19,6 +20,8 @@ import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.data.map.MapBoundary
+import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LATITUDE
+import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LONGITUDE
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_MAP_PERMISSION
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_PERMISSION_REQUEST_CODE
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
@@ -27,6 +30,7 @@ import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
@@ -56,6 +60,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             }
         }
 
+    private val searchActivityResultLauncher =
+        registerForActivityResult(
+            StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.run {
+                    homeViewModel.setMapCameraPosition(
+                        LatLng(
+                            getDoubleExtra("latitude", DEFAULT_LATITUDE),
+                            getDoubleExtra("longitude", DEFAULT_LONGITUDE)
+                        )
+                    )
+                }
+            }
+        }
+
     override fun initLayout() {
         mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
@@ -66,6 +86,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     override fun observeViewModel() {
+        observeMapLiveData()
         observeSearchLiveData()
     }
 
@@ -107,9 +128,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
     }
 
-    private fun showSearchActivity() {
-        val intent = Intent(requireActivity(), SearchActivity::class.java)
-        requireActivity().startActivity(intent)
+    private fun showSearchActivity(searchingAddress: String) {
+        val intent = Intent(requireActivity(), SearchActivity::class.java).apply {
+            putExtra("keyword", searchingAddress)
+        }
+        searchActivityResultLauncher.launch(intent)
+    }
+
+    private fun observeMapLiveData() {
+        homeViewModel.mapCameraPosition.observe(this) {
+            val cameraUpdate = CameraUpdate.scrollTo(it)
+            myMap.moveCamera(cameraUpdate)
+        }
     }
 
     private fun observeSearchLiveData() {
@@ -120,7 +150,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
         homeViewModel.showSearchResultEvent.observe(this) { event ->
             if (event) {
-                showSearchActivity()
+                showSearchActivity(homeViewModel.searchAddress.value ?: "")
             }
         }
         homeViewModel.isSearchingPlace.observe(this) { isSearching ->
@@ -191,7 +221,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initUniversityMarker() {
         val marker = Marker().apply {
-            position = LatLng(37.557277, 126.9009433)
+            position = LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
             icon = OverlayImage.fromResource(R.drawable.ic_marker)
             width = resources.getDimension(R.dimen.width_marker).toInt()
             height = resources.getDimension(R.dimen.height_marker).toInt()

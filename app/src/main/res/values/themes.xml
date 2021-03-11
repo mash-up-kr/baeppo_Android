@@ -22,7 +22,7 @@
 
     <style name="Splash.Ipdam" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/primary_color</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowBackground">@color/primary_color</item>
     </style>
 </resources>

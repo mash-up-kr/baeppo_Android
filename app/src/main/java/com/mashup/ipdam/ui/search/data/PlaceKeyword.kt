@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PlaceKeyword(
     @SerializedName("meta") var meta: Meta,
-    @SerializedName("documents") var documents: List<Documents>
+    @SerializedName("documents") var places: List<Places>
 )

@@ -2,7 +2,7 @@ package com.mashup.ipdam.ui.search.data
 
 import com.google.gson.annotations.SerializedName
 
-data class Documents (
+data class Places (
     @SerializedName("place_name") var placeName : String,
     @SerializedName("distance") var distance : String,
     @SerializedName("place_url") var placeUrl : String,

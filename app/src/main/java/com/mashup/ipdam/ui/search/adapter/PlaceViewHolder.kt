@@ -2,13 +2,20 @@ package com.mashup.ipdam.ui.search.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.ui.search.data.Documents
+import com.mashup.ipdam.ui.search.data.Places
 
 class PlaceViewHolder(
-    val binding: ItemPlaceBinding
+    val binding: ItemPlaceBinding,
+    private val placeClickListener: PlaceAdapter.PlaceClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(document: Documents) {
+    init {
+        binding.root.setOnClickListener {
+            placeClickListener.onPlaceClick(adapterPosition)
+        }
+    }
+
+    fun bind(document: Places) {
         binding.document = document
     }
 }

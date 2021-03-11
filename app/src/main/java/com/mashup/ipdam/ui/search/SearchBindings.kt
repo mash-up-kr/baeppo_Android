@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
-import com.mashup.ipdam.ui.search.data.Documents
+import com.mashup.ipdam.ui.search.data.Places
 
 @BindingAdapter("keyword")
-fun showPlaceResultHeader(view: TextView, keyword: String) {
+fun showPlaceHeader(view: TextView, keyword: String) {
     view.text = view.context.getString(
             R.string.search_place_header,
             keyword)
 }
 
 @BindingAdapter("placeList")
-fun showPlaceResultHeader(view: RecyclerView, placeList: List<Documents>) {
-    view.apply {
-        adapter = PlaceAdapter(placeList)
-        layoutManager = LinearLayoutManager(view.context)
+fun showPlacesItem(view: RecyclerView, placeList: List<Places>) {
+    val adapter = view.adapter
+    if (adapter is PlaceAdapter) {
+        adapter.submitList(placeList)
     }
 }

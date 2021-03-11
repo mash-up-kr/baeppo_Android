@@ -13,6 +13,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor() : BaseViewModel() {
     override var logTag: String = "HomeViewModel"
 
+    private val _mapCameraPosition = MutableLiveData<LatLng>()
+    val mapCameraPosition = _mapCameraPosition
     private val _ipdamCount = MutableLiveData(0)
     val ipdamCount: LiveData<Int> = _ipdamCount
     private val _address = MutableLiveData("")
@@ -44,10 +46,14 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
         _isSearchingPlace.value = true
         if (searchAddress.value.isNullOrEmpty()) {
             _isSearchAddressEmpty.value = true
-            _showSearchResultEvent.value = true
         } else {
             _isSearchAddressEmpty.value = false
+            _showSearchResultEvent.value = true
         }
+    }
+
+    fun setMapCameraPosition(position: LatLng) {
+        _mapCameraPosition.value = position
     }
 
 }
