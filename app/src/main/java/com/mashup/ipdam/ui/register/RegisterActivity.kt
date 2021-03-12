@@ -31,7 +31,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         binding.registerIdResult.run {
             visibility = View.VISIBLE
             text = getString(R.string.register_id_result_failed)
-            setTextColor(ContextCompat.getColor(context, R.color.red_color))
+            setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }
 
@@ -47,7 +47,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         binding.registerPasswordResult.run {
             visibility = View.VISIBLE
             text = getString(R.string.register_password_result_failed)
-            setTextColor(ContextCompat.getColor(context, R.color.red_color))
+            setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="review_sort">
+        <item>최신순</item>
+        <item>별점순</item>
+    </string-array>
+</resources>

@@ -37,8 +37,8 @@
 
         <TextView
             android:id="@+id/ipdamHeader"
-            ipdamAddress="@{viewModel.address}"
-            ipdamCount="@{viewModel.ipdamCount}"
+            ipdamAddress="@{viewModel.name}"
+            ipdamCount="@{viewModel.reviews.size()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:alpha="0"
-            android:text="@{viewModel.address}"
+            android:text="@{viewModel.name}"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_marker"
             app:layout_constraintStart_toEndOf="@+id/iv_marker"
@@ -91,7 +91,8 @@
             android:layout_marginStart="23dp"
             android:layout_marginTop="18dp"
             android:alpha="0"
-            android:text="대학교명 자취방 리뷰"
+            ipdamAddress="@{viewModel.name}"
+            ipdamCount="@{viewModel.reviews.size()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_marker" />
 
@@ -102,6 +103,7 @@
             android:layout_marginTop="52dp"
             android:layout_marginEnd="18dp"
             android:alpha="0"
+            android:background="@drawable/spinner_arrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

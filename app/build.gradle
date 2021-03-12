@@ -81,4 +81,8 @@ dependencies {
     implementation "androidx.datastore:datastore:$data_store_version"
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 }

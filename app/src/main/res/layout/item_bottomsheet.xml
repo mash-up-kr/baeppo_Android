@@ -18,8 +18,9 @@
         android:layout_height="280dp"
         android:layout_marginBottom="16dp">
 
-        <androidx.viewpager2.widget.ViewPager2
+        <ImageView
             android:id="@+id/vp_photoViewPager"
+            imageUrl="@{review.images[0]}"
             android:layout_width="match_parent"
             android:layout_height="203dp"
             android:layout_marginTop="4dp"
@@ -28,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.viewpager2.widget.ViewPager2>
+        </ImageView>
 
         <View
             android:id="@+id/v_leftLine"
@@ -86,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:text="2020.01.23"
+            android:text="@{review.createdDate}"
             app:layout_constraintStart_toStartOf="@+id/v_rightLine"
             app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager" />
 
@@ -103,11 +104,11 @@
 
         <TextView
             android:id="@+id/tv_starRate"
+            starCount="@{review.rating}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:text="1/5"
             app:layout_constraintStart_toStartOf="@+id/v_leftLine"
             app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager" />
 

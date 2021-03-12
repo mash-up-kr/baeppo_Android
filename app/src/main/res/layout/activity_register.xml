@@ -196,7 +196,7 @@
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="4dp"
             android:text="@string/register_id_result_failed"
-            android:textColor="@color/red_color"
+            android:textColor="@color/red"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/registerIdEditText"

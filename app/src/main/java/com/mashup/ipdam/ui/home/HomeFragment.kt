@@ -1,8 +1,10 @@
 package com.mashup.ipdam.ui.home
 
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.PointF
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.fragment.app.activityViewModels
 import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
@@ -70,6 +73,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.bottomSheet.loBottomSheetByMarker.viewModel = homeViewModel
         binding.map.getMapAsync(this)
         initBottomSheet()
+        initSpinner()
         binding.button2.setOnClickListener {
             homeViewModel.getReviewByMarker()
         }
@@ -116,7 +120,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 R.layout.item_bottomsheet_by_marker,
                 BR.review
             ) {}
-        ViewCompat.setNestedScrollingEnabled(binding.bottomSheet.loBottomSheetByMarker.rvThumbnail, false)
+        ViewCompat.setNestedScrollingEnabled(
+            binding.bottomSheet.loBottomSheetByMarker.rvThumbnail,
+            false
+        )
+    }
+
+    private fun initSpinner(){
+        val spinnerItems = resources.getStringArray(R.array.review_sort)
+        binding.bottomSheet.spSort.adapter
     }
 
     override fun observeViewModel() {
@@ -238,7 +250,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.bottomSheet.root.updateLayoutParams {
             val bottomSheetHeight = binding.root.height - binding.searchView.height -
                     binding.searchView.marginTop - resources.getDimensionPixelSize(R.dimen.bottom_sheet_marigin_top)
-            height = bottomSheetHeight.toInt()
+            height = bottomSheetHeight
         }
     }
 
