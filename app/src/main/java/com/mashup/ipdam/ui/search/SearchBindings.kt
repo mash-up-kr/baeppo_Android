@@ -1,5 +1,6 @@
 package com.mashup.ipdam.ui.search
 
+import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,4 +22,9 @@ fun showPlacesItem(view: RecyclerView, placeList: List<Places>) {
     if (adapter is PlaceAdapter) {
         adapter.submitList(placeList)
     }
+}
+
+@BindingAdapter("visible")
+fun setVisible(view: View, visible: Boolean) {
+    view.visibility = if (visible) View.VISIBLE else View.GONE
 }

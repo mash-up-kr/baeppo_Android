@@ -72,15 +72,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     }
 
     override fun observeViewModel() {
-        searchViewModel.placeList.observe(this) {
-            if (it.isEmpty()) {
-                hideResultExistLayout()
-                showResultNoneLayout()
-            } else {
-                hideResultNoneLayout()
-                showResultExistLayout()
-            }
-        }
         searchViewModel.isSearchingPlace.observe(this) { isSearching ->
             if (isSearching) {
                 hideSoftKeyBoard()
@@ -91,26 +82,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
                 toast(getString(R.string.empty_search_address))
             }
         }
-    }
-
-    private fun showResultNoneLayout() {
-        binding.resultNoneImage.visibility = View.VISIBLE
-        binding.resultNoneTextView.visibility = View.VISIBLE
-    }
-
-    private fun hideResultNoneLayout() {
-        binding.resultNoneImage.visibility = View.GONE
-        binding.resultNoneTextView.visibility = View.GONE
-    }
-
-    private fun showResultExistLayout() {
-        binding.resultRecyclerView.visibility = View.VISIBLE
-        binding.resultHeader.visibility = View.VISIBLE
-    }
-
-    private fun hideResultExistLayout() {
-        binding.resultRecyclerView.visibility = View.GONE
-        binding.resultHeader.visibility = View.GONE
     }
 
     override fun onPlaceClick(position: Int) {
