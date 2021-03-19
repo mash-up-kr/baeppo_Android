@@ -3,11 +3,10 @@ package com.mashup.ipdam.ui.search
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
-import com.mashup.ipdam.ui.search.data.Places
+import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 
 @BindingAdapter("keyword")
 fun showPlaceHeader(view: TextView, keyword: String) {

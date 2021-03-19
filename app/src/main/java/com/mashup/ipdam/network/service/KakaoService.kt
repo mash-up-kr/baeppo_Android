@@ -1,6 +1,6 @@
 package com.mashup.ipdam.network.service
 
-import com.mashup.ipdam.ui.search.data.PlaceKeyword
+import com.mashup.ipdam.ui.search.data.entity.kakao.PlaceKeyword
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers

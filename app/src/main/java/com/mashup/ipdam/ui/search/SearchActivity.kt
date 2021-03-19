@@ -10,7 +10,7 @@ import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySearchBinding
 import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
-import com.mashup.ipdam.ui.search.data.Places
+import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

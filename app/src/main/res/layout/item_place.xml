@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mashup.ipdam.ui.search.data.Places"/>
+        <import type="com.mashup.ipdam.ui.search.data.entity.kakao.Places"/>
         <variable
             name="document"
-            type="Places" />
+            type="com.mashup.ipdam.ui.search.data.entity.kakao.Places" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
