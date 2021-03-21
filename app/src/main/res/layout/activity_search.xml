@@ -15,36 +15,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="18dp"
         tools:context=".ui.search.SearchActivity">
 
         <ImageButton
             android:id="@+id/search_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
             android:background="@null"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/height_edittext"
             android:layout_marginTop="18dp"
+            android:layout_marginEnd="19dp"
             android:background="@drawable/bg_corner_solid"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/elevation_search"
             android:hint="@string/hint_address_search"
-            android:layout_marginEnd="19dp"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:lines="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="12dp"
+            android:minHeight="@dimen/height_edittext"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
             android:text="@={viewModel.keyword}"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,10 +72,12 @@
             android:layout_height="80dp"
             android:src="@drawable/ic_none"
             visible="@{viewModel.placeList.empty}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/resultNoneTextView"
@@ -82,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             visible="@{viewModel.placeList.empty}"
+            android:visibility="gone"
             android:text="@string/search_result_none"
             android:textColor="@color/surface_color"
             android:textSize="14sp"
@@ -95,13 +99,16 @@
             visible="@{!viewModel.placeList.empty}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="19dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="19dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resultHeader"
             tools:listitem="@layout/item_place" />
+
 
         <TextView
             android:id="@+id/resultHeader"
@@ -109,13 +116,54 @@
             visible="@{!viewModel.placeList.empty}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
             android:textColor="#222222"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchView"
             tools:text="서울빌딩 검색결과" />
+
+        <TextView
+            android:id="@+id/historyHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/history_header"
+            android:textColor="#222222"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+        <TextView
+            android:id="@+id/historyClearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/history_clear"
+            android:textColor="#222222"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:id="@+id/historyRecyclerView"
+            android:layout_height="0dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/historyHeader" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
