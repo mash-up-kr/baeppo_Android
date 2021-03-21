@@ -59,7 +59,7 @@
             android:layout_marginEnd="12dp"
             android:background="@null"
             android:elevation="4dp"
-            android:onClick="@{() -> viewModel.getPlaceByKeyword()}"
+            android:onClick="@{() -> viewModel.getPlaceByEditText()}"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
             app:layout_constraintEnd_toEndOf="@id/searchView"
             app:layout_constraintTop_toTopOf="@id/searchView"
@@ -71,7 +71,7 @@
             android:layout_width="60dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_none"
-            visible="@{viewModel.placeList.empty}"
+            visible="@{viewModel.placeList.empty &amp;&amp; !viewModel.isEditKeyword() || (viewModel.historyList.empty &amp;&amp; viewModel.isEditKeyword())}"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
-            visible="@{viewModel.placeList.empty}"
+            visible="@{viewModel.placeList.empty &amp;&amp; !viewModel.isEditKeyword() || (viewModel.historyList.empty &amp;&amp; viewModel.isEditKeyword())}"
             android:visibility="gone"
             android:text="@string/search_result_none"
             android:textColor="@color/surface_color"
@@ -96,7 +96,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/resultRecyclerView"
             placeList="@{viewModel.placeList}"
-            visible="@{!viewModel.placeList.empty}"
+            visible="@{!viewModel.isEditKeyword()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="18dp"
@@ -113,7 +113,7 @@
         <TextView
             android:id="@+id/resultHeader"
             keyword="@{viewModel.keyword}"
-            visible="@{!viewModel.placeList.empty}"
+            visible="@{!viewModel.isEditKeyword()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -129,6 +129,7 @@
         <TextView
             android:id="@+id/historyHeader"
             android:layout_width="wrap_content"
+            visible="@{viewModel.isEditKeyword()}"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
@@ -141,6 +142,7 @@
 
         <TextView
             android:id="@+id/historyClearButton"
+            visible="@{viewModel.isEditKeyword()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -154,6 +156,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:id="@+id/historyRecyclerView"
+            historyList="@{viewModel.historyList}"
+            visible="@{viewModel.isEditKeyword()}"
             android:layout_height="0dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"

@@ -43,6 +43,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun getResultBySearchAddress() {
+        searchAddress.value = ""
         _isSearchingPlace.value = true
         if (searchAddress.value.isNullOrEmpty()) {
             _isSearchAddressEmpty.value = true
