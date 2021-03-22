@@ -1,6 +1,5 @@
 package com.mashup.ipdam.ui.search
 
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -13,7 +12,6 @@ import com.mashup.ipdam.databinding.ActivitySearchBinding
 import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
 import com.mashup.ipdam.ui.search.data.Places
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_search),
@@ -77,7 +75,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
                 hideSoftKeyBoard()
             }
         }
-        searchViewModel.isSearchKeywordEmpty.observe(this) {
+        searchViewModel.isKeywordEmptyOnSearching.observe(this) {
             if (it) {
                 toast(getString(R.string.empty_search_address))
             }

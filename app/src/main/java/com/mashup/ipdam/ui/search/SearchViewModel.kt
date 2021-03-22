@@ -20,8 +20,8 @@ class SearchViewModel @Inject constructor(
 
     private val _placeList = MutableLiveData<List<Places>>(emptyList())
     val placeList: LiveData<List<Places>> = _placeList
-    private val _isSearchKeywordEmpty = MutableLiveData(false)
-    val isSearchKeywordEmpty = _isSearchKeywordEmpty
+    private val _isKeywordEmptyOnSearching = MutableLiveData(false)
+    val isKeywordEmptyOnSearching = _isKeywordEmptyOnSearching
     private val _isSearchingPlace = MutableLiveData(false)
     val isSearchingPlace = _isSearchingPlace
 
@@ -32,10 +32,10 @@ class SearchViewModel @Inject constructor(
     fun getPlaceByKeyword() {
         keyword.value?.let {
             if (it.isEmpty()) {
-                _isSearchKeywordEmpty.value = true
+                _isKeywordEmptyOnSearching.value = true
                 return
             }
-            _isSearchKeywordEmpty.value = false
+            _isKeywordEmptyOnSearching.value = false
             _isSearchingPlace.value = true
 
             searchRepository.getPlaceByKeyword(it)

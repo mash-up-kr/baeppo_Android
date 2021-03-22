@@ -3,16 +3,16 @@ package com.mashup.ipdam.ui.search.data
 import com.google.gson.annotations.SerializedName
 
 data class Places (
-    @SerializedName("place_name") var placeName : String,
-    @SerializedName("distance") var distance : String,
-    @SerializedName("place_url") var placeUrl : String,
-    @SerializedName("category_name") var categoryName : String,
-    @SerializedName("address_name") var addressName : String,
-    @SerializedName("road_address_name") var roadAddressName : String,
-    @SerializedName("id") var id : String,
-    @SerializedName("phone") var phone : String,
-    @SerializedName("category_group_code") var categoryGroupCode : String,
-    @SerializedName("category_group_name") var categoryGroupName : String,
-    @SerializedName("x") var x : String,
-    @SerializedName("y") var y : String
+    @SerializedName("place_name") val placeName : String,
+    @SerializedName("distance") val distance : String,
+    @SerializedName("place_url") val placeUrl : String,
+    @SerializedName("category_name") val categoryName : String,
+    @SerializedName("address_name") val addressName : String,
+    @SerializedName("road_address_name") val roadAddressName : String,
+    @SerializedName("id") val id : String,
+    @SerializedName("phone") val phone : String,
+    @SerializedName("category_group_code") val categoryGroupCode : String,
+    @SerializedName("category_group_name") val categoryGroupName : String,
+    @SerializedName("x") val x : String,
+    @SerializedName("y") val y : String
 )
