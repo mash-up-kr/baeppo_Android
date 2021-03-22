@@ -13,6 +13,9 @@ interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertHistory(history: History): Completable
 
+    @Query("DELETE FROM HISTORY WHERE address = :address")
+    fun deleteHistoryWithAddress(address: String) : Completable
+
     @Delete
     fun deleteHistory(history: History): Completable
 

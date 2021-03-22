@@ -15,4 +15,6 @@ interface SearchRepository {
     fun deleteHistoryAll(): Completable
 
     fun deleteHistory(history: History): Completable
+
+    fun deleteHistoryWithAddress(address: String): Completable
 }

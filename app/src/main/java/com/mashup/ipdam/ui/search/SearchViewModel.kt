@@ -11,6 +11,7 @@ import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 import com.mashup.ipdam.ui.search.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -42,7 +43,7 @@ class SearchViewModel @Inject constructor(
                 _isKeywordEmptyOnSearching.value = true
                 return
             }
-            insertHistory(it)
+            deleteHistoryBeforeInsert(it)
             getPlaces(it)
         }
     }
@@ -65,31 +66,30 @@ class SearchViewModel @Inject constructor(
         searchRepository.getHistoryAll()
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
-            .subscribe({ historyList ->
+            .subscribe{ historyList ->
                 _historyList.value = historyList
-            }, {
-                Log.e(logTag, it.message ?: "getAll History Error")
-                _historyList.value = emptyList()
-            }).addToDisposable()
+                if (historyList.size > 10) {
+                    deleteHistoryWithPosition(historyList.size - 1)
+                }
+            }.addToDisposable()
     }
 
     private fun insertHistory(address: String) {
         val history = History(address = address)
 
-        historyList.value?.let {
-            val findHistory = it.find { history -> history.address == address }
-            if (it.size >= 10) {
-                deleteHistoryWithPosition(it.size - 1)
-            }
-            if (findHistory != null) {
-                deleteHistory(findHistory)
-            }
-        }
         searchRepository.insertHistory(history)
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
-            .subscribe {
-                getHistory()
+            .subscribe()
+            .addToDisposable()
+    }
+
+    private fun deleteHistoryBeforeInsert(address: String) {
+        searchRepository.deleteHistoryWithAddress(address)
+            .subscribeOn(SchedulerProvider.io())
+            .observeOn(SchedulerProvider.ui())
+            .subscribe{
+                insertHistory(address)
             }.addToDisposable()
     }
 

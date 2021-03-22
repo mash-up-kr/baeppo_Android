@@ -24,4 +24,7 @@ class SearchRepositoryImpl @Inject constructor(
 
     override fun deleteHistory(history: History): Completable =
         historyDao.deleteHistory(history)
+
+    override fun deleteHistoryWithAddress(address: String): Completable =
+        historyDao.deleteHistoryWithAddress(address)
 }

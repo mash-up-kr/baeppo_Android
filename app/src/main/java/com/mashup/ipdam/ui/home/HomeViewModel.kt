@@ -43,7 +43,6 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun getResultBySearchAddress() {
-        searchAddress.value = ""
         _isSearchingPlace.value = true
         if (searchAddress.value.isNullOrEmpty()) {
             _isSearchAddressEmpty.value = true
@@ -51,6 +50,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
             _isSearchAddressEmpty.value = false
             _showSearchResultEvent.value = true
         }
+        searchAddress.value = ""
     }
 
     fun setMapCameraPosition(position: LatLng) {
