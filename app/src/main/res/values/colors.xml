@@ -11,7 +11,8 @@
     <color name="primary_color">#6B37FF</color>
     <color name="splash_text_color">#ededed</color>
     <color name="main_color">#000000</color>
-    <color name="surface_color">#b6b6b6</color>
     <color name="red">#ff0000</color>
     <color name="yellow">#ffe34f</color>
+    <color name="accent_color">#6B37FF</color>
+    <color name="surface_color">#696969</color>
 </resources>

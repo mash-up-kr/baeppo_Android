@@ -5,7 +5,8 @@
     <string name="menu_myipdam">마이리뷰</string>
     <string name="menu_profile">마이페이지</string>
     <string name="clientid_navermap">uj5pdp7rc1</string>
-    <string name="hint_search">어느 곳의 입담 리뷰를 찾아볼까요?</string>
+    <string name="hint_main_search">어느 곳의 입담 리뷰를 찾아볼까요?</string>
+    <string name="hint_address_search">장소, 빌딩명, 주소 검색</string>
     <string name="location_access_required">현재 위치를 알기 위해서는 Fine Location 퍼미션이 필요합니다.</string>
     <string name="location_access_denied">Fine Location 퍼미션 권한을 사용하지 않아 현재 위치를 알 수 없습니다.</string>
     <string name="ipdam_header_text">%1$s 자취방 리뷰 &lt;font color=\"%2$s\">%3$d&lt;/font>개</string>
@@ -41,4 +42,8 @@
     <string name="register_id_result_success">멋진 아이디에요!</string>
     <string name="register_password_result_failed">비밀번호가 달라요!</string>
     <string name="register_password_result_success">확인되었습니다!</string>
+    <!--    검색 페이지-->
+    <string name="search_place_header">%1$s 검색결과</string>
+    <string name="search_result_none">검색한 결과가 없습니다.</string>
+    <string name="empty_search_address">검색할 장소를 입력해주세요</string>
 </resources>

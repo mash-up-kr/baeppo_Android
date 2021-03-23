@@ -11,8 +11,8 @@ import com.mashup.base.ext.getNavigationBarHeight
 import com.mashup.base.ext.getStatusBarHeight
 import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
-import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.databinding.ActivityMainBinding
+import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.ui.home.HomeFragment
 import com.mashup.ipdam.ui.myipdam.MyIpdamFragment
 import com.mashup.ipdam.ui.profile.ProfileFragment

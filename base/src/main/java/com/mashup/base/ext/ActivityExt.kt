@@ -6,7 +6,6 @@ import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
 
-
 fun Activity.setDecorFitStatusBar() {
     when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {

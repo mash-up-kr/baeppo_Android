@@ -1,12 +1,10 @@
 package com.mashup.ipdam.ui.home
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
