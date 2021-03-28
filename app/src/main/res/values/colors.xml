@@ -14,4 +14,6 @@
     <color name="red_color">#ff0000</color>
     <color name="accent_color">#6B37FF</color>
     <color name="surface_color">#696969</color>
+    <color name="save_button_color">#774aff</color>
+    <color name="light_gray_color">#f5f5f5</color>
 </resources>
