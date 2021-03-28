@@ -14,14 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ipdam">
-        <activity android:name=".ui.register.RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.search.SearchActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.creator.CreatorActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.create.CreateActivity"></activity>
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.creator.CreatorActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -30,13 +35,13 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Splash.Ipdam"
-            android:screenOrientation="portrait">
-
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Ipdam">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
