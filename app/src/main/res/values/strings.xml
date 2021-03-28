@@ -40,6 +40,19 @@
     <string name="register_id_result_success">멋진 아이디에요!</string>
     <string name="register_password_result_failed">비밀번호가 달라요!</string>
     <string name="register_password_result_success">확인되었습니다!</string>
+    <!--    만든이-->
+    <string name="creator_title">만든이</string>
+    <string name="creator_design">Design</string>
+    <string name="creator_design_member">박수아 황지은</string>
+    <string name="creator_android">Android</string>
+    <string name="creator_android_member">강다현 최민정 양민욱</string>
+    <string name="creator_web">WEB</string>
+    <string name="creator_web_member">김지혜 박민수 박영진</string>
+    <string name="creator_spring">Spring</string>
+    <string name="creator_spring_member">김승현 김종현 김대윤 김지희</string>
+    <string name="creator_mashup">MASH UP 10기&lt;br>
+        Team 6 배뽀&lt;br>
+        2021.02.27</string>
     <!--    검색 페이지-->
     <string name="search_place_header">%1$s 검색결과</string>
     <string name="search_result_none">검색한 결과가 없습니다.</string>

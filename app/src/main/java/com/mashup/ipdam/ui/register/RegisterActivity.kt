@@ -3,6 +3,7 @@ package com.mashup.ipdam.ui.register
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.mashup.base.BaseActivity
+import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityRegisterBinding
 
@@ -10,6 +11,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     override var logTag: String = "RegisterActivity"
 
     override fun initLayout() {
+        setDecorFitStatusBar()
         binding.registerBackButton.setOnClickListener {
             finish()
         }
