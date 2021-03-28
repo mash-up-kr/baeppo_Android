@@ -1,16 +1,17 @@
 package com.mashup.ipdam.ui.search
 
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mashup.base.BaseActivity
 import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySearchBinding
-import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
-import com.mashup.ipdam.ui.search.data.Places
+import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
+import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
+import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,32 +20,48 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     override var logTag: String = "SearchActivity"
 
     private val searchViewModel by viewModels<SearchViewModel>()
-
     private val placeAdapter: PlaceAdapter by lazy { PlaceAdapter(this) }
+    private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter(searchViewModel) }
 
     override fun initLayout() {
         binding.viewModel = searchViewModel
 
-        binding.searchView.setOnEditorActionListener(
-            TextView.OnEditorActionListener { _, actionId, _ ->
+        initRecyclerView()
+        initKeywordResult()
+        initButton()
+        initEditText()
+    }
+
+    private fun initEditText() {
+        binding.searchView.apply {
+            setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE -> {
-                        searchViewModel.getPlaceByKeyword()
+                        searchViewModel.getPlaceByEditText()
                         true
                     }
                     else -> false
                 }
-            })
-        binding.searchBack.setOnClickListener {
-            finishWithNoResult()
+            }
+
+            doOnTextChanged { _, _, _, _ ->
+                searchViewModel.setIsEditKeywordTrue()
+            }
         }
-        initRecyclerView()
-        initKeywordResult()
     }
 
     private fun initKeywordResult() {
         intent.getStringExtra("keyword")?.let {
-            searchViewModel.getPlaceByKeyword()
+            searchViewModel.getPlaceByEditText()
+        }
+    }
+
+    private fun initButton() {
+        binding.searchBack.setOnClickListener {
+            finishWithNoResult()
+        }
+        binding.historyClearButton.setOnClickListener {
+            searchViewModel.deleteHistoryAll()
         }
     }
 
@@ -66,6 +83,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
         binding.resultRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = placeAdapter
+        }
+        binding.historyRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = historyAdapter
         }
     }
 

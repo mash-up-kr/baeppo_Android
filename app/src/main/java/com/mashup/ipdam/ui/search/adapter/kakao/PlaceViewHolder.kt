@@ -1,8 +1,8 @@
-package com.mashup.ipdam.ui.search.adapter
+package com.mashup.ipdam.ui.search.adapter.kakao
 
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.ui.search.data.Places
+import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 
 class PlaceViewHolder(
     val binding: ItemPlaceBinding,
