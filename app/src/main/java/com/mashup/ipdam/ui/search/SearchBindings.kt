@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.R
-import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
+import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
 import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
 import com.mashup.ipdam.ui.search.data.entity.history.History
 import com.mashup.ipdam.ui.search.data.entity.kakao.Places

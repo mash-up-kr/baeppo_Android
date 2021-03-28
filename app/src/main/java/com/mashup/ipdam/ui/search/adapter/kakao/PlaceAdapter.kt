@@ -1,11 +1,10 @@
-package com.mashup.ipdam.ui.search.adapter
+package com.mashup.ipdam.ui.search.adapter.kakao
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.ui.search.adapter.kakao.PlaceViewHolder
 import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 
 class PlaceAdapter(

@@ -2,20 +2,21 @@ package com.mashup.ipdam.ui.search.adapter.history
 
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemHistoryBinding
+import com.mashup.ipdam.ui.search.SearchViewModel
 import com.mashup.ipdam.ui.search.data.entity.history.History
 
 
 class HistoryViewHolder(
-    val binding: ItemHistoryBinding,
-    private val historyClickListener: HistoryAdapter.HistoryClickListener
+    private val binding: ItemHistoryBinding,
+    private val searchViewModel: SearchViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.root.setOnClickListener {
-            historyClickListener.onHistoryClick(adapterPosition)
+            searchViewModel.getPlaceByHistoryWithPosition(adapterPosition)
         }
         binding.historyDelete.setOnClickListener {
-            historyClickListener.onHistoryDeleteClick(adapterPosition)
+            searchViewModel.deleteHistoryWithPosition(adapterPosition)
         }
     }
 

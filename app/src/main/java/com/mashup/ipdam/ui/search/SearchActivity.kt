@@ -9,19 +9,19 @@ import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySearchBinding
-import com.mashup.ipdam.ui.search.adapter.PlaceAdapter
+import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
 import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
 import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_search),
-    PlaceAdapter.PlaceClickListener, HistoryAdapter.HistoryClickListener {
+    PlaceAdapter.PlaceClickListener {
     override var logTag: String = "SearchActivity"
 
     private val searchViewModel by viewModels<SearchViewModel>()
     private val placeAdapter: PlaceAdapter by lazy { PlaceAdapter(this) }
-    private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter(this) }
+    private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter(searchViewModel) }
 
     override fun initLayout() {
         binding.viewModel = searchViewModel
@@ -109,13 +109,5 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
                 finishWithPlaceResult(placeList[position])
             }
         }
-    }
-
-    override fun onHistoryClick(position: Int) {
-        searchViewModel.getPlaceByHistoryWithPosition(position)
-    }
-
-    override fun onHistoryDeleteClick(position: Int) {
-        searchViewModel.deleteHistoryWithPosition(position)
     }
 }

@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.mashup.ipdam.databinding.ItemHistoryBinding
+import com.mashup.ipdam.ui.search.SearchViewModel
 import com.mashup.ipdam.ui.search.data.entity.history.History
 
 class HistoryAdapter(
-    private val historyClickListener: HistoryClickListener
+    private val searchViewModel: SearchViewModel
 ) : ListAdapter<History, HistoryViewHolder>(HistoryDiffCallback()) {
 
     init {
@@ -20,16 +21,11 @@ class HistoryAdapter(
             ItemHistoryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
-            ), historyClickListener
+            ), searchViewModel
         )
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.bind(getItem(position))
-    }
-
-    interface HistoryClickListener {
-        fun onHistoryClick(position: Int)
-        fun onHistoryDeleteClick(position: Int)
     }
 }
 
