@@ -13,6 +13,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor() : BaseViewModel() {
     override var logTag: String = "HomeViewModel"
 
+    private val _mapCameraPosition = MutableLiveData<LatLng>()
+    val mapCameraPosition = _mapCameraPosition
     private val _ipdamCount = MutableLiveData(0)
     val ipdamCount: LiveData<Int> = _ipdamCount
     private val _address = MutableLiveData("")
@@ -20,6 +22,13 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
 
     private val _bottomSheetVisible = MutableLiveData<Boolean>()
     val bottomSheetVisible = _bottomSheetVisible
+    val searchAddress = MutableLiveData("")
+    private val _isSearchAddressEmpty = MutableLiveData(false)
+    val isSearchAddressEmpty = _isSearchAddressEmpty
+    private val _showSearchResultEvent = MutableLiveData(false)
+    val showSearchResultEvent = _showSearchResultEvent
+    private val _isSearchingPlace = MutableLiveData(false)
+    val isSearchingPlace = _isSearchingPlace
 
     fun getIpdamBySymbol(symbolPosition: LatLng) {
 
@@ -32,4 +41,19 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
         _ipdamCount.value = 72
         _bottomSheetVisible.value = true
     }
+
+    fun getResultBySearchAddress() {
+        _isSearchingPlace.value = true
+        if (searchAddress.value.isNullOrEmpty()) {
+            _isSearchAddressEmpty.value = true
+        } else {
+            _isSearchAddressEmpty.value = false
+            _showSearchResultEvent.value = true
+        }
+    }
+
+    fun setMapCameraPosition(position: LatLng) {
+        _mapCameraPosition.value = position
+    }
+
 }

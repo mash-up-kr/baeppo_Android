@@ -20,7 +20,6 @@
             android:layout_height="match_parent"
             tools:context=".map.MapFragment">
 
-
             <com.naver.maps.map.MapView
                 android:id="@+id/map"
                 android:layout_width="0dp"
@@ -28,7 +27,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.naver.maps.map.MapView>
 
             <EditText
                 android:id="@+id/searchView"
@@ -39,17 +40,32 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="18dp"
                 android:background="@drawable/bg_corner_solid"
+                android:imeOptions="actionDone"
+                android:inputType="text"
                 android:backgroundTint="@color/white"
-                android:drawableRight="@drawable/ic_search"
                 android:elevation="@dimen/elevation_search"
-                android:textSize="16sp"
-                android:hint="@string/hint_search"
+                android:hint="@string/hint_main_search"
                 android:lines="1"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
+                android:text="@={viewModel.searchAddress}"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:background="@null"
+                android:elevation="4dp"
+                android:onClick="@{() -> viewModel.getResultBySearchAddress()}"
+                app:layout_constraintBottom_toBottomOf="@id/searchView"
+                app:layout_constraintEnd_toEndOf="@id/searchView"
+                app:layout_constraintTop_toTopOf="@id/searchView"
+                app:srcCompat="@drawable/ic_search" />
 
             <com.naver.maps.map.widget.LocationButtonView
                 android:id="@+id/locationView"

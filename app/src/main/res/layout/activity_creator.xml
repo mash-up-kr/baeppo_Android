@@ -47,7 +47,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/creatorBackButton" />
+            app:layout_constraintTop_toBottomOf="@id/creatorBackButton" />
 
         <TextView
             android:id="@+id/creator_design_member"
@@ -57,8 +57,8 @@
             android:text="@string/creator_design_member"
             android:textColor="#212226"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/creator_design"
-            app:layout_constraintTop_toBottomOf="@+id/creator_design" />
+            app:layout_constraintStart_toStartOf="@id/creator_design"
+            app:layout_constraintTop_toBottomOf="@id/creator_design" />
 
         <TextView
             android:id="@+id/creator_android"
@@ -69,8 +69,8 @@
             android:textColor="#212226"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/creator_design_member"
-            app:layout_constraintTop_toBottomOf="@+id/creator_design_member" />
+            app:layout_constraintStart_toStartOf="@id/creator_design_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_design_member" />
 
         <TextView
             android:id="@+id/creator_android_member"
@@ -80,8 +80,8 @@
             android:text="@string/creator_android_member"
             android:textColor="#212226"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/creator_android"
-            app:layout_constraintTop_toBottomOf="@+id/creator_android" />
+            app:layout_constraintStart_toStartOf="@id/creator_android"
+            app:layout_constraintTop_toBottomOf="@id/creator_android" />
 
         <TextView
             android:id="@+id/creator_web"
@@ -92,8 +92,8 @@
             android:textColor="#212226"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/creator_android_member"
-            app:layout_constraintTop_toBottomOf="@+id/creator_android_member" />
+            app:layout_constraintStart_toStartOf="@id/creator_android_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_android_member" />
 
         <TextView
             android:id="@+id/creator_web_member"
@@ -103,8 +103,8 @@
             android:text="@string/creator_web_member"
             android:textColor="#212226"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/creator_web"
-            app:layout_constraintTop_toBottomOf="@+id/creator_web" />
+            app:layout_constraintStart_toStartOf="@id/creator_web"
+            app:layout_constraintTop_toBottomOf="@id/creator_web" />
 
         <TextView
             android:id="@+id/creator_spring"
@@ -115,8 +115,8 @@
             android:textColor="#212226"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/creator_web_member"
-            app:layout_constraintTop_toBottomOf="@+id/creator_web_member" />
+            app:layout_constraintStart_toStartOf="@id/creator_web_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_web_member" />
 
         <TextView
             android:id="@+id/creator_spring_member"
@@ -126,8 +126,8 @@
             android:text="@string/creator_spring_member"
             android:textColor="#212226"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/creator_spring"
-            app:layout_constraintTop_toBottomOf="@+id/creator_spring" />
+            app:layout_constraintStart_toStartOf="@id/creator_spring"
+            app:layout_constraintTop_toBottomOf="@id/creator_spring" />
 
         <TextView
             android:id="@+id/creator_mashup"
@@ -138,8 +138,8 @@
             android:textColor="#212226"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/creator_spring_member"
-            app:layout_constraintTop_toBottomOf="@+id/creator_spring_member" />
+            app:layout_constraintStart_toStartOf="@id/creator_spring_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_spring_member" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -76,4 +76,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:$data_store_version"
+    implementation "androidx.datastore:datastore:$data_store_version"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 }

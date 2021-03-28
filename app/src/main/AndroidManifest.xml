@@ -17,6 +17,7 @@
         <activity android:name=".ui.creator.CreatorActivity"></activity>
         <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.search.SearchActivity"/>
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -29,6 +30,7 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/Splash.Ipdam">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
