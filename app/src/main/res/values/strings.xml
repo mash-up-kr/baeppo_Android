@@ -62,4 +62,8 @@
     <!-- 리뷰 생성 페이지   -->
     <string name="create_title">마이리뷰 작성하기</string>
     <string name="create_save_button">등록</string>
+    <string name="create_hint_search_address">리뷰를 남길 주소를 입력해주세</string>
+    <string name="create_hint_detail_address">상세 주소 작성</string>
+    <string name="create_point">총 점수</string>
+    <string name="create_around">주변 상권</string>
 </resources>

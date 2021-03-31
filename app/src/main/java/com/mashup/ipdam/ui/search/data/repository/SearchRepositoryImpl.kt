@@ -1,7 +1,7 @@
 package com.mashup.ipdam.ui.search.data.repository
 
 import com.mashup.ipdam.network.service.KakaoService
-import com.mashup.ipdam.ui.search.data.entity.history.History
+import com.mashup.ipdam.entity.history.History
 import com.mashup.ipdam.ui.search.data.source.HistoryDao
 import io.reactivex.Completable
 import io.reactivex.Single

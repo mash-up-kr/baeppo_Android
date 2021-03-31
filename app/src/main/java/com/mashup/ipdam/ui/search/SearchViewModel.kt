@@ -1,17 +1,15 @@
 package com.mashup.ipdam.ui.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.base.schedulers.SchedulerProvider
-import com.mashup.ipdam.ui.search.data.entity.history.History
-import com.mashup.ipdam.ui.search.data.entity.kakao.Places
+import com.mashup.ipdam.entity.history.History
+import com.mashup.ipdam.entity.kakao.Places
 import com.mashup.ipdam.ui.search.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(

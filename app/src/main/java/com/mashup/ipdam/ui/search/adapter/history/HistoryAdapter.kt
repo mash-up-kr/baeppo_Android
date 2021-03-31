@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.mashup.ipdam.databinding.ItemHistoryBinding
 import com.mashup.ipdam.ui.search.SearchViewModel
-import com.mashup.ipdam.ui.search.data.entity.history.History
+import com.mashup.ipdam.entity.history.History
 
 class HistoryAdapter(
     private val searchViewModel: SearchViewModel
-) : ListAdapter<History, HistoryViewHolder>(HistoryDiffCallback()) {
+) : ListAdapter<History, HistoryViewHolder>(HistoryDiffCallback) {
 
     init {
         setHasStableIds(true)
@@ -29,7 +29,7 @@ class HistoryAdapter(
     }
 }
 
-class HistoryDiffCallback : DiffUtil.ItemCallback<History>() {
+object HistoryDiffCallback : DiffUtil.ItemCallback<History>() {
     override fun areItemsTheSame(oldItem: History, newItem: History): Boolean {
         return oldItem.id == newItem.id
     }

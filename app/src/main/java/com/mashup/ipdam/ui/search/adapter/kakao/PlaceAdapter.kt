@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.ui.search.data.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.Places
 
 class PlaceAdapter(
     private val placeClickListener: PlaceClickListener

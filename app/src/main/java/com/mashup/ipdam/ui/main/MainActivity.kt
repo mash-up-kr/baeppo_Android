@@ -1,5 +1,6 @@
 package com.mashup.ipdam.ui.main
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.view.MenuItem
@@ -13,6 +14,7 @@ import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.databinding.ActivityMainBinding
+import com.mashup.ipdam.ui.create.CreateActivity
 import com.mashup.ipdam.ui.home.HomeFragment
 import com.mashup.ipdam.ui.myipdam.MyIpdamFragment
 import com.mashup.ipdam.ui.profile.ProfileFragment
@@ -32,6 +34,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navigateFragment(MainType.HOME)
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
         initStatusBar()
+
+        binding.mainCreateReviewButton.setOnClickListener {
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initStatusBar() {

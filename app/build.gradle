@@ -86,4 +86,7 @@ dependencies {
     implementation "androidx.datastore:datastore:$data_store_version"
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    // Third party libraries
+    implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
 }
