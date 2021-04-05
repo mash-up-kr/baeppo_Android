@@ -13,10 +13,10 @@ class HistoryViewHolder(
 
     init {
         binding.root.setOnClickListener {
-            searchViewModel.getPlaceByHistoryWithPosition(adapterPosition)
+            searchViewModel.getPlaceByHistoryWithPosition(bindingAdapterPosition)
         }
         binding.historyDelete.setOnClickListener {
-            searchViewModel.deleteHistoryWithPosition(adapterPosition)
+            searchViewModel.deleteHistoryWithPosition(bindingAdapterPosition)
         }
     }
 

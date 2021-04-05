@@ -20,12 +20,12 @@ object NetworkModule {
         OkHttpClient.Builder()
             .connectTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_CONNECT, TimeUnit.SECONDS)
-            .addInterceptor(createLoggingInterceptor())
+            .addInterceptor(add_editLoggingInterceptor())
             .addInterceptor(authorizationInterceptor)
             .build()
 
 
-    private fun createLoggingInterceptor(): HttpLoggingInterceptor {
+    private fun add_editLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             level = when {
                 BuildConfig.DEBUG -> HttpLoggingInterceptor.Level.BODY

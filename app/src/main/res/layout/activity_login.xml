@@ -105,8 +105,8 @@
             app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
         <TextView
-            android:id="@+id/loginCreateAccount"
-            setHtmlText="@{@string/login_create_account}"
+            android:id="@+id/loginRegisterAccount"
+            setHtmlText="@{@string/login_register_account}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"

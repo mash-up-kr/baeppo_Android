@@ -11,7 +11,7 @@ class PlaceViewHolder(
 
     init {
         binding.root.setOnClickListener {
-            placeClickListener.onPlaceClick(adapterPosition)
+            placeClickListener.onPlaceClick(bindingAdapterPosition)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.mashup.ipdam.ui.create.adapter
+package com.mashup.ipdam.ui.addedit.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemPointBinding
 import com.mashup.ipdam.entity.review.PointType
 import com.mashup.ipdam.entity.review.ReviewPoint
-import com.mashup.ipdam.ui.create.CreateViewModel
+import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
 class PointAdapter(
-    private val viewModel: CreateViewModel
+    private val viewModel: AddEditViewModel
 ) : ListAdapter<ReviewPoint, PointViewHolder>(ReviewPointDiffCallback) {
 
     init {
@@ -33,19 +33,19 @@ class PointAdapter(
 
 class PointViewHolder(
     private val binding: ItemPointBinding,
-    private val viewModel: CreateViewModel
+    private val viewModel: AddEditViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.apply {
             pointBadImage.setOnClickListener {
-                viewModel.setReviewType(adapterPosition, PointType.BAD)
+                viewModel.setReviewType(bindingAdapterPosition, PointType.BAD)
             }
             pointNormalImage.setOnClickListener {
-                viewModel.setReviewType(adapterPosition, PointType.NORMAL)
+                viewModel.setReviewType(bindingAdapterPosition, PointType.NORMAL)
             }
             pointGoodImage.setOnClickListener {
-                viewModel.setReviewType(adapterPosition, PointType.GOOD)
+                viewModel.setReviewType(bindingAdapterPosition, PointType.GOOD)
             }
         }
     }

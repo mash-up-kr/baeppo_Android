@@ -19,7 +19,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             startActivity(intent)
             finish()
         }
-        binding.loginCreateAccount.setOnClickListener {
+        binding.loginRegisterAccount.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }

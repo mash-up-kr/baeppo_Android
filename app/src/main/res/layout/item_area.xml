@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.mashup.ipdam.entity.review.ReviewArea"/>
+        <variable
+            name="item"
+            type="ReviewArea" />
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:textStyle='@{item.exist ? "bold" : "normal"}'
+        android:alpha="@{item.exist ? 1.0f : 0.5f}"
+        android:textSize="14sp"
+        android:text="@{item.name ?? @string/add_edit_add_area}"
+        tools:text="편의점"
+        android:textColor="@color/black"/>
+</layout>

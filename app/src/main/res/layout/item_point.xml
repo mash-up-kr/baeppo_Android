@@ -17,15 +17,15 @@
 
         <ImageButton
             android:id="@+id/pointGoodImage"
+            imageButtonDrawable="@{item.pointType.equals(PointType.GOOD) ? @drawable/ic_active_good : @drawable/ic_not_active_good}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@null"
             android:scaleType="fitXY"
-            imageButtonDrawable="@{item.pointType.equals(PointType.GOOD) ? @drawable/ic_active_good : @drawable/ic_not_active_good}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -43,15 +43,17 @@
 
         <ImageButton
             android:id="@+id/pointNormalImage"
+            imageButtonDrawable="@{item.pointType.equals(PointType.NORMAL) ? @drawable/ic_active_normal : @drawable/ic_not_active_normal}"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="38dp"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="40dp"
-            app:layout_constraintEnd_toStartOf="@id/pointGoodImage"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@null"
             android:scaleType="fitXY"
-            imageButtonDrawable="@{item.pointType.equals(PointType.NORMAL) ? @drawable/ic_active_normal : @drawable/ic_not_active_normal}"
+            app:layout_constraintEnd_toStartOf="@id/pointGoodImage"
+            app:layout_constraintStart_toEndOf="@+id/pointBadImage"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -69,15 +71,15 @@
 
         <ImageButton
             android:id="@+id/pointBadImage"
+            imageButtonDrawable="@{item.pointType.equals(PointType.BAD) ? @drawable/ic_active_bad : @drawable/ic_not_active_bad}"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="57dp"
             android:layout_marginTop="21dp"
-            android:layout_marginEnd="38dp"
-            app:layout_constraintEnd_toStartOf="@id/pointNormalImage"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@null"
             android:scaleType="fitXY"
-            imageButtonDrawable="@{item.pointType.equals(PointType.BAD) ? @drawable/ic_active_bad : @drawable/ic_not_active_bad}"
+            app:layout_constraintStart_toEndOf="@+id/pointTitle"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -97,7 +99,7 @@
             android:id="@+id/pointTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:minWidth="52dp"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
