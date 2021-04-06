@@ -10,7 +10,7 @@ import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
 class ImageAdapter(
     private val viewModel: AddEditViewModel
-) : ListAdapter<String, ImageHolder>(ImageDiffUtil) {
+) : ListAdapter<String, ImageHolder>(DiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
         return ImageHolder(
@@ -42,7 +42,8 @@ class ImageHolder(
     }
 }
 
-object ImageDiffUtil : DiffUtil.ItemCallback<String>() {
+
+object DiffUtilCallback : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
         return oldItem == newItem
     }

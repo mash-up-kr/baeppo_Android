@@ -2,7 +2,6 @@ package com.mashup.ipdam.ui.addedit.adapter.area
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemAreaBinding
@@ -11,7 +10,7 @@ import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
 class AreaAdapter(
     private val viewModel: AddEditViewModel
-) : ListAdapter<ReviewArea, AreaViewHolder>(ReviewAreaDiffCallback) {
+) : ListAdapter<ReviewArea, AreaViewHolder>(ReviewArea.DiffCallback) {
 
     init {
         setHasStableIds(true)
@@ -49,15 +48,4 @@ class AreaViewHolder(
             item = reviewArea
         }
     }
-}
-
-object ReviewAreaDiffCallback : DiffUtil.ItemCallback<ReviewArea>() {
-    override fun areItemsTheSame(oldItem: ReviewArea, newItem: ReviewArea): Boolean {
-        return oldItem.name == newItem.name
-    }
-
-    override fun areContentsTheSame(oldItem: ReviewArea, newItem: ReviewArea): Boolean {
-        return oldItem == newItem
-    }
-
 }

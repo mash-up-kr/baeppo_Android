@@ -1,5 +1,6 @@
 package com.mashup.ipdam.entity.kakao
 
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 
 data class Places (
@@ -15,4 +16,16 @@ data class Places (
     @SerializedName("category_group_name") val categoryGroupName : String,
     @SerializedName("x") val x : String,
     @SerializedName("y") val y : String
-)
+) {
+    companion object {
+        val DiffCallback =  object : DiffUtil.ItemCallback<Places>() {
+            override fun areItemsTheSame(oldItem: Places, newItem: Places): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Places, newItem: Places): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
+}
