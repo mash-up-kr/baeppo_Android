@@ -1,10 +1,12 @@
 package com.mashup.ipdam.ui.home
 
 import android.content.res.ColorStateList
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -12,6 +14,7 @@ import com.mashup.base.ext.setHtmlText
 import com.mashup.base.glide.GlideApp
 import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
+import java.util.*
 
 @BindingAdapter(value = ["ipdamAddress", "ipdamCount"], requireAll = true)
 fun showIpdamHeader(view: TextView, address: String, count: Int) {
@@ -45,15 +48,14 @@ fun setStarCount(view: TextView, count: Double) {
     view.text = view.context.getString(R.string.star_count, count)
 }
 
-@BindingAdapter(value = ["isBookmark", "bookmarkColor"], requireAll = true)
-fun setBookmarkColor(view: ImageView, isBookmark: Boolean, @ColorInt color: Int) {
-    if (isBookmark) {
-        view.imageTintList =
-            ColorStateList.valueOf(color)
-    } else {
-        view.imageTintList =
-            null
-    }
+@BindingAdapter("bookmark")
+fun setBookmarkColor(view: ImageView, bookmark: Boolean) {
+    view.imageTintList = if (bookmark) ColorStateList.valueOf(
+        ContextCompat.getColor(
+            view.context,
+            R.color.yellow
+        )
+    ) else null
 }
 
 @BindingAdapter("imageUrl")

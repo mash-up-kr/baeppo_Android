@@ -3,24 +3,20 @@ package com.mashup.ipdam.ui.home
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.PointF
-import android.graphics.PorterDuff
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import androidx.fragment.app.activityViewModels
-import androidx.activity.result.contract.ActivityResultContracts.*
-import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
+import androidx.databinding.library.baseAdapters.BR
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.BaseRecyclerView
@@ -40,6 +36,7 @@ import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
 import com.mashup.ipdam.databinding.ItemBottomsheetBinding
+import com.mashup.ipdam.databinding.ItemBottomsheetByMarkerBinding
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -50,11 +47,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.databinding.library.baseAdapters.BR
-import androidx.lifecycle.Observer
-import com.mashup.ipdam.databinding.ItemBottomsheetByMarkerBinding
 import kotlin.math.min
-import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -149,12 +142,53 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                         }
                     }
                 })
-
+//        binding.bottomSheet.rvReviews.adapter =
+//            object : BaseRecyclerView.Adapter<Review, ItemBottomsheetBinding>(
+//                R.layout.item_bottomsheet,
+//                BR.review,
+//                homeViewModel
+//            ) {
+//                override val items: List<Review> by lazy { homeViewModel.reviews.value!! }
+//
+//                override fun onCreateViewHolder(
+//                    parent: ViewGroup,
+//                    viewType: Int
+//                ): BaseRecyclerView.ViewHolder<ItemBottomsheetBinding> {
+//                    val viewHolder = super.onCreateViewHolder(parent, viewType)
+//                    viewHolder.binding.apply {
+//                        isMyReview = false
+//                        ivBookmark.setOnClickListener {
+//                            review?.let {
+//                                it.isBookmark = !it.isBookmark
+//                            }
+//                        }
+//                    }
+//                    return viewHolder
+//                }
+//            }
         binding.bottomSheet.rvReviews.adapter =
             object : BaseRecyclerView.Adapter<Review, ItemBottomsheetBinding>(
                 R.layout.item_bottomsheet,
                 BR.review
-            ) {}
+            ) {
+                override fun onCreateViewHolder(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): BaseRecyclerView.ViewHolder<ItemBottomsheetBinding> {
+                    val viewHolder = super.onCreateViewHolder(parent, viewType)
+                    viewHolder.binding.apply {
+                        isMyReview = false
+                        ivBookmark.setOnClickListener {
+                            review?.let {
+                                it.bookmark = !it.bookmark
+                                notifyPropertyChanged(com.mashup.ipdam.BR.review)
+                                Log.d("bookmark", it.bookmark.toString())
+                            }
+                        }
+                    }
+                    return viewHolder
+                }
+            }
         binding.bottomSheet.loBottomSheetByMarker.rvThumbnail.adapter = object :
             BaseRecyclerView.Adapter<Review, ItemBottomsheetByMarkerBinding>(
                 R.layout.item_bottomsheet_by_marker,

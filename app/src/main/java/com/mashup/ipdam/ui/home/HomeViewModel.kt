@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     private val _name = MutableLiveData("")
     val name: LiveData<String> = _name
 
-     val reviews = MutableLiveData<List<Review>>()
+    val reviews = MutableLiveData<List<Review>>()
 
     private val _mapCameraPosition = MutableLiveData<LatLng>()
     val mapCameraPosition = _mapCameraPosition

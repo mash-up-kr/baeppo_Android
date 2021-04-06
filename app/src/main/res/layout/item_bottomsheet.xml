@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isMyReview"
+            type="Boolean" />
 
         <variable
             name="review"
@@ -26,7 +33,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription">
 
         </ImageView>
 
@@ -68,17 +76,21 @@
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toEndOf="@+id/tv_starRate"
             app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager"
-            app:srcCompat="@drawable/star" />
+            app:srcCompat="@drawable/star"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/iv_bookmark"
+            bookmark="@{review.bookmark}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="6dp"
+            android:visibility="@{isMyReview ? View.GONE: View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@+id/vp_photoViewPager"
             app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager"
-            app:srcCompat="@drawable/bookmark" />
+            app:srcCompat="@drawable/bookmark"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_date"
