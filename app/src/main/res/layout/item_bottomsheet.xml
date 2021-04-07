@@ -44,9 +44,9 @@
             android:layout_height="10dp"
             android:layout_marginStart="100dp"
             android:background="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_buildingName"
+            app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_buildingName" />
+            app:layout_constraintTop_toTopOf="@id/tv_buildingName" />
 
         <View
             android:id="@+id/v_rightLine"
@@ -54,9 +54,9 @@
             android:layout_height="10dp"
             android:layout_marginStart="80dp"
             android:background="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_buildingName"
-            app:layout_constraintStart_toEndOf="@+id/v_leftLine"
-            app:layout_constraintTop_toTopOf="@+id/tv_buildingName" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
+            app:layout_constraintStart_toEndOf="@id/v_leftLine"
+            app:layout_constraintTop_toTopOf="@id/tv_buildingName" />
 
         <TextView
             android:id="@+id/tv_buildingName"
@@ -65,8 +65,8 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="12dp"
             android:text="@{review.buildingName}"
-            app:layout_constraintStart_toStartOf="@+id/vp_photoViewPager"
-            app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager" />
+            app:layout_constraintStart_toStartOf="@id/vp_photoViewPager"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
 
         <ImageView
             android:id="@+id/iv_star"
@@ -74,8 +74,8 @@
             android:layout_height="19dp"
             android:layout_marginStart="6dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintStart_toEndOf="@+id/tv_starRate"
-            app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager"
+            app:layout_constraintStart_toEndOf="@id/tv_starRate"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
             app:srcCompat="@drawable/star"
             tools:ignore="ContentDescription" />
 
@@ -87,8 +87,8 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="6dp"
             android:visibility="@{isMyReview ? View.GONE: View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="@+id/vp_photoViewPager"
-            app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager"
+            app:layout_constraintEnd_toEndOf="@id/vp_photoViewPager"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
             app:srcCompat="@drawable/bookmark"
             tools:ignore="ContentDescription" />
 
@@ -99,8 +99,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:text="@{review.createdDate}"
-            app:layout_constraintStart_toStartOf="@+id/v_rightLine"
-            app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager" />
+            app:layout_constraintStart_toStartOf="@id/v_rightLine"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
 
         <TextView
             android:id="@+id/tv_review"
@@ -111,7 +111,7 @@
             android:text="여러분, 제가 살아봤는데요! 이 집은 아니..."
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_buildingName" />
+            app:layout_constraintTop_toBottomOf="@id/tv_buildingName" />
 
         <TextView
             android:id="@+id/tv_starRate"
@@ -120,8 +120,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="@+id/v_leftLine"
-            app:layout_constraintTop_toBottomOf="@+id/vp_photoViewPager" />
+            app:layout_constraintStart_toStartOf="@id/v_leftLine"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

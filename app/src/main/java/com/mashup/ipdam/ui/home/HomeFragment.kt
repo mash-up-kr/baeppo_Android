@@ -201,7 +201,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     BottomSheetState.MARKER_CLICKED -> showIpdamBottomSheetByMarker()
                 }
             }
-        }
+        })
     }
 
     private fun showSearchActivity(searchingAddress: String) {

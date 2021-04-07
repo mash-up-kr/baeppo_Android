@@ -45,7 +45,7 @@
             android:visibility="@{(viewModel.bottomSheetState==BottomSheetState.MAP_MOVED)? View.VISIBLE:View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_line" />
+            app:layout_constraintTop_toBottomOf="@id/v_line" />
 
         <View
             android:id="@+id/v_line"
@@ -68,9 +68,9 @@
             android:alpha="0"
             android:text="@{viewModel.name}"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_marker"
-            app:layout_constraintStart_toEndOf="@+id/iv_marker"
-            app:layout_constraintTop_toTopOf="@+id/iv_marker" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_marker"
+            app:layout_constraintStart_toEndOf="@id/iv_marker"
+            app:layout_constraintTop_toTopOf="@id/iv_marker" />
 
         <ImageView
             android:id="@+id/iv_marker"
@@ -93,7 +93,7 @@
             ipdamAddress="@{viewModel.name}"
             ipdamCount="@{viewModel.reviews.size()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_marker" />
+            app:layout_constraintTop_toBottomOf="@id/iv_marker" />
 
         <Spinner
             android:id="@+id/sp_sort"
@@ -119,7 +119,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_placeNameAndCount"
+            app:layout_constraintTop_toBottomOf="@id/tv_placeNameAndCount"
             app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
