@@ -17,7 +17,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thumbnail"
-            replaceAll="@{viewModel.reviews}"
+            replaceList="@{viewModel.reviews}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

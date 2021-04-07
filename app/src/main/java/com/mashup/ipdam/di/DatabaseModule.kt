@@ -1,8 +1,8 @@
 package com.mashup.ipdam.di
 
 import android.content.Context
-import com.mashup.ipdam.ui.search.data.source.HistoryDao
 import com.mashup.ipdam.data.AppDatabase
+import com.mashup.ipdam.ui.search.data.source.HistoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

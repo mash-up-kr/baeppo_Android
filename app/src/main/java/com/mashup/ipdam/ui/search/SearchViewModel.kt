@@ -1,6 +1,5 @@
 package com.mashup.ipdam.ui.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -11,7 +10,6 @@ import com.mashup.ipdam.ui.search.data.entity.kakao.Places
 import com.mashup.ipdam.ui.search.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(

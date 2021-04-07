@@ -108,7 +108,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_reviews"
-            replaceAll="@{viewModel.reviews}"
+            replaceList="@{viewModel.reviews}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"

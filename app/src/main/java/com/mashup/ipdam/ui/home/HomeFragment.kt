@@ -149,8 +149,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
                         return oldItem.id == newItem.id
                     }
-                }
-            ) {
+                }) {
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
                     viewType: Int
