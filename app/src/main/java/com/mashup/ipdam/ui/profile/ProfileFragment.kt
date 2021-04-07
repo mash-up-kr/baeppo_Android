@@ -1,10 +1,12 @@
 package com.mashup.ipdam.ui.profile
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.util.Log
 import com.mashup.base.BaseFragment
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.FragmentProfileBinding
+import com.mashup.ipdam.ui.creator.CreatorActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,6 +16,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     override fun initLayout() {
         initVersionName()
+        binding.profileCreator.setOnClickListener {
+            val intent = Intent(requireContext(), CreatorActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
     }
 
     private fun initVersionName() {
@@ -22,7 +28,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
                 requireContext().packageName, 0
             )
             binding.profileVersionValue.text = packageInfo.versionName
-        } catch (e : PackageManager.NameNotFoundException) {
+        } catch (e: PackageManager.NameNotFoundException) {
             Log.e(logTag, e.message ?: "PackageManagerName Not Found")
             binding.profileVersionValue.text = getString(R.string.profile_not_found_version)
         }
