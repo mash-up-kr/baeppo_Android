@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -345,8 +346,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun setIpdamBottomSheetHeight() {
         binding.bottomSheet.root.updateLayoutParams {
-            val bottomSheetHeight = binding.root.height - binding.searchView.height -
-                    binding.searchView.marginTop - resources.getDimensionPixelSize(R.dimen.bottom_sheet_marigin_top)
+            val bottomSheetHeight =
+                binding.root.height -
+                        binding.searchView.height -
+                        binding.searchView.marginTop -
+                        resources.getDimensionPixelSize(R.dimen.bottom_sheet_marigin_top)
             height = bottomSheetHeight
         }
     }

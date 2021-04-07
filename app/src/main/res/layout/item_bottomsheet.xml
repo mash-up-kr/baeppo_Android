@@ -82,11 +82,11 @@
         <ImageView
             android:id="@+id/iv_bookmark"
             bookmark="@{review.bookmark}"
+            visible="@{!isMyReview}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="6dp"
-            android:visibility="@{isMyReview ? View.GONE: View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/vp_photoViewPager"
             app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
             app:srcCompat="@drawable/bookmark"

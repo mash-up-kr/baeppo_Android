@@ -27,9 +27,9 @@
         <include
             android:id="@+id/lo_bottomSheetByMarker"
             layout="@layout/bottomsheet_by_marker"
+            visible="@{viewModel.bottomSheetState==BottomSheetState.MARKER_CLICKED}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="@{(viewModel.bottomSheetState==BottomSheetState.MARKER_CLICKED)? View.VISIBLE:View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,11 +38,11 @@
             android:id="@+id/ipdamHeader"
             ipdamAddress="@{viewModel.name}"
             ipdamCount="@{viewModel.reviews.size()}"
+            visible="@{viewModel.bottomSheetState==BottomSheetState.MAP_MOVED}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:textSize="16sp"
-            android:visibility="@{(viewModel.bottomSheetState==BottomSheetState.MAP_MOVED)? View.VISIBLE:View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/v_line" />
@@ -85,13 +85,13 @@
 
         <TextView
             android:id="@+id/tv_placeNameAndCount"
+            ipdamAddress="@{viewModel.name}"
+            ipdamCount="@{viewModel.reviews.size()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
             android:layout_marginTop="18dp"
             android:alpha="0"
-            ipdamAddress="@{viewModel.name}"
-            ipdamCount="@{viewModel.reviews.size()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_marker" />
 
