@@ -1,6 +1,5 @@
 package com.mashup.base.ext
 
-import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.base.BaseRecyclerView
@@ -9,7 +8,6 @@ import com.mashup.base.BaseRecyclerView
 fun RecyclerView.replaceAll(list: List<Any>?) {
     @Suppress("UNCHECKED_CAST")
     (this.adapter as BaseRecyclerView.Adapter<Any, *>).run {
-        this.replaceAll(list)
-        notifyDataSetChanged()
+        this.submitList(list)
     }
 }

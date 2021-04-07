@@ -17,6 +17,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.BaseRecyclerView
@@ -142,34 +143,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                         }
                     }
                 })
-//        binding.bottomSheet.rvReviews.adapter =
-//            object : BaseRecyclerView.Adapter<Review, ItemBottomsheetBinding>(
-//                R.layout.item_bottomsheet,
-//                BR.review,
-//                homeViewModel
-//            ) {
-//                override val items: List<Review> by lazy { homeViewModel.reviews.value!! }
-//
-//                override fun onCreateViewHolder(
-//                    parent: ViewGroup,
-//                    viewType: Int
-//                ): BaseRecyclerView.ViewHolder<ItemBottomsheetBinding> {
-//                    val viewHolder = super.onCreateViewHolder(parent, viewType)
-//                    viewHolder.binding.apply {
-//                        isMyReview = false
-//                        ivBookmark.setOnClickListener {
-//                            review?.let {
-//                                it.isBookmark = !it.isBookmark
-//                            }
-//                        }
-//                    }
-//                    return viewHolder
-//                }
-//            }
+
         binding.bottomSheet.rvReviews.adapter =
             object : BaseRecyclerView.Adapter<Review, ItemBottomsheetBinding>(
                 R.layout.item_bottomsheet,
-                BR.review
+                BR.review,
+                object : BaseRecyclerView.ItemCallback<Review>() {
+                    override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
+                        return oldItem.id == newItem.id
+                    }
+                }
             ) {
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
@@ -181,8 +164,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                         ivBookmark.setOnClickListener {
                             review?.let {
                                 it.bookmark = !it.bookmark
-                                notifyPropertyChanged(com.mashup.ipdam.BR.review)
-                                Log.d("bookmark", it.bookmark.toString())
                             }
                         }
                     }
@@ -192,7 +173,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.bottomSheet.loBottomSheetByMarker.rvThumbnail.adapter = object :
             BaseRecyclerView.Adapter<Review, ItemBottomsheetByMarkerBinding>(
                 R.layout.item_bottomsheet_by_marker,
-                BR.review
+                BR.review,
+                object : BaseRecyclerView.ItemCallback<Review>() {
+                    override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
+                        return oldItem.id == newItem.id
+                    }
+                }
             ) {}
         ViewCompat.setNestedScrollingEnabled(
             binding.bottomSheet.loBottomSheetByMarker.rvThumbnail,

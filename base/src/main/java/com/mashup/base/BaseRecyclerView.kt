@@ -1,58 +1,57 @@
 package com.mashup.base
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecyclerView {
 
     abstract class Adapter<ITEM : Any, B : ViewDataBinding>(
         @LayoutRes private val layoutRes: Int,
-        private val bindingVariableId: Int? = null
-    ) : RecyclerView.Adapter<ViewHolder<B>>() {
+        private val bindingVariableId: Int? = null,
+        diffCallback: ItemCallback<ITEM>
+    ) : ListAdapter<ITEM, ViewHolder<B>>(diffCallback) {
 
         private val items = mutableListOf<ITEM>()
 
-        fun replaceAll(newItems: List<ITEM>?) {
-            newItems?.let {
-                items.run {
-                    clear()
-                    addAll(it)
-                }
-            }
-        }
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<B> =
             object : ViewHolder<B>(
-                parent = parent,
-                layoutRes = layoutRes,
+                DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.context),
+                    layoutRes,
+                    parent,
+                    false
+                ),
                 bindingVariableId = bindingVariableId
             ) {}
 
         override fun onBindViewHolder(holder: ViewHolder<B>, position: Int) {
-            holder.bind(items[position])
+            holder.bind(getItem(position))
         }
-
-        override fun getItemCount(): Int = items.size
     }
 
     abstract class ViewHolder<B : ViewDataBinding>(
-        parent: ViewGroup?,
-        @LayoutRes layoutRes: Int,
+        val binding: B,
         private val bindingVariableId: Int?
-    ) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent?.context)
-            .inflate(layoutRes, parent, false)
-    ) {
-        val binding: B = DataBindingUtil.bind(itemView)!!
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Any) {
             bindingVariableId?.let {
                 binding.setVariable(it, item)
             }
+        }
+    }
+
+    abstract class ItemCallback<ITEM> : DiffUtil.ItemCallback<ITEM>() {
+        @SuppressLint("DiffUtilEquals")
+        override fun areContentsTheSame(oldItem: ITEM, newItem: ITEM): Boolean {
+            return oldItem == newItem
         }
     }
 }
