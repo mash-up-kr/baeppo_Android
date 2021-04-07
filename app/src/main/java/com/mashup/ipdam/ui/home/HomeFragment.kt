@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -16,8 +15,6 @@ import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.BaseRecyclerView
@@ -163,7 +160,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                         isMyReview = false
                         ivBookmark.setOnClickListener {
                             review?.let {
-                                it.bookmark = !it.bookmark
+                                homeViewModel.toggleBookmark(it)
                             }
                         }
                     }

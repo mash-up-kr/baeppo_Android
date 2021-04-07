@@ -34,13 +34,16 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     private val _isSearchingPlace = MutableLiveData(false)
     val isSearchingPlace = _isSearchingPlace
 
+    private lateinit var nowMapBoundary: MapBoundary
+
     fun getIpdamBySymbol(symbolPosition: LatLng) {
 
     }
 
     fun getReviewByMarker() {
         //TODO: 파라미터로 symbolPosition: LatLng를 받을 것. MOCK DATA 파싱이나 서버 통신 결과를 받아올 예정
-        _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
+        if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED) _bottomSheetState.value =
+            BottomSheetState.MARKER_CLICKED
         _name.value = "서울 빌딩"
         _address.value = "서울시 광진구 광진로 55"
         reviews.value = MockReview.getMockReviewList()
@@ -48,7 +51,9 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         //TODO: 이후 MOCK DATA 파싱이나 서버 통신 결과를 받아올 예정
-        _bottomSheetState.value = BottomSheetState.MAP_MOVED
+        nowMapBoundary = mapBoundary
+        if (_bottomSheetState.value != BottomSheetState.MAP_MOVED) _bottomSheetState.value =
+            BottomSheetState.MAP_MOVED
         _name.value = "안암동"
         _address.value = "서울시 광진구 광진로 55"
         reviews.value = MockReview.getMockReviewList()
@@ -67,6 +72,18 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
 
     fun setMapCameraPosition(position: LatLng) {
         _mapCameraPosition.value = position
+    }
+
+    fun updateReview(review: Review) {
+        //TODO: 서버와의 통신으로 review update
+    }
+
+    fun toggleBookmark(review: Review) {
+        updateReview(review.copy(bookmark = !review.bookmark))
+        if (bottomSheetState.value == BottomSheetState.MARKER_CLICKED) getReviewByMarker()
+        else if (this::nowMapBoundary.isInitialized) {
+            getReviewInBoundary(nowMapBoundary)
+        }
     }
 }
 
