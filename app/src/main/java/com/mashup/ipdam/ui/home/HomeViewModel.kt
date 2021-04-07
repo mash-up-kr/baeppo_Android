@@ -74,7 +74,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
         _mapCameraPosition.value = position
     }
 
-    fun updateReview(review: Review) {
+    private fun updateReview(review: Review) {
         //TODO: 서버와의 통신으로 review update
     }
 

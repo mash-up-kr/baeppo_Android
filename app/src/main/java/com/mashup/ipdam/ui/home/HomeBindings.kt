@@ -30,14 +30,6 @@ fun showIpdamHeader(view: TextView, address: String, count: Int) {
     )
 }
 
-@BindingAdapter("bottomSheetVisible")
-fun setVisibleBottomSheet(bottomSheetRootView: ConstraintLayout, visible: Boolean) {
-    BottomSheetBehavior.from(bottomSheetRootView).run {
-        state =
-            if (visible) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
-    }
-}
-
 @BindingAdapter("reviewCount")
 fun setReviewCount(view: TextView, count: Int) {
     view.text = view.context.getString(R.string.review_count, count)
