@@ -194,12 +194,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun observeViewModel() {
         observeMapLiveData()
         observeSearchLiveData()
-        homeViewModel.bottomSheetState.observe(this, Observer {
-            when (it!!) {
-                BottomSheetState.MAP_MOVED -> showIpdamBottomSheetByMap()
-                BottomSheetState.MARKER_CLICKED -> showIpdamBottomSheetByMarker()
+        homeViewModel.bottomSheetState.observe(this, { state ->
+            state?.let {
+                when (it) {
+                    BottomSheetState.MAP_MOVED -> showIpdamBottomSheetByMap()
+                    BottomSheetState.MARKER_CLICKED -> showIpdamBottomSheetByMarker()
+                }
             }
-        })
+        }
     }
 
     private fun showSearchActivity(searchingAddress: String) {
