@@ -33,6 +33,12 @@ class RegisterViewModel : BaseViewModel() {
         return idRegex.matches(id) && lengthRegex.matches(id)
     }
 
+    private fun isPasswordCorrect(password: String): Boolean {
+        val passwordRegex = Regex("[0-9]+[a-zA-z]+[~!@#$%^&*]+")
+        val lengthRegex = Regex("[0-9a-zA-Z~!@#$%^&*]{6,20}")
+        return passwordRegex.matches(password) && lengthRegex.matches(password)
+    }
+
     private fun isPasswordCheckCorrect(passwordCheck: String): Boolean {
         val passwordValue = password.value ?: ""
         return if (passwordValue.isEmpty()) false else passwordValue == passwordCheck
