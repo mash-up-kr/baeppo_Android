@@ -1,5 +1,5 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/androidstudio,android,kotlin,intellij
+# add_editd by https://www.toptal.com/developers/gitignore/api/androidstudio,android,kotlin,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=androidstudio,android,kotlin,intellij
 
 ### Android ###
@@ -125,7 +125,7 @@ output.json
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
-# since they will be recreated, and may cause churn.  Uncomment if using
+# since they will be readd_editd, and may cause churn.  Uncomment if using
 # auto-import.
 # .idea/artifacts
 # .idea/compiler.xml

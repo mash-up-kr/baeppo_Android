@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.ui.search.data.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.Places
 
 class PlaceAdapter(
     private val placeClickListener: PlaceClickListener
-) : ListAdapter<Places, PlaceViewHolder>(PlacesDiffCallback()) {
+) : ListAdapter<Places, PlaceViewHolder>(PlacesDiffCallback) {
 
     init {
         setHasStableIds(true)
@@ -32,7 +32,7 @@ class PlaceAdapter(
     }
 }
 
-class PlacesDiffCallback : DiffUtil.ItemCallback<Places>() {
+object PlacesDiffCallback : DiffUtil.ItemCallback<Places>() {
     override fun areItemsTheSame(oldItem: Places, newItem: Places): Boolean {
         return oldItem.id == newItem.id
     }

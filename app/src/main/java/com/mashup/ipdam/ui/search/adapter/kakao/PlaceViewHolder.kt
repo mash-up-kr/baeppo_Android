@@ -2,7 +2,7 @@ package com.mashup.ipdam.ui.search.adapter.kakao
 
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.ui.search.data.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.Places
 
 class PlaceViewHolder(
     val binding: ItemPlaceBinding,
@@ -11,7 +11,7 @@ class PlaceViewHolder(
 
     init {
         binding.root.setOnClickListener {
-            placeClickListener.onPlaceClick(adapterPosition)
+            placeClickListener.onPlaceClick(bindingAdapterPosition)
         }
     }
 

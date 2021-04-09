@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.mashup.ipdam.ui.addedit.AddEditViewModel" />
+
+        <variable
+            name="viewModel"
+            type="AddEditViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/add_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/add_editTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/add_edit_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/add_editSaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="19dp"
+            android:background="@android:color/transparent"
+            android:gravity="top|end"
+            android:text="@string/add_edit_save_button"
+            android:textColor="@color/save_button_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:layout_marginTop="23dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_editTitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <EditText
+                    android:id="@+id/addEditSearchAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/bg_corner_stroke"
+                    android:hint="@string/add_edit_hint_search_address"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:minHeight="@dimen/height_edittext"
+                    android:paddingStart="11dp"
+                    android:paddingEnd="11dp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/addEditDetailAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/bg_corner_detail_address_stroke"
+                    android:hint="@string/add_edit_hint_detail_address"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:minHeight="@dimen/height_edittext"
+                    android:paddingStart="11dp"
+                    android:paddingEnd="11dp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditSearchAddress" />
+
+                <ImageButton
+                    android:id="@+id/searchButton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="@id/addEditSearchAddress"
+                    app:layout_constraintEnd_toEndOf="@id/addEditSearchAddress"
+                    app:layout_constraintTop_toTopOf="@id/addEditSearchAddress"
+                    app:srcCompat="@drawable/ic_search"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/addEditPointTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/add_edit_point"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditDetailAddress" />
+
+                <com.willy.ratingbar.BaseRatingBar
+                    android:id="@+id/addEditRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/addEditStarValue"
+                    app:layout_constraintTop_toTopOf="@id/addEditPointTextView"
+                    app:srb_drawableEmpty="@drawable/ic_star_empty"
+                    app:srb_drawableFilled="@drawable/ic_star_filled"
+                    app:srb_numStars="5"
+                    reviewRating="@={viewModel.rating}"
+                    app:srb_starHeight="24dp"
+                    app:srb_starPadding="0dp"
+                    app:srb_starWidth="24dp"
+                    app:srb_stepSize="0.5" />
+
+                <TextView
+                    android:id="@+id/addEditStarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="54dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    ratingToString="@{viewModel.rating}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditDetailAddress"
+                    tools:text="0점" />
+
+                <View
+                    android:id="@+id/addEditLineOne"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditPointTextView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addEditPointRecyclerView"
+                    pointList="@{viewModel.reviewPointList}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="18dp"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditLineOne"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_point" />
+
+                <View
+                    android:id="@+id/addEditLineTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditPointRecyclerView" />
+
+                <TextView
+                    android:id="@+id/addEditAround"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="17dp"
+                    android:text="@string/add_edit_around"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditLineTwo" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addEditAreaRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="18dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="4"
+                    tools:listitem="@layout/item_area"
+                    areaList="@{viewModel.reviewAmenitiesList}"
+                    android:overScrollMode="never"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/addEditAround"
+                    app:layout_constraintTop_toBottomOf="@id/addEditLineTwo" />
+
+                <View
+                    android:id="@+id/addEditLineThree"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditAreaRecyclerView" />
+
+                <TextView
+                    android:id="@+id/addEditContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="17dp"
+                    android:text="@string/add_edit_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditLineThree" />
+
+
+                <EditText
+                    android:id="@+id/addEditContentTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/bg_corner_stroke"
+                    android:hint="@string/add_edit_hint_content_title"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:minHeight="@dimen/height_edittext"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditContent" />
+
+                <EditText
+                    android:id="@+id/addEditContentDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/bg_corner_stroke"
+                    android:gravity="top|start"
+                    android:hint="@string/add_edit_hint_content_description"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:minHeight="@dimen/height_review_description"
+                    android:paddingStart="7dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="7dp"
+                    android:paddingBottom="16dp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditContentTitle" />
+
+                <View
+                    android:id="@+id/addEditLineFour"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@color/line_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditContentDescription" />
+
+                <TextView
+                    android:id="@+id/addEditImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="19dp"
+                    android:text="@string/add_edit_image"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditLineFour" />
+
+                <TextView
+                    android:id="@+id/addEditImageHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:text="@string/add_edit_hint_image"
+                    android:textColor="#b3000000"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toEndOf="@id/addEditImage"
+                    app:layout_constraintTop_toTopOf="@id/addEditImage" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addEditImageRecyclerView"
+                    imageList="@{viewModel.imageList}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addEditImage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

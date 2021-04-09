@@ -24,7 +24,7 @@
     <string name="login_password">비밀번호</string>
     <string name="login_button">로그인하기</string>
     <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
-    <string name="login_create_account">&lt;u>입담 회원가입&lt;/u></string>
+    <string name="login_register_account">&lt;u>입담 회원가입&lt;/u></string>
     <!--    회원 가입 페이지-->
     <string name="register_title">회원가입</string>
     <string name="register_id_text">아이디</string>
@@ -61,4 +61,18 @@
     <string name="empty_search_address">검색할 장소를 입력해주세요</string>
     <string name="history_header">최근 검색어</string>
     <string name="history_clear">모두 지우기</string>
+    <!-- 리뷰 생성 페이지   -->
+    <string name="add_edit_title">마이리뷰 작성하기</string>
+    <string name="add_edit_save_button">등록</string>
+    <string name="add_edit_hint_search_address">리뷰를 남길 주소를 입력해주세</string>
+    <string name="add_edit_hint_detail_address">상세 주소 작성</string>
+    <string name="add_edit_point">총 점수</string>
+    <string name="add_edit_point_rating">%1$s점</string>
+    <string name="add_edit_around">주변 상권</string>
+    <string name="add_edit_content">후기 쓰기</string>
+    <string name="add_edit_image">사진 등록</string>
+    <string name="add_edit_add_area">추가+</string>
+    <string name="add_edit_hint_image">최대5장까지 업로드가능합니다</string>
+    <string name="add_edit_hint_content_title">제목을 작성하세요</string>
+    <string name="add_edit_hint_content_description">자유롭게 후기를 작성하세요</string>
 </resources>

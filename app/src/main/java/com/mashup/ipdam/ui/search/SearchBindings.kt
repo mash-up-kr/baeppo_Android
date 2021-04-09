@@ -1,17 +1,16 @@
 package com.mashup.ipdam.ui.search
 
-import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.R
 import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
 import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
-import com.mashup.ipdam.ui.search.data.entity.history.History
-import com.mashup.ipdam.ui.search.data.entity.kakao.Places
+import com.mashup.ipdam.entity.history.History
+import com.mashup.ipdam.entity.kakao.Places
 
 @BindingAdapter("keyword")
-fun showPlaceHeader(view: TextView, keyword: String) {
+fun setPlaceHeader(view: TextView, keyword: String) {
     view.text = view.context.getString(
         R.string.search_place_header,
         keyword
@@ -19,7 +18,7 @@ fun showPlaceHeader(view: TextView, keyword: String) {
 }
 
 @BindingAdapter("placeList")
-fun showPlacesItem(view: RecyclerView, placeList: List<Places>) {
+fun setPlacesItem(view: RecyclerView, placeList: List<Places>) {
     val adapter = view.adapter
     if (adapter is PlaceAdapter) {
         adapter.submitList(placeList)
@@ -27,7 +26,7 @@ fun showPlacesItem(view: RecyclerView, placeList: List<Places>) {
 }
 
 @BindingAdapter("historyList")
-fun showHistoryItem(view: RecyclerView, historyList: List<History>) {
+fun setHistoryItem(view: RecyclerView, historyList: List<History>) {
     val adapter = view.adapter
     if (adapter is HistoryAdapter) {
         adapter.submitList(historyList)

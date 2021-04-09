@@ -1,4 +1,4 @@
-package com.mashup.ipdam.ui.search.data.entity.history
+package com.mashup.ipdam.entity.history
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

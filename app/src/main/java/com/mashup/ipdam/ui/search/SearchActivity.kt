@@ -11,7 +11,7 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySearchBinding
 import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
 import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
-import com.mashup.ipdam.ui.search.data.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.Places
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -2,8 +2,8 @@ package com.mashup.ipdam.ui.search.adapter.history
 
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemHistoryBinding
+import com.mashup.ipdam.entity.history.History
 import com.mashup.ipdam.ui.search.SearchViewModel
-import com.mashup.ipdam.ui.search.data.entity.history.History
 
 
 class HistoryViewHolder(
@@ -13,10 +13,10 @@ class HistoryViewHolder(
 
     init {
         binding.root.setOnClickListener {
-            searchViewModel.getPlaceByHistoryWithPosition(adapterPosition)
+            searchViewModel.getPlaceByHistoryWithPosition(bindingAdapterPosition)
         }
         binding.historyDelete.setOnClickListener {
-            searchViewModel.deleteHistoryWithPosition(adapterPosition)
+            searchViewModel.deleteHistoryWithPosition(bindingAdapterPosition)
         }
     }
 
