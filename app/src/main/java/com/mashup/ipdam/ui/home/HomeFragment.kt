@@ -127,7 +127,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                             ALPHA_MAX / ALPHA_CHANGED_VALUE * slideOffset
                         )
                         binding.bottomSheet.apply {
-                            ipdamHeader.alpha = ALPHA_MAX - changedAlpha
+                            tvBottomSheetHeader.alpha = ALPHA_MAX - changedAlpha
                             tvPlaceName.alpha = changedAlpha
                             tvPlaceNameAndCount.alpha = changedAlpha
                             ivMarker.alpha = changedAlpha

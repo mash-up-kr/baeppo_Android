@@ -1,6 +1,8 @@
 package com.mashup.ipdam.ui.home
 
 import android.content.res.ColorStateList
+import android.graphics.Paint
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -13,7 +15,7 @@ import com.mashup.ipdam.utils.ColorUtils
 
 @BindingAdapter(value = ["ipdamAddress", "ipdamCount"], requireAll = true)
 fun showIpdamHeader(view: TextView, address: String, count: Int) {
-    val mainColor = ResourcesCompat.getColor(view.resources, R.color.main_color, null)
+    val mainColor = ResourcesCompat.getColor(view.resources, R.color.primary_color, null)
     val mainHexColor = ColorUtils.getHexColor(mainColor)
     view.setHtmlText(
         view.context.getString(
