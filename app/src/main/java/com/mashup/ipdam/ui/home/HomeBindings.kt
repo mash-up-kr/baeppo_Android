@@ -1,8 +1,6 @@
 package com.mashup.ipdam.ui.home
 
 import android.content.res.ColorStateList
-import android.graphics.Paint
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat

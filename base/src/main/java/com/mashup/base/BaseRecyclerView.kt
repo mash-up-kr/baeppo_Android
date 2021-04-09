@@ -15,10 +15,8 @@ abstract class BaseRecyclerView {
     abstract class Adapter<ITEM : Any, B : ViewDataBinding>(
         @LayoutRes private val layoutRes: Int,
         private val bindingVariableId: Int? = null,
-        diffCallback: ItemCallback<ITEM>
+        diffCallback: DiffUtil.ItemCallback<ITEM>
     ) : ListAdapter<ITEM, ViewHolder<B>>(diffCallback) {
-
-        private val items = mutableListOf<ITEM>()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<B> =
             object : ViewHolder<B>(
@@ -37,7 +35,7 @@ abstract class BaseRecyclerView {
     }
 
     abstract class ViewHolder<B : ViewDataBinding>(
-        val binding: B,
+        private val binding: B,
         private val bindingVariableId: Int?
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -45,13 +43,6 @@ abstract class BaseRecyclerView {
             bindingVariableId?.let {
                 binding.setVariable(it, item)
             }
-        }
-    }
-
-    abstract class ItemCallback<ITEM> : DiffUtil.ItemCallback<ITEM>() {
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: ITEM, newItem: ITEM): Boolean {
-            return oldItem == newItem
         }
     }
 }

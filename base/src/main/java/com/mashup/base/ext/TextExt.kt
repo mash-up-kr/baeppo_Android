@@ -1,8 +1,7 @@
 package com.mashup.base.ext
 
-import android.os.Build
-import android.text.Html
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("setHtmlText")
@@ -10,9 +9,5 @@ fun TextView.setHtmlText(htmlString: String?) {
     if (htmlString.isNullOrEmpty()) {
         return
     }
-    text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(htmlString, Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        Html.fromHtml(htmlString)
-    }
+    text = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_LEGACY)
 }

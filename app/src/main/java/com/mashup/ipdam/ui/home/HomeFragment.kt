@@ -4,9 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -14,17 +12,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
-import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
-import com.mashup.base.BaseRecyclerView
 import com.mashup.base.ext.checkSelfPermissionCompat
 import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LATITUDE
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LONGITUDE
@@ -34,8 +29,8 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
-import com.mashup.ipdam.databinding.ItemBottomsheetBinding
-import com.mashup.ipdam.databinding.ItemBottomsheetByMarkerBinding
+import com.mashup.ipdam.ui.home.adapter.ReviewAdapter
+import com.mashup.ipdam.ui.home.adapter.RoomImageByMarkerAdapter
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -56,6 +51,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private lateinit var myMap: NaverMap
     private lateinit var mapLocationSource: FusedLocationSource
     private val homeViewModel by activityViewModels<HomeViewModel>()
+    private val reviewAdapter by lazy { ReviewAdapter(homeViewModel) }
+    private val roomImageByMarkerAdapter by lazy { RoomImageByMarkerAdapter() }
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -142,41 +139,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     }
                 })
 
-        binding.bottomSheet.rvReviews.adapter =
-            object : BaseRecyclerView.Adapter<Review, ItemBottomsheetBinding>(
-                R.layout.item_bottomsheet,
-                BR.review,
-                object : BaseRecyclerView.ItemCallback<Review>() {
-                    override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
-                        return oldItem.id == newItem.id
-                    }
-                }) {
-                override fun onCreateViewHolder(
-                    parent: ViewGroup,
-                    viewType: Int
-                ): BaseRecyclerView.ViewHolder<ItemBottomsheetBinding> {
-                    val viewHolder = super.onCreateViewHolder(parent, viewType)
-                    viewHolder.binding.apply {
-                        isMyReview = false
-                        ivBookmark.setOnClickListener {
-                            review?.let {
-                                homeViewModel.toggleBookmark(it)
-                            }
-                        }
-                    }
-                    return viewHolder
-                }
-            }
-        binding.bottomSheet.loBottomSheetByMarker.rvThumbnail.adapter = object :
-            BaseRecyclerView.Adapter<Review, ItemBottomsheetByMarkerBinding>(
-                R.layout.item_bottomsheet_by_marker,
-                BR.review,
-                object : BaseRecyclerView.ItemCallback<Review>() {
-                    override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
-                        return oldItem.id == newItem.id
-                    }
-                }
-            ) {}
+        binding.bottomSheet.rvReviews.adapter = reviewAdapter
+        binding.bottomSheet.loBottomSheetByMarker.rvThumbnail.adapter = roomImageByMarkerAdapter
         ViewCompat.setNestedScrollingEnabled(
             binding.bottomSheet.loBottomSheetByMarker.rvThumbnail,
             false

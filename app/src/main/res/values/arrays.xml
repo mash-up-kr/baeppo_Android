@@ -4,4 +4,29 @@
         <item>최신순</item>
         <item>별점순</item>
     </string-array>
+    <!--  리뷰 생성페이지  -->
+    <string-array name="add_edit_point_distance">
+        <item>통학거리</item>
+        <item>멀어요</item>
+        <item>괜찮아요</item>
+        <item>가까워요</item>
+    </string-array>
+    <string-array name="add_edit_point_host">
+        <item>집주인</item>
+        <item>전쟁이에요</item>
+        <item>보통이에요</item>
+        <item>친절해요</item>
+    </string-array>
+    <string-array name="add_edit_point_safety">
+        <item>치안</item>
+        <item>위험해요</item>
+        <item>괜찮아요</item>
+        <item>안전해요</item>
+    </string-array>
+    <string-array name="add_edit_point_cleanness">
+        <item>청결</item>
+        <item>더러워요</item>
+        <item>괜찮아요</item>
+        <item>깨끗해요</item>
+    </string-array>
 </resources>

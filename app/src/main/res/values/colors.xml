@@ -15,4 +15,9 @@
     <color name="yellow">#ffe34f</color>
     <color name="accent_color">#6B37FF</color>
     <color name="surface_color">#696969</color>
+    <color name="save_button_color">#774aff</color>
+    <color name="light_gray_color">#f5f5f5</color>
+    <color name="stroke_color">#b6b6b6</color>
+    <color name="line_color">#d0d0d0</color>
+    <color name="photo_surface_color">#e1e1e1</color>
 </resources>

@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.mashup.ipdam.ui.search.data.entity.history.History" />
+        <import type="com.mashup.ipdam.entity.history.History" />
 
         <variable
             name="history"

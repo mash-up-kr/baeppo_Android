@@ -1,5 +1,6 @@
 package com.mashup.ipdam.ui.main
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.view.MenuItem
@@ -12,6 +13,7 @@ import com.mashup.base.ext.getStatusBarHeight
 import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityMainBinding
+import com.mashup.ipdam.ui.addedit.AddEditActivity
 import com.mashup.ipdam.ui.bookmark.BookmarkFragment
 import com.mashup.ipdam.ui.home.HomeFragment
 import com.mashup.ipdam.ui.myipdam.MyIpdamFragment
@@ -32,6 +34,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navigateFragment(MainType.HOME)
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationListener)
         initStatusBar()
+
+        binding.mainCreateReviewButton.setOnClickListener {
+            val intent = Intent(this, AddEditActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initStatusBar() {
@@ -53,7 +60,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         when (menu.itemId) {
             R.id.action_home -> {
                 navigateFragment(MainType.HOME)
-                setFakeStatusBarColor(ResourcesCompat.getColor(resources, R.color.status_color, null))
+                setFakeStatusBarColor(
+                    ResourcesCompat.getColor(
+                        resources,
+                        R.color.status_color,
+                        null
+                    )
+                )
                 true
             }
             R.id.action_bookmarks -> {
