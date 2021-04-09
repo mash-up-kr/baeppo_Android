@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mashup.ipdam.entity.review.ReviewArea"/>
+        <import type="com.mashup.ipdam.entity.review.ReviewAmenities"/>
         <variable
             name="item"
-            type="ReviewArea" />
+            type="ReviewAmenities" />
     </data>
 
     <TextView

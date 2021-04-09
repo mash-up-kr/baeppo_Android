@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemImageBinding
 import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
-class ImageAdapter(
+class RoomImageAdapter(
     private val viewModel: AddEditViewModel
-) : ListAdapter<String, ImageHolder>(DiffUtilCallback) {
+) : ListAdapter<String, RoomImageHolder>(RoomImageDiffUtilCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
-        return ImageHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomImageHolder {
+        return RoomImageHolder(
             ItemImageBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
@@ -22,12 +22,12 @@ class ImageAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ImageHolder, position: Int) {
+    override fun onBindViewHolder(holder: RoomImageHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
 
-class ImageHolder(
+class RoomImageHolder(
     private val binding: ItemImageBinding,
     private val viewModel: AddEditViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -43,7 +43,7 @@ class ImageHolder(
 }
 
 
-object DiffUtilCallback : DiffUtil.ItemCallback<String>() {
+object RoomImageDiffUtilCallback : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
         return oldItem == newItem
     }

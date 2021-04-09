@@ -9,12 +9,12 @@ object ReviewMockData {
         ReviewPoint(ReviewType.CLEANNESS)
     )
 
-    fun getReviewAreaMockData(): List<ReviewArea> = arrayListOf(
-        ReviewArea("편의점", false),
-        ReviewArea("지하철", false),
-        ReviewArea("슈퍼", false),
-        ReviewArea("대형마트", false),
-        ReviewArea("공원", false),
-        ReviewArea("세탁소", false)
+    fun getReviewAreaMockData(): List<ReviewAmenities> = arrayListOf(
+        ReviewAmenities("편의점", false),
+        ReviewAmenities("지하철", false),
+        ReviewAmenities("슈퍼", false),
+        ReviewAmenities("대형마트", false),
+        ReviewAmenities("공원", false),
+        ReviewAmenities("세탁소", false)
     )
 }

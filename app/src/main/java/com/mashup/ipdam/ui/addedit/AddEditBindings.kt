@@ -8,11 +8,11 @@ import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.R
-import com.mashup.ipdam.entity.review.ReviewArea
+import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.entity.review.ReviewPoint
 import com.mashup.ipdam.ui.addedit.adapter.PointAdapter
-import com.mashup.ipdam.ui.addedit.adapter.area.AreaAdapter
-import com.mashup.ipdam.ui.addedit.adapter.image.ImageAdapter
+import com.mashup.ipdam.ui.addedit.adapter.area.AmenitiesAdapter
+import com.mashup.ipdam.ui.addedit.adapter.image.RoomImageAdapter
 import com.willy.ratingbar.BaseRatingBar
 import java.text.DecimalFormat
 
@@ -26,12 +26,12 @@ fun setPointItem(view: RecyclerView, pointList: List<ReviewPoint>) {
 }
 
 @BindingAdapter("areaList")
-fun setAreaItem(view: RecyclerView, areaList: List<ReviewArea>) {
+fun setAreaItem(view: RecyclerView, amenitiesList: List<ReviewAmenities>) {
     val concatAdapter = view.adapter
     if (concatAdapter is ConcatAdapter) {
         val imageAdapter = concatAdapter.adapters[0]
-        if (imageAdapter is AreaAdapter) {
-            imageAdapter.submitList(areaList)
+        if (imageAdapter is AmenitiesAdapter) {
+            imageAdapter.submitList(amenitiesList)
         }
     }
 }
@@ -41,7 +41,7 @@ fun setImageItem(view: RecyclerView, imageList: List<String>) {
     val concatAdapter = view.adapter
     if (concatAdapter is ConcatAdapter) {
         val imageAdapter = concatAdapter.adapters[1]
-        if (imageAdapter is ImageAdapter) {
+        if (imageAdapter is RoomImageAdapter) {
             imageAdapter.submitList(imageList)
         }
     }

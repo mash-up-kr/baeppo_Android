@@ -2,15 +2,14 @@ package com.mashup.ipdam.ui.addedit
 
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import com.mashup.base.BaseActivity
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityAddEditBinding
 import com.mashup.ipdam.ui.addedit.adapter.PointAdapter
-import com.mashup.ipdam.ui.addedit.adapter.area.AddAreaAdapter
-import com.mashup.ipdam.ui.addedit.adapter.area.AreaAdapter
-import com.mashup.ipdam.ui.addedit.adapter.image.AddImageAdapter
-import com.mashup.ipdam.ui.addedit.adapter.image.ImageAdapter
+import com.mashup.ipdam.ui.addedit.adapter.area.AddAmenitiesAdapter
+import com.mashup.ipdam.ui.addedit.adapter.area.AmenitiesAdapter
+import com.mashup.ipdam.ui.addedit.adapter.image.AddRoomImageAdapter
+import com.mashup.ipdam.ui.addedit.adapter.image.RoomImageAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,16 +33,16 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
 
     private fun initAreaRecyclerView() {
         binding.addEditAreaRecyclerView.apply {
-            val addAdapter = AddAreaAdapter(viewModel)
-            val areaAdapter = AreaAdapter(viewModel)
+            val addAdapter = AddAmenitiesAdapter(viewModel)
+            val areaAdapter = AmenitiesAdapter(viewModel)
             adapter = ConcatAdapter(areaAdapter, addAdapter)
         }
     }
 
     private fun initImageRecyclerView() {
         binding.addEditImageRecyclerView.apply {
-            val addAdapter = AddImageAdapter(viewModel)
-            val imageAdapter = ImageAdapter(viewModel)
+            val addAdapter = AddRoomImageAdapter(viewModel)
+            val imageAdapter = RoomImageAdapter(viewModel)
             adapter = ConcatAdapter(addAdapter, imageAdapter)
         }
     }

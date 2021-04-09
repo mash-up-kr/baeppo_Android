@@ -2,22 +2,23 @@ package com.mashup.ipdam.ui.addedit.adapter.area
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mashup.ipdam.databinding.ItemAreaBinding
-import com.mashup.ipdam.entity.review.ReviewArea
+import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
-class AreaAdapter(
+class AmenitiesAdapter(
     private val viewModel: AddEditViewModel
-) : ListAdapter<ReviewArea, AreaViewHolder>(ReviewArea.DiffCallback) {
+) : ListAdapter<ReviewAmenities, AmenitiesViewHolder>(ReviewAmenitiesDiffUtilCallback) {
 
     init {
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaViewHolder {
-        return AreaViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AmenitiesViewHolder {
+        return AmenitiesViewHolder(
             ItemAreaBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
@@ -25,12 +26,12 @@ class AreaAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: AreaViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AmenitiesViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
 
-class AreaViewHolder(
+class AmenitiesViewHolder(
     private val binding: ItemAreaBinding,
     private val viewModel: AddEditViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -43,9 +44,19 @@ class AreaViewHolder(
         }
     }
 
-    fun bind(reviewArea: ReviewArea) {
+    fun bind(reviewAmenities: ReviewAmenities) {
         binding.apply {
-            item = reviewArea
+            item = reviewAmenities
         }
+    }
+}
+
+object ReviewAmenitiesDiffUtilCallback : DiffUtil.ItemCallback<ReviewAmenities>() {
+    override fun areItemsTheSame(oldItem: ReviewAmenities, newItem: ReviewAmenities): Boolean {
+        return oldItem.name == newItem.name
+    }
+
+    override fun areContentsTheSame(oldItem: ReviewAmenities, newItem: ReviewAmenities): Boolean {
+        return oldItem == newItem
     }
 }

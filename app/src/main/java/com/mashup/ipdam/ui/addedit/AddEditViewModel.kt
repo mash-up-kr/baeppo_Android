@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.ipdam.SingleLiveEvent
-import com.mashup.ipdam.entity.review.ReviewArea
+import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.entity.review.PointType
 import com.mashup.ipdam.entity.review.ReviewMockData
 import com.mashup.ipdam.entity.review.ReviewPoint
@@ -18,8 +18,8 @@ class AddEditViewModel @Inject constructor(
 
     private val _reviewPointList = MutableLiveData<List<ReviewPoint>>(emptyList())
     val reviewPointList: LiveData<List<ReviewPoint>> = _reviewPointList
-    private val _reviewAreaList = MutableLiveData<List<ReviewArea>>(emptyList())
-    val reviewAreaList: LiveData<List<ReviewArea>> = _reviewAreaList
+    private val _reviewAreaList = MutableLiveData<List<ReviewAmenities>>(emptyList())
+    val reviewAmenitiesList: LiveData<List<ReviewAmenities>> = _reviewAreaList
     private val _imageList = MutableLiveData<List<String>>(emptyList())
     val imageList: LiveData<List<String>> = _imageList
     private val _addReviewImageEvent = SingleLiveEvent<Unit>()
@@ -56,11 +56,11 @@ class AddEditViewModel @Inject constructor(
 
     fun changeSelectedArea(position: Int) {
         val areaList = _reviewAreaList.value ?: emptyList()
-        val newAreaList = mutableListOf<ReviewArea>().apply {
+        val newAreaList = mutableListOf<ReviewAmenities>().apply {
             addAll(areaList)
 
             val oldItem = removeAt(position)
-            add(position, ReviewArea(oldItem.name, !oldItem.isExist))
+            add(position, ReviewAmenities(oldItem.name, !oldItem.isExist))
         }
         _reviewAreaList.postValue(newAreaList)
     }

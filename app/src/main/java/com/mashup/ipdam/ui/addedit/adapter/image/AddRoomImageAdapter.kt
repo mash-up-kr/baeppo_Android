@@ -10,22 +10,22 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ItemImageBinding
 import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
-class AddImageAdapter(
+class AddRoomImageAdapter(
     private val viewModel: AddEditViewModel
-) : RecyclerView.Adapter<AddImageViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddImageViewHolder {
-        return AddImageViewHolder(
+) : RecyclerView.Adapter<AddRoomImageViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddRoomImageViewHolder {
+        return AddRoomImageViewHolder(
             ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             viewModel
         )
     }
 
-    override fun onBindViewHolder(holder: AddImageViewHolder, position: Int) {}
+    override fun onBindViewHolder(holder: AddRoomImageViewHolder, position: Int) {}
 
     override fun getItemCount(): Int = 1
 }
 
-class AddImageViewHolder(
+class AddRoomImageViewHolder(
     private val binding: ItemImageBinding,
     private val viewModel: AddEditViewModel
 ) : RecyclerView.ViewHolder(binding.root) {

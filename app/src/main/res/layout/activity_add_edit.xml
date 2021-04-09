@@ -218,7 +218,7 @@
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="4"
                     tools:listitem="@layout/item_area"
-                    areaList="@{viewModel.reviewAreaList}"
+                    areaList="@{viewModel.reviewAmenitiesList}"
                     android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/addEditAround"
