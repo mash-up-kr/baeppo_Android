@@ -1,54 +1,108 @@
 package com.mashup.ipdam.ui.register
 
-import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.mashup.base.BaseActivity
-import com.mashup.base.ext.setDecorFitStatusBar
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityRegisterBinding
+import com.mashup.ipdam.ui.register.RegisterInputType.*
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
     override var logTag: String = "RegisterActivity"
+    private val registerViewModel: RegisterViewModel by viewModels()
 
     override fun initLayout() {
-        setDecorFitStatusBar()
-        binding.registerBackButton.setOnClickListener {
-            finish()
+        binding.apply {
+            viewModel = registerViewModel
+            registerBackButton.setOnClickListener {
+                finish()
+            }
+            registerButton.setOnClickListener {
+                //TODO: 회원가입 로직 작성
+            }
         }
+        initSearchEditText()
+    }
 
-        binding.registerButton.setOnClickListener {
-            //TODO: 회원가입 로직 작성
+    private fun initSearchEditText() {
+        binding.registerSearchButton.setOnClickListener {
+            showSearchSchoolView()
         }
     }
 
-    fun showIdCheckSuccessLayout() {
+    override fun observeViewModel() {
+        super.observeViewModel()
+        registerViewModel.idInputType.observe(this) { type ->
+            when (type) {
+                SAFE -> showIdSuccessLayout()
+                WRONG -> showIdFailedLayout()
+                else -> {
+                }
+            }
+        }
+        registerViewModel.passwordInputType.observe(this) { type ->
+            when (type) {
+                SAFE -> showPasswordSuccessLayout()
+                WRONG -> showPasswordFailedLayout()
+                else -> {
+                }
+            }
+        }
+        registerViewModel.passwordCheckInputType.observe(this) { type ->
+            when (type) {
+                SAFE -> showPasswordCheckSuccessLayout()
+                WRONG -> showPasswordCheckFailedLayout()
+                else -> {
+                }
+            }
+        }
+        registerViewModel.requestSearchSchool.observe(this) {
+            showSearchSchoolView()
+        }
+    }
+
+    private fun showSearchSchoolView() {
+        //TODO: 학교 검색 화면
+    }
+
+    private fun showIdSuccessLayout() {
         binding.registerIdResult.run {
-            visibility = View.VISIBLE
             text = getString(R.string.register_id_result_success)
             setTextColor(ContextCompat.getColor(context, R.color.primary_color))
         }
     }
 
-    fun showIdCheckFailedLayout() {
+    private fun showIdFailedLayout() {
         binding.registerIdResult.run {
-            visibility = View.VISIBLE
             text = getString(R.string.register_id_result_failed)
             setTextColor(ContextCompat.getColor(context, R.color.red_color))
         }
     }
 
-    fun showPasswordCheckSuccessLayout() {
+    private fun showPasswordSuccessLayout() {
         binding.registerPasswordResult.run {
-            visibility = View.VISIBLE
             text = getString(R.string.register_password_result_success)
             setTextColor(ContextCompat.getColor(context, R.color.primary_color))
         }
     }
 
-    fun showPasswordCheckFailedLayout() {
+    private fun showPasswordFailedLayout() {
         binding.registerPasswordResult.run {
-            visibility = View.VISIBLE
             text = getString(R.string.register_password_result_failed)
+            setTextColor(ContextCompat.getColor(context, R.color.red_color))
+        }
+    }
+
+    private fun showPasswordCheckSuccessLayout() {
+        binding.registerPasswordCheckResult.run {
+            text = getString(R.string.register_password_check_result_success)
+            setTextColor(ContextCompat.getColor(context, R.color.primary_color))
+        }
+    }
+
+    private fun showPasswordCheckFailedLayout() {
+        binding.registerPasswordCheckResult.run {
+            text = getString(R.string.register_password_check_result_failed)
             setTextColor(ContextCompat.getColor(context, R.color.red_color))
         }
     }
