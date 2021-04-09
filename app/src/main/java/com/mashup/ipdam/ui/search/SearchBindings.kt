@@ -33,8 +33,3 @@ fun showHistoryItem(view: RecyclerView, historyList: List<History>) {
         adapter.submitList(historyList)
     }
 }
-
-@BindingAdapter("visible")
-fun setVisible(view: View, visible: Boolean) {
-    view.visibility = if (visible) View.VISIBLE else View.GONE
-}

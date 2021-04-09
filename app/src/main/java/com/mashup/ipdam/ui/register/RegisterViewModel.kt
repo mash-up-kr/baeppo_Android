@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.mashup.base.BaseViewModel
 import com.mashup.ipdam.SingleLiveEvent
+import com.mashup.ipdam.utils.RegexUtil
 
 class RegisterViewModel : BaseViewModel() {
     override var logTag: String = "RegisterViewModel"
@@ -15,32 +16,42 @@ class RegisterViewModel : BaseViewModel() {
     val searchSchool = MutableLiveData("")
     private val _requestSearchSchool = SingleLiveEvent<Unit>()
     val requestSearchSchool: SingleLiveEvent<Unit> = _requestSearchSchool
-
-    val idCorrect: LiveData<Boolean> = Transformations.map(id) {
-        isIdCorrect(it)
-    }
-    val passwordCheckCorrect: LiveData<Boolean> = Transformations.map(passwordCheck) {
-        isPasswordCheckCorrect(it)
-    }
+    val idInputType: LiveData<RegisterInputType> =
+        Transformations.map(id) { id ->
+            isIdCorrect(id)
+        }
+    val passwordInputType: LiveData<RegisterInputType> =
+        Transformations.map(password) { password ->
+            isPasswordCorrect(password)
+        }
+    val passwordCheckInputType: LiveData<RegisterInputType> =
+        Transformations.map(passwordCheck) { passwordCheck ->
+            isPasswordCheckCorrect(passwordCheck)
+        }
 
     fun showSearchSchoolResult() {
         _requestSearchSchool.value = Unit
     }
 
-    private fun isIdCorrect(id: String): Boolean {
-        val idRegex = Regex("[0-9]+[a-zA-z]+")
-        val lengthRegex = Regex("[0-9a-zA-Z]{6,12}")
-        return idRegex.matches(id) && lengthRegex.matches(id)
+    private fun isIdCorrect(id: String): RegisterInputType {
+        if (id.isEmpty()) return RegisterInputType.NONE
+
+        val idRegex = RegexUtil.getIdRegex()
+        return if (idRegex.matches(id)) RegisterInputType.SAFE else RegisterInputType.WRONG
     }
 
-    private fun isPasswordCorrect(password: String): Boolean {
-        val passwordRegex = Regex("[0-9]+[a-zA-z]+[~!@#$%^&*]+")
-        val lengthRegex = Regex("[0-9a-zA-Z~!@#$%^&*]{6,20}")
-        return passwordRegex.matches(password) && lengthRegex.matches(password)
+    private fun isPasswordCorrect(password: String): RegisterInputType {
+        if (password.isEmpty()) return RegisterInputType.NONE
+
+        val passwordRegex = RegexUtil.getPasswordRex()
+        return if (passwordRegex.matches(password)) RegisterInputType.SAFE else RegisterInputType.WRONG
     }
 
-    private fun isPasswordCheckCorrect(passwordCheck: String): Boolean {
+    private fun isPasswordCheckCorrect(passwordCheck: String): RegisterInputType {
+        if (passwordCheck.isEmpty()) return RegisterInputType.NONE
+
         val passwordValue = password.value ?: ""
-        return if (passwordValue.isEmpty()) false else passwordValue == passwordCheck
+        return if (passwordValue == passwordCheck) RegisterInputType.SAFE
+        else RegisterInputType.WRONG
     }
 }

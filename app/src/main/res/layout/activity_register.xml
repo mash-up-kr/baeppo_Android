@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.mashup.ipdam.ui.register.RegisterInputType" />
+
         <import type="com.mashup.ipdam.ui.register.RegisterViewModel" />
 
         <variable
@@ -199,6 +201,7 @@
 
         <TextView
             android:id="@+id/registerIdResult"
+            visible="@{viewModel.idInputType != RegisterInputType.NONE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -215,16 +218,34 @@
 
         <TextView
             android:id="@+id/registerPasswordResult"
+            visible="@{viewModel.passwordInputType != RegisterInputType.NONE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/register_id_result_failed"
+            android:textColor="@color/red_color"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/registerPasswordEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/registerPasswordTitle" />
+
+        <TextView
+            android:id="@+id/registerPasswordCheckResult"
+            visible="@{viewModel.passwordCheckInputType != RegisterInputType.NONE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="4dp"
             android:text="@string/register_password_result_success"
-            android:visibility="gone"
             android:textColor="@color/primary_color"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/registerPasswordCheckEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/registerPasswordCheckTitle" />
