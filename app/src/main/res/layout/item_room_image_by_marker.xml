@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/iv_thumbnail"
-            imageUrl="@{review.images[0]}"
+            loadImageWithRadius="@{review.images[0]}"
             android:layout_width="67dp"
             android:layout_height="67dp"
             android:layout_marginStart="2dp"
@@ -24,7 +24,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/star"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/star" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

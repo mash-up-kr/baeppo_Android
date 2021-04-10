@@ -26,7 +26,7 @@
 
         <ImageView
             android:id="@+id/vp_photoViewPager"
-            imageUrl="@{review.images[0]}"
+            loadImageWithRadius="@{review.images[0]}"
             android:layout_width="match_parent"
             android:layout_height="203dp"
             android:layout_marginTop="4dp"
@@ -34,9 +34,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription">
-
-        </ImageView>
+            tools:ignore="ContentDescription" />
 
         <View
             android:id="@+id/v_leftLine"
@@ -53,7 +51,7 @@
             android:layout_width="0.5dp"
             android:layout_height="10dp"
             android:layout_marginStart="80dp"
-            android:background="#000000"
+            android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
             app:layout_constraintStart_toEndOf="@id/v_leftLine"
             app:layout_constraintTop_toTopOf="@id/tv_buildingName" />

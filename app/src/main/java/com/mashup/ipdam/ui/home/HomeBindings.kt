@@ -44,8 +44,3 @@ fun setBookmarkColor(view: ImageView, bookmark: Boolean) {
         )
     ) else null
 }
-
-@BindingAdapter("imageUrl")
-fun setImageByUri(view: ImageView, imgUri: String) {
-    GlideApp.with(view.context).load(imgUri).centerCrop().into(view)
-}
