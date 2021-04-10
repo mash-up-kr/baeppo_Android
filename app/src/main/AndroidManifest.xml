@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ipdam">
-        <activity android:name=".ui.addedit.AddEditActivity"></activity>
+        <activity
+            android:name=".ui.addedit.AddEditActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:screenOrientation="portrait" />

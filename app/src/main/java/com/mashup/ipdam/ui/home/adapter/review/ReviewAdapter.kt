@@ -1,4 +1,4 @@
-package com.mashup.ipdam.ui.home.adapter
+package com.mashup.ipdam.ui.home.adapter.review
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,6 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.databinding.ItemReviewBinding
 import com.mashup.ipdam.ui.home.HomeViewModel
-import com.mashup.ipdam.ui.home.adapter.review.ReviewViewHolder
 
 class ReviewAdapter(private val homeViewModel: HomeViewModel) :
     BaseRecyclerView.Adapter<Review, ItemReviewBinding>(

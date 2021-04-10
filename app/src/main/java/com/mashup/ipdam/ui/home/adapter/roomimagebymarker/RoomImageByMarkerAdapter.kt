@@ -1,4 +1,4 @@
-package com.mashup.ipdam.ui.home.adapter
+package com.mashup.ipdam.ui.home.adapter.roomimagebymarker
 
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.DiffUtil
@@ -8,12 +8,12 @@ import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.databinding.ItemRoomImageByMarkerBinding
 
 
-class RoomImageByMarkerAdapter() :
+class RoomImageByMarkerAdapter :
     BaseRecyclerView.Adapter<Review, ItemRoomImageByMarkerBinding>(
         R.layout.item_room_image_by_marker,
         BR.review,
         RoomImageByMarkerDiffCallback
-    ) {}
+    )
 
 object RoomImageByMarkerDiffCallback : DiffUtil.ItemCallback<Review>() {
 

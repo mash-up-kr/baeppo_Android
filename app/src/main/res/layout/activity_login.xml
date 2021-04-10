@@ -20,7 +20,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_ipdam" />
+            app:srcCompat="@drawable/ic_ipdam"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/loginTitle"

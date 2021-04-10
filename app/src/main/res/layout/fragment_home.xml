@@ -38,7 +38,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></com.naver.maps.map.MapView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/searchView"
@@ -74,7 +74,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/searchView"
                 app:layout_constraintEnd_toEndOf="@id/searchView"
                 app:layout_constraintTop_toTopOf="@id/searchView"
-                app:srcCompat="@drawable/ic_search" />
+                app:srcCompat="@drawable/ic_search"
+                android:contentDescription="TODO" />
 
             <com.naver.maps.map.widget.LocationButtonView
                 android:id="@+id/locationView"

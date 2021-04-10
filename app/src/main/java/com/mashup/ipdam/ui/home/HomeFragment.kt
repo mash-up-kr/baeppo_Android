@@ -29,8 +29,8 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
-import com.mashup.ipdam.ui.home.adapter.ReviewAdapter
-import com.mashup.ipdam.ui.home.adapter.RoomImageByMarkerAdapter
+import com.mashup.ipdam.ui.home.adapter.review.ReviewAdapter
+import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapter
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
