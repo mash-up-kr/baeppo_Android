@@ -80,4 +80,7 @@
     <!-- 관심리뷰 페이지   -->
     <string name="bookmark_review">관심리뷰</string>
     <string name="bookmark_review_count">관심리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
+    <!-- 마리뷰 페이지   -->
+    <string name="my_review">마이리뷰</string>
+    <string name="my_ipdam_review_count">내가 작성한 리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
 </resources>

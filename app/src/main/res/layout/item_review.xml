@@ -43,7 +43,7 @@
             android:layout_width="0.5dp"
             android:layout_height="10dp"
             android:layout_marginStart="100dp"
-            android:background="#000000"
+            android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_buildingName" />
@@ -108,10 +108,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
             android:layout_marginTop="17dp"
-            tools:text="여러분 제가 살아봤는데요, 이 집은 진짜 아니에요..."
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_buildingName" />
+            app:layout_constraintTop_toBottomOf="@id/tv_buildingName"
+            tools:text="여러분 제가 살아봤는데요, 이 집은 진짜 아니에요..." />
 
         <TextView
             android:id="@+id/tv_starRate"
@@ -122,6 +122,18 @@
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="@id/v_leftLine"
             app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            visible="@{isMyReview}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
+            app:srcCompat="@drawable/gear"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
