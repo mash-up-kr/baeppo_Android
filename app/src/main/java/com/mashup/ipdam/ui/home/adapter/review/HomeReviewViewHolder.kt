@@ -4,7 +4,7 @@ import com.mashup.base.BaseRecyclerView
 import com.mashup.ipdam.databinding.ItemReviewBinding
 import com.mashup.ipdam.ui.home.HomeViewModel
 
-class ReviewViewHolder(
+class HomeReviewViewHolder(
     binding: ItemReviewBinding,
     bindingVariableId: Int?,
     private val homeViewModel: HomeViewModel

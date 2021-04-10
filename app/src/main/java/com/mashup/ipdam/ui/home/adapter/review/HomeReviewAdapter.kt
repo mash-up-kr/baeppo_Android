@@ -10,17 +10,17 @@ import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.databinding.ItemReviewBinding
 import com.mashup.ipdam.ui.home.HomeViewModel
 
-class ReviewAdapter(private val homeViewModel: HomeViewModel) :
+class HomeReviewAdapter(private val homeViewModel: HomeViewModel) :
     BaseRecyclerView.Adapter<Review, ItemReviewBinding>(
         R.layout.item_review,
         BR.review,
-        ReviewDiffCallback
+        HomeReviewDiffCallback
     ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ReviewViewHolder =
-        ReviewViewHolder(
+    ): HomeReviewViewHolder =
+        HomeReviewViewHolder(
             ItemReviewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
@@ -28,7 +28,7 @@ class ReviewAdapter(private val homeViewModel: HomeViewModel) :
         )
 }
 
-object ReviewDiffCallback : DiffUtil.ItemCallback<Review>() {
+object HomeReviewDiffCallback : DiffUtil.ItemCallback<Review>() {
 
     override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
         return oldItem.id == newItem.id

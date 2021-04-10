@@ -29,7 +29,7 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
-import com.mashup.ipdam.ui.home.adapter.review.ReviewAdapter
+import com.mashup.ipdam.ui.home.adapter.review.HomeReviewAdapter
 import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapter
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
@@ -51,7 +51,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private lateinit var myMap: NaverMap
     private lateinit var mapLocationSource: FusedLocationSource
     private val homeViewModel by activityViewModels<HomeViewModel>()
-    private val reviewAdapter by lazy { ReviewAdapter(homeViewModel) }
+    private val reviewAdapter by lazy { HomeReviewAdapter(homeViewModel) }
     private val roomImageByMarkerAdapter by lazy { RoomImageByMarkerAdapter() }
 
     private val requestPermissionLauncher =
