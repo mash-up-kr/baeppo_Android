@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="review_sort">
+        <item>최신순</item>
+        <item>별점순</item>
+    </string-array>
     <!--  리뷰 생성페이지  -->
     <string-array name="add_edit_point_distance">
         <item>통학거리</item>

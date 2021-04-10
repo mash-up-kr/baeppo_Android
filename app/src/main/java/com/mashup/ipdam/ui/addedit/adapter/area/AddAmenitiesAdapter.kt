@@ -1,15 +1,9 @@
 package com.mashup.ipdam.ui.addedit.adapter.area
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ItemAreaBinding
-import com.mashup.ipdam.databinding.ItemImageBinding
 import com.mashup.ipdam.ui.addedit.AddEditViewModel
 
 class AddAmenitiesAdapter(

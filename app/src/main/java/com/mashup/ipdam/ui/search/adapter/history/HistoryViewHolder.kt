@@ -1,16 +1,18 @@
 package com.mashup.ipdam.ui.search.adapter.history
 
-import androidx.recyclerview.widget.RecyclerView
+import com.mashup.base.BaseRecyclerView
 import com.mashup.ipdam.databinding.ItemHistoryBinding
-import com.mashup.ipdam.entity.history.History
 import com.mashup.ipdam.ui.search.SearchViewModel
 
 
 class HistoryViewHolder(
-    private val binding: ItemHistoryBinding,
+    binding: ItemHistoryBinding,
+    bindingVariableId: Int?,
     private val searchViewModel: SearchViewModel
-) : RecyclerView.ViewHolder(binding.root) {
-
+) : BaseRecyclerView.ViewHolder<ItemHistoryBinding>(
+    binding,
+    bindingVariableId
+) {
     init {
         binding.root.setOnClickListener {
             searchViewModel.getPlaceByHistoryWithPosition(bindingAdapterPosition)
@@ -18,9 +20,5 @@ class HistoryViewHolder(
         binding.historyDelete.setOnClickListener {
             searchViewModel.deleteHistoryWithPosition(bindingAdapterPosition)
         }
-    }
-
-    fun bind(history: History) {
-        binding.history = history
     }
 }

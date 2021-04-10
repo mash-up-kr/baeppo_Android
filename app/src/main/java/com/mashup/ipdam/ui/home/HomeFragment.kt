@@ -6,12 +6,13 @@ import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import androidx.fragment.app.activityViewModels
-import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.view.ViewCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mashup.base.BaseFragment
 import com.mashup.base.ext.checkSelfPermissionCompat
@@ -28,6 +29,8 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.databinding.FragmentHomeBinding
+import com.mashup.ipdam.ui.home.adapter.review.HomeReviewAdapter
+import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapter
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -38,6 +41,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.min
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -47,6 +51,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private lateinit var myMap: NaverMap
     private lateinit var mapLocationSource: FusedLocationSource
     private val homeViewModel by activityViewModels<HomeViewModel>()
+    private val reviewAdapter by lazy { HomeReviewAdapter(homeViewModel) }
+    private val roomImageByMarkerAdapter by lazy { RoomImageByMarkerAdapter() }
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -80,52 +86,83 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         mapLocationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         binding.viewModel = homeViewModel
+        binding.bottomSheet.loBottomSheetByMarker.viewModel = homeViewModel
         binding.map.getMapAsync(this)
         initBottomSheet()
+        initSpinner()
+        binding.button2.setOnClickListener {
+            homeViewModel.getReviewByMarker()
+        }
         initSearchLayout()
+    }
+
+    private fun initSearchLayout() {
+        binding.searchView.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    homeViewModel.getResultBySearchAddress()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun initBottomSheet() {
+        binding.root.doOnLayout {
+            setIpdamBottomSheetHeight()
+        }
+        BottomSheetBehavior.from(binding.bottomSheet.root)
+            .addBottomSheetCallback(
+                object : BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    }
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                        val changedAlpha = min(
+                            ALPHA_MAX,
+                            ALPHA_MAX / ALPHA_CHANGED_VALUE * slideOffset
+                        )
+                        binding.bottomSheet.apply {
+                            tvBottomSheetHeader.alpha = ALPHA_MAX - changedAlpha
+                            tvPlaceName.alpha = changedAlpha
+                            tvPlaceNameAndCount.alpha = changedAlpha
+                            ivMarker.alpha = changedAlpha
+                            spSort.alpha = changedAlpha
+                        }
+                        binding.bottomSheet.loBottomSheetByMarker.apply {
+                            tvAddress.alpha = ALPHA_MAX - changedAlpha
+                            tvName.alpha = ALPHA_MAX - changedAlpha
+                            tvReviewCounts.alpha = ALPHA_MAX - changedAlpha
+                            rvThumbnail.alpha = ALPHA_MAX - changedAlpha
+                        }
+                    }
+                })
+
+        binding.bottomSheet.rvReviews.adapter = reviewAdapter
+        binding.bottomSheet.loBottomSheetByMarker.rvThumbnail.adapter = roomImageByMarkerAdapter
+        ViewCompat.setNestedScrollingEnabled(
+            binding.bottomSheet.loBottomSheetByMarker.rvThumbnail,
+            false
+        )
+    }
+
+    private fun initSpinner() {
+        val spinnerItems = resources.getStringArray(R.array.review_sort)
+        binding.bottomSheet.spSort.adapter
     }
 
     override fun observeViewModel() {
         observeMapLiveData()
         observeSearchLiveData()
-    }
-
-    private fun initSearchLayout() {
-        binding.searchView.setOnEditorActionListener(
-            TextView.OnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE -> {
-                        homeViewModel.getResultBySearchAddress()
-                        true
-                    }
-                    else -> false
+        homeViewModel.bottomSheetState.observe(this, { state ->
+            state?.let {
+                when (it) {
+                    BottomSheetState.MAP_MOVED -> showIpdamBottomSheetByMap()
+                    BottomSheetState.MARKER_CLICKED -> showIpdamBottomSheetByMarker()
                 }
-            })
-    }
-
-    private fun initBottomSheet() {
-        binding.root.doOnLayout {
-            initBottomSheetHeight()
-        }
-        BottomSheetBehavior.from(binding.bottomSheet.root)
-            .addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    //TODO: 입담 리뷰 세세한 리스트 화면에 보여주기
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-                }
-            })
-    }
-
-    private fun initBottomSheetHeight() {
-        binding.bottomSheet.root.updateLayoutParams {
-            val bottomSheetHeight = binding.root.height - binding.searchView.height -
-                    binding.searchView.marginTop -
-                    resources.getDimension(R.dimen.margin_bottom_search)
-            height = bottomSheetHeight.toInt()
-        }
+            }
+        })
     }
 
     private fun showSearchActivity(searchingAddress: String) {
@@ -196,7 +233,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private fun getMapBoundaryOnScreen(): MapBoundary {
         val locationOnScreen = getMapLocation()
         val topLeftPointF = PointF(0f, 0f)
-        val bottomRightPointF = PointF(locationOnScreen[0].toFloat(), locationOnScreen[1].toFloat())
+        val bottomRightPointF =
+            PointF(locationOnScreen[0].toFloat(), locationOnScreen[1].toFloat())
 
         val projection = myMap.projection
         val topLeftLatLng = projection.fromScreenLocation(topLeftPointF)
@@ -216,7 +254,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             homeViewModel.getIpdamBySymbol(symbol.position)
             false
         }
-        myMap.addOnCameraIdleListener { homeViewModel.getIpdamInBoundary(getMapBoundaryOnScreen()) }
+        myMap.addOnCameraIdleListener {
+            homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
+        }
     }
 
     private fun initUniversityMarker() {
@@ -254,19 +294,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         myMap.locationTrackingMode = LOCATION_TRACKING_MODE
     }
 
-    private fun showIpdamBottomSheet() {
+    private fun showIpdamBottomSheetByMarker() {
         BottomSheetBehavior.from(binding.bottomSheet.root).run {
+            peekHeight = resources.getDimensionPixelSize(R.dimen.peek_height_bottom_sheet_by_marker)
             state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
 
-    private fun hideIpdamBottomSheet() {
+    private fun showIpdamBottomSheetByMap() {
         BottomSheetBehavior.from(binding.bottomSheet.root).run {
-            state = BottomSheetBehavior.STATE_HIDDEN
+            peekHeight = resources.getDimensionPixelSize(R.dimen.peek_height_bottom_sheet_by_map)
+            state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
+    private fun setIpdamBottomSheetHeight() {
+        binding.bottomSheet.root.updateLayoutParams {
+            val bottomSheetHeight =
+                binding.root.height -
+                        binding.searchView.height -
+                        binding.searchView.marginTop -
+                        resources.getDimensionPixelSize(R.dimen.bottom_sheet_marigin_top)
+            height = bottomSheetHeight
         }
     }
 
     companion object {
+        private const val ALPHA_MAX = 1F
+        private const val ALPHA_CHANGED_VALUE = 0.15F
         fun getInstance() = HomeFragment()
     }
 }

@@ -5,7 +5,8 @@ import androidx.core.content.ContextCompat
 import com.mashup.base.BaseActivity
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityRegisterBinding
-import com.mashup.ipdam.ui.register.RegisterInputType.*
+import com.mashup.ipdam.ui.register.RegisterInputType.SAFE
+import com.mashup.ipdam.ui.register.RegisterInputType.WRONG
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
     override var logTag: String = "RegisterActivity"
@@ -75,7 +76,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     private fun showIdFailedLayout() {
         binding.registerIdResult.run {
             text = getString(R.string.register_id_result_failed)
-            setTextColor(ContextCompat.getColor(context, R.color.red_color))
+            setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }
 
@@ -89,7 +90,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     private fun showPasswordFailedLayout() {
         binding.registerPasswordResult.run {
             text = getString(R.string.register_password_result_failed)
-            setTextColor(ContextCompat.getColor(context, R.color.red_color))
+            setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }
 
@@ -103,7 +104,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     private fun showPasswordCheckFailedLayout() {
         binding.registerPasswordCheckResult.run {
             text = getString(R.string.register_password_check_result_failed)
-            setTextColor(ContextCompat.getColor(context, R.color.red_color))
+            setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }
 }

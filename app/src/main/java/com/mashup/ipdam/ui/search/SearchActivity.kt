@@ -3,15 +3,14 @@ package com.mashup.ipdam.ui.search
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mashup.base.BaseActivity
 import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySearchBinding
-import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
-import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
 import com.mashup.ipdam.entity.kakao.Places
+import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
+import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,9 +18,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     PlaceAdapter.PlaceClickListener {
     override var logTag: String = "SearchActivity"
 
-    private val searchViewModel by viewModels<SearchViewModel>()
     private val placeAdapter: PlaceAdapter by lazy { PlaceAdapter(this) }
     private val historyAdapter: HistoryAdapter by lazy { HistoryAdapter(searchViewModel) }
+    private val searchViewModel by viewModels<SearchViewModel>()
 
     override fun initLayout() {
         binding.viewModel = searchViewModel
@@ -81,14 +80,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
     private fun initRecyclerView() {
         binding.resultRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
             adapter = placeAdapter
         }
         binding.historyRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
             adapter = historyAdapter
         }
     }
+
 
     override fun observeViewModel() {
         searchViewModel.isSearchingPlace.observe(this) { isSearching ->

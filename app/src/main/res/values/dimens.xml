@@ -6,11 +6,13 @@
     <dimen name="elevation_search">4dp</dimen>
     <dimen name="margin_bottom_search">8dp</dimen>
     <dimen name="margin_bottom_location_button">56dp</dimen>
-    <dimen name="peek_height_bottom_sheet">48dp</dimen>
+    <dimen name="peek_height_bottom_sheet_by_map">71dp</dimen>
+    <dimen name="peek_height_bottom_sheet_by_marker">125dp</dimen>
     <dimen name="height_indicator">2dp</dimen>
     <dimen name="padding_indicator">10dp</dimen>
     <dimen name="size_navigation_icon">20dp</dimen>
     <dimen name="size_add_button">50dp</dimen>
+    <dimen name="bottom_sheet_marigin_top">30dp</dimen>
     <dimen name="height_marker">60dp</dimen>
     <dimen name="width_marker">44dp</dimen>
 </resources>

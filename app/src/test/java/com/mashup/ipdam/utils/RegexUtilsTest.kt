@@ -1,7 +1,7 @@
 package com.mashup.ipdam.utils
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.junit.Assert.*
 
 class RegexUtilsTest {
 

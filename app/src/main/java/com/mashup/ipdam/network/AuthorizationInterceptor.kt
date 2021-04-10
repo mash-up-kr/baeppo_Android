@@ -22,7 +22,7 @@ class AuthorizationInterceptor @Inject constructor(
             .apply {
                 runBlocking(Dispatchers.IO) {
                     val accessToken = authorizationDataStore.getAccessToken().first()
-                    if (!accessToken.isEmpty()) {
+                    if (accessToken.isNotEmpty()) {
                         header(KEY_ACCESS_TOKEN, accessToken)
                     }
                 }

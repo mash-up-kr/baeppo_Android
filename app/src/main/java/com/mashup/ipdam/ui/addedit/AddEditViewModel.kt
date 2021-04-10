@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.ipdam.SingleLiveEvent
-import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.entity.review.PointType
+import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.entity.review.ReviewMockData
 import com.mashup.ipdam.entity.review.ReviewPoint
 import javax.inject.Inject

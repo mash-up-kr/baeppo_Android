@@ -2,30 +2,28 @@ package com.mashup.ipdam.ui.search.adapter.kakao
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import com.mashup.base.BaseRecyclerView
+import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ItemPlaceBinding
 import com.mashup.ipdam.entity.kakao.Places
 
 class PlaceAdapter(
     private val placeClickListener: PlaceClickListener
-) : ListAdapter<Places, PlaceViewHolder>(PlacesDiffCallback) {
-
-    init {
-        setHasStableIds(true)
-    }
+) :
+    BaseRecyclerView.Adapter<Places, ItemPlaceBinding>(
+        R.layout.item_place,
+        BR.document, PlacesDiffCallback
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         PlaceViewHolder(
             ItemPlaceBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
-            ), placeClickListener
+            ), BR.document, placeClickListener
         )
-
-    override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
 
     interface PlaceClickListener {
         fun onPlaceClick(position: Int)

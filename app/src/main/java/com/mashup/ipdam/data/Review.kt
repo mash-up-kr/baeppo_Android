@@ -5,8 +5,8 @@ data class Review(
     val createdDate: String,
     val id: String,
     val images: List<String>,
-    val isBookmark: String,
+    val bookmark: Boolean,
     val nickName: String,
-    val rating: String,
+    val rating: Double,
     val userId: String
 )

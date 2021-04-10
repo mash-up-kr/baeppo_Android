@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.mashup.ipdam.entity.kakao.Places"/>
+
+        <import type="com.mashup.ipdam.entity.kakao.Places" />
+
         <variable
             name="document"
             type="Places" />
@@ -15,22 +17,22 @@
         android:layout_height="wrap_content">
 
         <View
+            android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="#d0d0d0"
-            android:id="@+id/line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/placeKeyword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textSize="16sp"
-            android:id="@+id/placeKeyword"
-            android:textStyle="bold"
             android:text="@{document.placeName}"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
             tools:text="서울빌딩" />
@@ -46,7 +48,7 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/placeKeyword"
+            app:layout_constraintTop_toBottomOf="@id/placeKeyword"
             tools:text="서울 노원구 동일로 1021(공릉동)" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
