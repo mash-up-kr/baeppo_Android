@@ -82,8 +82,7 @@
             android:alpha="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/marker"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/marker" />
 
         <TextView
             android:id="@+id/tv_placeNameAndCount"

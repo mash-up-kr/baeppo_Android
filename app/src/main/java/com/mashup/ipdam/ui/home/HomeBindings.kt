@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.mashup.base.ext.setHtmlText
-import com.mashup.base.glide.GlideApp
 import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
 

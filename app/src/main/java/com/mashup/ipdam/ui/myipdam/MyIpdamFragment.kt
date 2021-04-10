@@ -3,10 +3,7 @@ package com.mashup.ipdam.ui.myipdam
 import androidx.fragment.app.activityViewModels
 import com.mashup.base.BaseFragment
 import com.mashup.ipdam.R
-import com.mashup.ipdam.databinding.FragmentBookmarksBinding
 import com.mashup.ipdam.databinding.FragmentMyipdamBinding
-import com.mashup.ipdam.ui.bookmark.BookmarkViewModel
-import com.mashup.ipdam.ui.bookmark.adapter.BookmarkReviewAdapter
 import com.mashup.ipdam.ui.myipdam.adapter.MyIpdamReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

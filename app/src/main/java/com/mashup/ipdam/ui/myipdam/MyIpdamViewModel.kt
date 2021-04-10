@@ -1,6 +1,5 @@
 package com.mashup.ipdam.ui.myipdam
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.mashup.base.BaseViewModel
 import com.mashup.ipdam.data.Review

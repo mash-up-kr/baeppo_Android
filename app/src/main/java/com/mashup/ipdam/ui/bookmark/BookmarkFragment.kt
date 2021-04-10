@@ -5,8 +5,6 @@ import com.mashup.base.BaseFragment
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.FragmentBookmarksBinding
 import com.mashup.ipdam.ui.bookmark.adapter.BookmarkReviewAdapter
-import com.mashup.ipdam.ui.home.HomeViewModel
-import com.mashup.ipdam.ui.home.adapter.review.HomeReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
