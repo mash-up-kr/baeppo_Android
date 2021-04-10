@@ -330,19 +330,19 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/addEditImageRecyclerView"
-                    imageList="@{viewModel.imageList}"
+                    imageList="@{viewModel.roomImageList}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="10dp"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addEditImage" />
+                    app:layout_constraintTop_toBottomOf="@id/addEditImage"
+                    app:spanCount="2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

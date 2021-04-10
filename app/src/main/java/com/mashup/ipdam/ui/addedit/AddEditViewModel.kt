@@ -9,6 +9,7 @@ import com.mashup.ipdam.entity.review.PointType
 import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.entity.review.ReviewMockData
 import com.mashup.ipdam.entity.review.ReviewPoint
+import com.mashup.ipdam.error.Error
 import javax.inject.Inject
 
 class AddEditViewModel @Inject constructor(
@@ -20,13 +21,15 @@ class AddEditViewModel @Inject constructor(
     val reviewPointList: LiveData<List<ReviewPoint>> = _reviewPointList
     private val _reviewAreaList = MutableLiveData<List<ReviewAmenities>>(emptyList())
     val reviewAmenitiesList: LiveData<List<ReviewAmenities>> = _reviewAreaList
-    private val _imageList = MutableLiveData<List<String>>(emptyList())
-    val imageList: LiveData<List<String>> = _imageList
+    private val _roomImageList = MutableLiveData<List<String>>(emptyList())
+    val roomImageList: LiveData<List<String>> = _roomImageList
     private val _addReviewImageEvent = SingleLiveEvent<Unit>()
     val addReviewImageEvent: SingleLiveEvent<Unit> = _addReviewImageEvent
     private val _addReviewAreaEvent = SingleLiveEvent<Unit>()
     val addReviewAreaEvent: SingleLiveEvent<Unit> = _addReviewAreaEvent
     val rating = MutableLiveData<Double>()
+    private val _eventError = SingleLiveEvent<Error>()
+    val eventError: SingleLiveEvent<Error> = _eventError
 
 
     init {
@@ -39,7 +42,7 @@ class AddEditViewModel @Inject constructor(
     private fun initDefaultValue() {
         _reviewPointList.value = ReviewMockData.geReviewPointMockData()
         _reviewAreaList.value = ReviewMockData.getReviewAreaMockData()
-        _imageList.value = emptyList()
+        _roomImageList.value = emptyList()
         rating.value = 0.0
     }
 
@@ -73,13 +76,17 @@ class AddEditViewModel @Inject constructor(
         _addReviewAreaEvent.value = Unit
     }
 
+    fun setRoomImage(newRoomImageList: List<String>) {
+        _roomImageList.postValue(newRoomImageList)
+    }
+
     fun deleteReviewImage(position: Int) {
-        val imageList = _imageList.value ?: emptyList()
+        val roomImageList = _roomImageList.value ?: emptyList()
         val newImageList = mutableListOf<String>().apply {
-            addAll(imageList)
+            addAll(roomImageList)
 
             removeAt(position)
         }
-        _imageList.postValue(newImageList)
+        _roomImageList.postValue(newImageList)
     }
 }
