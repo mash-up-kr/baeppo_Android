@@ -9,7 +9,6 @@ import com.mashup.ipdam.entity.review.PointType
 import com.mashup.ipdam.entity.review.ReviewAmenities
 import com.mashup.ipdam.entity.review.ReviewMockData
 import com.mashup.ipdam.entity.review.ReviewPoint
-import com.mashup.ipdam.error.Error
 import javax.inject.Inject
 
 class AddEditViewModel @Inject constructor(
@@ -28,8 +27,6 @@ class AddEditViewModel @Inject constructor(
     private val _addReviewAreaEvent = SingleLiveEvent<Unit>()
     val addReviewAreaEvent: SingleLiveEvent<Unit> = _addReviewAreaEvent
     val rating = MutableLiveData<Double>()
-    private val _eventError = SingleLiveEvent<Error>()
-    val eventError: SingleLiveEvent<Error> = _eventError
 
 
     init {
