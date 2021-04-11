@@ -90,9 +90,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         binding.map.getMapAsync(this)
         initBottomSheet()
         initSpinner()
-        binding.button2.setOnClickListener {
-            homeViewModel.getReviewByMarker()
-        }
         initSearchLayout()
     }
 
@@ -265,6 +262,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             icon = OverlayImage.fromResource(R.drawable.ic_marker)
             width = resources.getDimension(R.dimen.width_marker).toInt()
             height = resources.getDimension(R.dimen.height_marker).toInt()
+        }
+        marker.setOnClickListener {
+            homeViewModel.getReviewByMarker()
+            true
         }
         marker.map = myMap
     }

@@ -29,11 +29,6 @@ fun setReviewCount(view: TextView, count: Int) {
     view.text = view.context.getString(R.string.review_count, count)
 }
 
-@BindingAdapter("starCount")
-fun setStarCount(view: TextView, count: Double) {
-    view.text = view.context.getString(R.string.star_count, count)
-}
-
 @BindingAdapter("bookmark")
 fun setBookmarkColor(view: ImageView, bookmark: Boolean) {
     view.imageTintList = if (bookmark) ColorStateList.valueOf(
