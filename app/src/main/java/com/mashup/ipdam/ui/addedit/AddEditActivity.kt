@@ -2,7 +2,6 @@ package com.mashup.ipdam.ui.addedit
 
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ConcatAdapter
 import com.mashup.base.BaseActivity
 import com.mashup.ipdam.R
