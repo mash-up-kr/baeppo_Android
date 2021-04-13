@@ -9,7 +9,6 @@ class CreatorActivity : BaseActivity<ActivityCreatorBinding>(R.layout.activity_c
     override var logTag: String = "CreatorActivity"
 
     override fun initLayout() {
-        setDecorFitStatusBar()
         binding.creatorBackButton.setOnClickListener {
             finish()
         }
