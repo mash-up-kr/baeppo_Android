@@ -12,6 +12,7 @@
     <dimen name="padding_indicator">10dp</dimen>
     <dimen name="size_navigation_icon">20dp</dimen>
     <dimen name="size_add_button">50dp</dimen>
+    <dimen name="space_room_image">8dp</dimen>
     <dimen name="bottom_sheet_marigin_top">8dp</dimen>
     <dimen name="height_marker">60dp</dimen>
     <dimen name="width_marker">44dp</dimen>
