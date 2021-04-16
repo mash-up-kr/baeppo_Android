@@ -1,4 +1,4 @@
-package com.mashup.ipdam.data
+package com.mashup.ipdam.data.db
 
 import android.content.Context
 import androidx.room.Database
