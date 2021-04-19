@@ -148,41 +148,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/registerPasswordCheckTitle" />
 
-        <TextView
-            android:id="@+id/registerSchoolTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:minHeight="30dp"
-            android:text="@string/register_school_text"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/registerPasswordCheckEditText" />
-
-        <EditText
-            android:id="@+id/registerSchoolEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:background="@drawable/bg_corner_stroke"
-            android:hint="@string/register_school_hint"
-            android:importantForAutofill="no"
-            android:inputType="none"
-            android:lines="1"
-            android:minHeight="@dimen/height_edittext"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:text="@={viewModel.searchSchool}"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/registerSchoolTitle" />
-
         <Button
             android:id="@+id/registerButton"
             android:layout_width="0dp"
@@ -197,7 +162,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/registerSchoolEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/registerPasswordCheckEditText" />
 
         <TextView
             android:id="@+id/registerIdResult"
@@ -249,21 +214,6 @@
             app:layout_constraintBottom_toTopOf="@id/registerPasswordCheckEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/registerPasswordCheckTitle" />
-
-        <ImageButton
-            android:id="@+id/registerSearchButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="11dp"
-            android:layout_marginBottom="10dp"
-            android:background="@null"
-            android:onClick="@{() -> viewModel.showSearchSchoolResult()}"
-            app:layout_constraintBottom_toBottomOf="@id/registerSchoolEditText"
-            app:layout_constraintEnd_toEndOf="@id/registerSchoolEditText"
-            app:layout_constraintTop_toTopOf="@id/registerSchoolEditText"
-            app:srcCompat="@drawable/ic_search"
-            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
