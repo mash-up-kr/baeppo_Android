@@ -3,6 +3,7 @@ package com.mashup.ipdam.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mashup.base.BaseViewModel
+import com.mashup.ipdam.SingleLiveEvent
 import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.data.map.MapBoundary
 import com.naver.maps.geometry.LatLng
@@ -27,12 +28,12 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     val address: LiveData<String> = _address
 
     val searchAddress = MutableLiveData("")
-    private val _isSearchAddressEmpty = MutableLiveData(false)
-    val isSearchAddressEmpty = _isSearchAddressEmpty
-    private val _showSearchResultEvent = MutableLiveData(false)
-    val showSearchResultEvent = _showSearchResultEvent
-    private val _isSearchingPlace = MutableLiveData(false)
-    val isSearchingPlace = _isSearchingPlace
+    private val _isSearchAddressEmpty = SingleLiveEvent<Unit>()
+    val isSearchAddressEmpty: SingleLiveEvent<Unit> = _isSearchAddressEmpty
+    private val _showSearchResultEvent = SingleLiveEvent<Unit>()
+    val showSearchResultEvent: SingleLiveEvent<Unit> = _showSearchResultEvent
+    private val _isSearchingPlace = SingleLiveEvent<Unit>()
+    val isSearchingPlace: SingleLiveEvent<Unit> = _isSearchingPlace
 
     private lateinit var nowMapBoundary: MapBoundary
 
@@ -60,12 +61,12 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     }
 
     fun getResultBySearchAddress() {
-        _isSearchingPlace.value = true
+        _isSearchingPlace.value = Unit
         if (searchAddress.value.isNullOrEmpty()) {
-            _isSearchAddressEmpty.value = true
+            _isSearchAddressEmpty.value = Unit
         } else {
-            _isSearchAddressEmpty.value = false
-            _showSearchResultEvent.value = true
+            _isSearchAddressEmpty.value = Unit
+            _showSearchResultEvent.value = Unit
         }
         searchAddress.value = ""
     }
