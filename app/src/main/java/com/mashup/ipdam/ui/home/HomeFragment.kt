@@ -37,7 +37,6 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
@@ -150,8 +149,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     override fun observeViewModel() {
+        observeBottomSheet()
         observeMapLiveData()
         observeSearchLiveData()
+    }
+
+    private fun showSearchActivity(searchingAddress: String) {
+        val intent = Intent(requireActivity(), SearchActivity::class.java).apply {
+            putExtra("keyword", searchingAddress)
+        }
+        searchActivityResultLauncher.launch(intent)
+    }
+
+    private fun observeBottomSheet() {
         homeViewModel.bottomSheetState.observe(this, { state ->
             state?.let {
                 when (it) {
@@ -162,17 +172,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         })
     }
 
-    private fun showSearchActivity(searchingAddress: String) {
-        val intent = Intent(requireActivity(), SearchActivity::class.java).apply {
-            putExtra("keyword", searchingAddress)
-        }
-        searchActivityResultLauncher.launch(intent)
-    }
-
     private fun observeMapLiveData() {
         homeViewModel.mapCameraPosition.observe(this) {
             val cameraUpdate = CameraUpdate.scrollTo(it)
             myMap.moveCamera(cameraUpdate)
+        }
+        homeViewModel.reviewMarkersOnMap.observe(this) {
+            val markerImage = OverlayImage.fromResource(R.drawable.ic_marker)
+            it.forEach { marker ->
+                marker.apply {
+                    icon = markerImage
+                    width = resources.getDimension(R.dimen.width_marker).toInt()
+                    height = resources.getDimension(R.dimen.height_marker).toInt()
+
+                    setOnClickListener { clickedMarker ->
+                        if (clickedMarker.tag is Int) {
+                            homeViewModel.getReviewByMarker(clickedMarker.tag as Int)
+                        }
+                        false
+                    }
+
+                    map = myMap
+                }
+            }
+        }
+        homeViewModel.deleteReviewMarkers.observe(this) {
+            it.forEach { marker ->
+                marker.map = null
+            }
         }
     }
 
@@ -203,7 +230,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         requestMapLocationPermission()
         initMapListener()
         initMapUi()
-        initUniversityMarker()
     }
 
     private fun requestMapLocationPermission() {
@@ -247,27 +273,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun initMapListener() {
-        myMap.setOnSymbolClickListener { symbol ->
-            homeViewModel.getIpdamBySymbol(symbol.position)
-            false
-        }
         myMap.addOnCameraIdleListener {
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
         }
-    }
-
-    private fun initUniversityMarker() {
-        val marker = Marker().apply {
-            position = LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
-            icon = OverlayImage.fromResource(R.drawable.ic_marker)
-            width = resources.getDimension(R.dimen.width_marker).toInt()
-            height = resources.getDimension(R.dimen.height_marker).toInt()
-        }
-        marker.setOnClickListener {
-            homeViewModel.getReviewByMarker()
-            true
-        }
-        marker.map = myMap
     }
 
     private fun initMapUi() {

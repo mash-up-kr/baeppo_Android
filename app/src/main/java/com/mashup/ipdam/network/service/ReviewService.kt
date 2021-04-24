@@ -6,7 +6,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MapService {
+interface ReviewService {
     @GET("/v1/map")
     fun requestReviewMarkersByMap(
         @Query("leftLatitude") leftLatitude: Double,
