@@ -40,12 +40,10 @@ class HomeViewModel @Inject constructor(
     val address: LiveData<String> = _address
 
     val searchAddress = MutableLiveData("")
-    private val _isSearchAddressEmpty = MutableLiveData(false)
-    val isSearchAddressEmpty = _isSearchAddressEmpty
-    private val _showSearchResultEvent = MutableLiveData(false)
-    val showSearchResultEvent = _showSearchResultEvent
-    private val _isSearchingPlace = MutableLiveData(false)
-    val isSearchingPlace = _isSearchingPlace
+    private val _showSearchResultEvent = SingleLiveEvent<Unit>()
+    val showSearchResultEvent: SingleLiveEvent<Unit> = _showSearchResultEvent
+    private val _isSearchingPlace = SingleLiveEvent<Unit>()
+    val isSearchingPlace: SingleLiveEvent<Unit> = _isSearchingPlace
 
     fun getReviewByMarker(reviewId: Int) {
         //TODO: 파라미터로 symbolPosition: LatLng를 받을 것. MOCK DATA 파싱이나 서버 통신 결과를 받아올 예정
@@ -79,12 +77,10 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getResultBySearchAddress() {
-        _isSearchingPlace.value = true
+        _isSearchingPlace.value = Unit
         if (searchAddress.value.isNullOrEmpty()) {
-            _isSearchAddressEmpty.value = true
         } else {
-            _isSearchAddressEmpty.value = false
-            _showSearchResultEvent.value = true
+            _showSearchResultEvent.value = Unit
         }
         searchAddress.value = ""
     }

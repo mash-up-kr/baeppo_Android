@@ -73,6 +73,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
         val intent = intent.apply {
             putExtra("latitude", place.y.toDouble())
             putExtra("longitude", place.x.toDouble())
+            putExtra("address", place.addressName)
         }
         setResult(RESULT_OK, intent)
         finish()

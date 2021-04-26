@@ -16,6 +16,12 @@ class AddEditViewModel @Inject constructor(
 ) : BaseViewModel() {
     override var logTag: String = "add_editViewModel"
 
+    private val _reviewType = MutableLiveData(AddEditType.ADD)
+    val reviewType: LiveData<AddEditType> = _reviewType
+    val reviewAddress = MutableLiveData("")
+    val reviewDetailAddress = MutableLiveData("")
+    private val _showSearchResultEvent = SingleLiveEvent<Unit>()
+    val showSearchResultEvent: SingleLiveEvent<Unit> = _showSearchResultEvent
     private val _reviewPointList = MutableLiveData<List<ReviewPoint>>(emptyList())
     val reviewPointList: LiveData<List<ReviewPoint>> = _reviewPointList
     private val _reviewAreaList = MutableLiveData<List<ReviewAmenities>>(emptyList())
@@ -26,21 +32,24 @@ class AddEditViewModel @Inject constructor(
     val addReviewImageEvent: SingleLiveEvent<Unit> = _addReviewImageEvent
     private val _addReviewAreaEvent = SingleLiveEvent<Unit>()
     val addReviewAreaEvent: SingleLiveEvent<Unit> = _addReviewAreaEvent
-    val rating = MutableLiveData<Double>()
+    val rating = MutableLiveData(0.0)
 
 
     init {
         val reviewId = savedStateHandle.get<Int>("reviewId")
         reviewId?.let {
-            //TODO: 리뷰 정보를 불러와 뷰모델 초기화
+            initReviewInfo(reviewId)
         } ?: initDefaultValue()
+    }
+
+    private fun initReviewInfo(reviewId: Int) {
+        _reviewType.value = AddEditType.EDIT
+        //TODO: review id API 통신
     }
 
     private fun initDefaultValue() {
         _reviewPointList.value = ReviewMockData.geReviewPointMockData()
         _reviewAreaList.value = ReviewMockData.getReviewAreaMockData()
-        _roomImageList.value = emptyList()
-        rating.value = 0.0
     }
 
     fun setReviewType(position: Int, pointType: PointType) {
@@ -77,6 +86,10 @@ class AddEditViewModel @Inject constructor(
         _roomImageList.postValue(newRoomImageList)
     }
 
+    fun setReviewAddress(address: String) {
+        reviewAddress.value = address
+    }
+
     fun deleteReviewImage(position: Int) {
         val roomImageList = _roomImageList.value ?: emptyList()
         val newImageList = mutableListOf<String>().apply {
@@ -85,5 +98,9 @@ class AddEditViewModel @Inject constructor(
             removeAt(position)
         }
         _roomImageList.postValue(newImageList)
+    }
+
+    fun getReviewAddressBySearch() {
+        _showSearchResultEvent.value = Unit
     }
 }

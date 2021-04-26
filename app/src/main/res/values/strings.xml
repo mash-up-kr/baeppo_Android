@@ -64,9 +64,11 @@
     <string name="history_header">최근 검색어</string>
     <string name="history_clear">모두 지우기</string>
     <!-- 리뷰 생성 페이지   -->
-    <string name="add_edit_title">마이리뷰 작성하기</string>
-    <string name="add_edit_save_button">등록</string>
-    <string name="add_edit_hint_search_address">리뷰를 남길 주소를 입력해주세</string>
+    <string name="add_title">마이리뷰 작성하기</string>
+    <string name="edit_title">마이리뷰 수정하기</string>
+    <string name="add_save_button">등록</string>
+    <string name="edit_save_button">등록</string>
+    <string name="add_edit_hint_search_address">리뷰를 남길 주소를 입력해주세요</string>
     <string name="add_edit_hint_detail_address">상세 주소 작성</string>
     <string name="add_edit_point">총 점수</string>
     <string name="add_edit_point_rating">%1$s점</string>

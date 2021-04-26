@@ -22,13 +22,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
                 //TODO: 회원가입 로직 작성
             }
         }
-        initSearchEditText()
-    }
-
-    private fun initSearchEditText() {
-        binding.registerSearchButton.setOnClickListener {
-            showSearchSchoolView()
-        }
     }
 
     override fun observeViewModel() {
