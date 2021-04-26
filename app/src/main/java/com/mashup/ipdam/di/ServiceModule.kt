@@ -2,7 +2,7 @@ package com.mashup.ipdam.di
 
 import com.mashup.ipdam.network.IpdamRetrofit
 import com.mashup.ipdam.network.service.KakaoService
-import com.mashup.ipdam.network.service.MapService
+import com.mashup.ipdam.network.service.ReviewService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,9 +13,9 @@ import okhttp3.OkHttpClient
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
     @Provides
-    fun provideSearchService(okHttpClient: OkHttpClient): MapService =
+    fun provideReviewService(okHttpClient: OkHttpClient): ReviewService =
         IpdamRetrofit.create(
-            MapService::class.java,
+            ReviewService::class.java,
             okHttpClient, IpdamRetrofit.IPDAM_API_END_POINT
         )
 
