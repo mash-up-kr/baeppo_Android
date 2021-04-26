@@ -4,7 +4,6 @@ import com.mashup.ipdam.data.ReviewMarkersByMap
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.network.service.ReviewService
 import io.reactivex.Single
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(

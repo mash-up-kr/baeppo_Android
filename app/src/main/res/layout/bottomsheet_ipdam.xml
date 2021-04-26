@@ -42,9 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
             android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/v_line" />
@@ -69,8 +69,8 @@
             android:layout_marginStart="7dp"
             android:alpha="0"
             android:text="@{viewModel.name}"
-            android:textSize="24sp"
             android:textColor="@color/black"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/iv_marker"
             app:layout_constraintStart_toEndOf="@id/iv_marker"
@@ -101,12 +101,15 @@
 
         <Spinner
             android:id="@+id/sp_sort"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="82dp"
             android:layout_marginEnd="18dp"
             android:alpha="0"
-            android:background="@drawable/spinner_arrow"
+            android:background="@drawable/bg_spinner_background"
+            android:divider="@color/stroke_color"
+            android:dividerHeight="10dp"
+            android:popupBackground="@drawable/bg_spinner_dropdown_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

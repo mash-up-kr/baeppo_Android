@@ -7,7 +7,7 @@ object MockReview {
         listOf(
             Review(
                 "서울빌딩",
-                "2020.01.20",
+                "2020.01.21",
                 1,
                 listOf(
                     "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMTlfMTM4%2FMDAxNjEzNjYzMDgyMzUz.UmYCoopR8Q8rTZTztLy9dHtZ9ZPZCIhHc8F7aUeQn5og.KfjcQvyb-xKR1G_sb28Mv7E8qZ4yBDz-Rf65j55Qhw0g.JPEG.jskdms007%2FIMG_6114.jpg&type=a340",
@@ -20,7 +20,7 @@ object MockReview {
             ),
             Review(
                 "서울빌딩",
-                "2020.01.20",
+                "2020.04.29",
                 2,
                 listOf(
                     "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDhfMTY2%2FMDAxNjEwMTE0ODU5OTA0.AQHbOYKQYzAqXjSEmCXjSlKSPe5D87aRv1fr_opYeOIg.AJbs2vOn5bhicqiHogYAF7MvY4rrwvK8FpOHEPJ7tgog.JPEG.psaa980%2F20210105%25A3%25DF114311.jpg&type=a340",
@@ -33,7 +33,7 @@ object MockReview {
             ),
             Review(
                 "서울빌딩",
-                "2020.01.20",
+                "2020.05.20",
                 3,
                 listOf(
                     "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMDFfNTYg%2FMDAxNjA2Nzk5MDE2MDUw.U3qreKXfTgkNnzaPzcCMGjJXv59kacodEEn374dX8sgg.6SCh_iWN6Xiq4trm4A2A0TZraZGZP9lzA3N-oOXigbgg.PNG.monk0531%2Fimage.png&type=a340",
@@ -46,7 +46,7 @@ object MockReview {
             ),
             Review(
                 "보빌딩",
-                "2020.01.20",
+                "2023.01.20",
                 4,
                 listOf(
                     "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMDRfMTYx%2FMDAxNjEyNDQzMzkxNzg4.U_ov3cutDLr5SOKQCuqvIWnjhtY1xnyHb6gn2-D6rgEg.hGHrcNgvx9hRTHGpNqLg2j2KBIwufGfv0biR4XCXmsMg.JPEG.vit4566%2FIMG_0387.jpg&type=a340",
@@ -61,7 +61,7 @@ object MockReview {
     fun getMockBookmarkReviews() = listOf(
         Review(
             "서울빌딩",
-            "2020.01.20",
+            "2021.01.22",
             5,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDhfMTY2%2FMDAxNjEwMTE0ODU5OTA0.AQHbOYKQYzAqXjSEmCXjSlKSPe5D87aRv1fr_opYeOIg.AJbs2vOn5bhicqiHogYAF7MvY4rrwvK8FpOHEPJ7tgog.JPEG.psaa980%2F20210105%25A3%25DF114311.jpg&type=a340",
@@ -74,7 +74,7 @@ object MockReview {
         ),
         Review(
             "서울빌딩",
-            "2020.01.20",
+            "2024.11.20",
             6,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMDFfNTYg%2FMDAxNjA2Nzk5MDE2MDUw.U3qreKXfTgkNnzaPzcCMGjJXv59kacodEEn374dX8sgg.6SCh_iWN6Xiq4trm4A2A0TZraZGZP9lzA3N-oOXigbgg.PNG.monk0531%2Fimage.png&type=a340",
@@ -87,7 +87,7 @@ object MockReview {
         ),
         Review(
             "보빌딩",
-            "2020.01.20",
+            "2023.01.20",
             7,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMDRfMTYx%2FMDAxNjEyNDQzMzkxNzg4.U_ov3cutDLr5SOKQCuqvIWnjhtY1xnyHb6gn2-D6rgEg.hGHrcNgvx9hRTHGpNqLg2j2KBIwufGfv0biR4XCXmsMg.JPEG.vit4566%2FIMG_0387.jpg&type=a340",
@@ -100,7 +100,7 @@ object MockReview {
         ),
         Review(
             "서울빌딩",
-            "2020.01.20",
+            "2023.12.20",
             8,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMTlfMTM4%2FMDAxNjEzNjYzMDgyMzUz.UmYCoopR8Q8rTZTztLy9dHtZ9ZPZCIhHc8F7aUeQn5og.KfjcQvyb-xKR1G_sb28Mv7E8qZ4yBDz-Rf65j55Qhw0g.JPEG.jskdms007%2FIMG_6114.jpg&type=a340",
@@ -115,7 +115,7 @@ object MockReview {
     fun getMockMyIpdamReviews() = listOf(
         Review(
             "서울빌딩",
-            "2020.01.20",
+            "2020.11.09",
             9,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEyMDFfNTYg%2FMDAxNjA2Nzk5MDE2MDUw.U3qreKXfTgkNnzaPzcCMGjJXv59kacodEEn374dX8sgg.6SCh_iWN6Xiq4trm4A2A0TZraZGZP9lzA3N-oOXigbgg.PNG.monk0531%2Fimage.png&type=a340",
@@ -128,7 +128,7 @@ object MockReview {
         ),
         Review(
             "보빌딩",
-            "2020.01.20",
+            "2020.11.20",
             10,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMDRfMTYx%2FMDAxNjEyNDQzMzkxNzg4.U_ov3cutDLr5SOKQCuqvIWnjhtY1xnyHb6gn2-D6rgEg.hGHrcNgvx9hRTHGpNqLg2j2KBIwufGfv0biR4XCXmsMg.JPEG.vit4566%2FIMG_0387.jpg&type=a340",
@@ -141,7 +141,7 @@ object MockReview {
         ),
         Review(
             "서울빌딩",
-            "2020.01.20",
+            "3020.01.20",
             11,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMTlfMTM4%2FMDAxNjEzNjYzMDgyMzUz.UmYCoopR8Q8rTZTztLy9dHtZ9ZPZCIhHc8F7aUeQn5og.KfjcQvyb-xKR1G_sb28Mv7E8qZ4yBDz-Rf65j55Qhw0g.JPEG.jskdms007%2FIMG_6114.jpg&type=a340",
@@ -154,7 +154,7 @@ object MockReview {
         ),
         Review(
             "서울빌딩",
-            "2020.01.20",
+            "2090.01.20",
             12,
             listOf(
                 "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDhfMTY2%2FMDAxNjEwMTE0ODU5OTA0.AQHbOYKQYzAqXjSEmCXjSlKSPe5D87aRv1fr_opYeOIg.AJbs2vOn5bhicqiHogYAF7MvY4rrwvK8FpOHEPJ7tgog.JPEG.psaa980%2F20210105%25A3%25DF114311.jpg&type=a340",
