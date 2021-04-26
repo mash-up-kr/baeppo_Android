@@ -28,8 +28,6 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     val address: LiveData<String> = _address
 
     val searchAddress = MutableLiveData("")
-    private val _isSearchAddressEmpty = SingleLiveEvent<Unit>()
-    val isSearchAddressEmpty: SingleLiveEvent<Unit> = _isSearchAddressEmpty
     private val _showSearchResultEvent = SingleLiveEvent<Unit>()
     val showSearchResultEvent: SingleLiveEvent<Unit> = _showSearchResultEvent
     private val _isSearchingPlace = SingleLiveEvent<Unit>()
@@ -63,9 +61,7 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     fun getResultBySearchAddress() {
         _isSearchingPlace.value = Unit
         if (searchAddress.value.isNullOrEmpty()) {
-            _isSearchAddressEmpty.value = Unit
         } else {
-            _isSearchAddressEmpty.value = Unit
             _showSearchResultEvent.value = Unit
         }
         searchAddress.value = ""

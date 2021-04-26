@@ -177,9 +177,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun observeSearchLiveData() {
-        homeViewModel.isSearchAddressEmpty.observe(this) {
-            requireContext().toast(getString(R.string.empty_search_address))
-        }
         homeViewModel.showSearchResultEvent.observe(this) {
             showSearchActivity(homeViewModel.searchAddress.value ?: "")
         }
