@@ -34,11 +34,11 @@ abstract class BaseRecyclerView {
     }
 
     abstract class ViewHolder<B : ViewDataBinding>(
-        private val binding: B,
+        protected val binding: B,
         private val bindingVariableId: Int?
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Any) {
+        open fun bind(item: Any) {
             bindingVariableId?.let {
                 binding.setVariable(it, item)
             }

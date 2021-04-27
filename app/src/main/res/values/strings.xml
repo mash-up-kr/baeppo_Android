@@ -13,6 +13,7 @@
     <string name="review_count">리뷰 %1$d개</string>
     <string name="star_count">%1$.1f/5</string>
     <string name="here_review_none">이 장소에는 리뷰가 없습니다</string>
+    <string name="room_image_none">이미지가 없습니다</string>
     <!-- Splash 화면 -->
     <string name="splash_text">입주자들의 솔직한 이야기를 만나보세요</string>
     <!--    마이페이지-->

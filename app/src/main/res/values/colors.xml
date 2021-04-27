@@ -20,4 +20,6 @@
     <color name="stroke_color">#b6b6b6</color>
     <color name="line_color">#d0d0d0</color>
     <color name="photo_surface_color">#e1e1e1</color>
+    <color name="indicator_on">#ccffffff</color>
+    <color name="indicator_off">#ccc4c4c4</color>
 </resources>
