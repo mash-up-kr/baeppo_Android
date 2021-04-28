@@ -9,7 +9,7 @@
 
         <variable
             name="document"
-            type="com.mashup.ipdam.entity.kakao.keyword.Place" />
+            type="Place" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
