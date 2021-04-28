@@ -22,7 +22,7 @@ object NetworkModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class KaKaoOkHttpClient
+    annotation class KakaoOkHttpClient
 
     @IpdamOkHttpClient
     @Provides
@@ -34,7 +34,7 @@ object NetworkModule {
             .addInterceptor(authorizationInterceptor)
             .build()
 
-    @IpdamOkHttpClient
+    @KakaoOkHttpClient
     @Provides
     fun provideKaKaoOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()

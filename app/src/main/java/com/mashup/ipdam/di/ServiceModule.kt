@@ -25,7 +25,7 @@ object ServiceModule {
 
     @Provides
     fun provideKaKaoService(
-        @NetworkModule.KaKaoOkHttpClient okHttpClient: OkHttpClient
+        @NetworkModule.KakaoOkHttpClient okHttpClient: OkHttpClient
     ): KakaoService =
         IpdamRetrofit.create(
             KakaoService::class.java,
