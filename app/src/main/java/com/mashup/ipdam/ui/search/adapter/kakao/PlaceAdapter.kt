@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import com.mashup.base.BaseRecyclerView
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ItemPlaceBinding
-import com.mashup.ipdam.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.keyword.Place
 
 class PlaceAdapter(
     private val placeClickListener: PlaceClickListener
 ) :
-    BaseRecyclerView.Adapter<Places, ItemPlaceBinding>(
+    BaseRecyclerView.Adapter<Place, ItemPlaceBinding>(
         R.layout.item_place,
         BR.document, PlacesDiffCallback
     ) {
@@ -30,12 +30,12 @@ class PlaceAdapter(
     }
 }
 
-object PlacesDiffCallback : DiffUtil.ItemCallback<Places>() {
-    override fun areItemsTheSame(oldItem: Places, newItem: Places): Boolean {
+object PlacesDiffCallback : DiffUtil.ItemCallback<Place>() {
+    override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Places, newItem: Places): Boolean {
+    override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
         return oldItem.id == newItem.id
     }
 }

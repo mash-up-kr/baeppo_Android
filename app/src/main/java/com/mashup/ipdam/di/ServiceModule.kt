@@ -12,17 +12,24 @@ import okhttp3.OkHttpClient
 @Module
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
+
     @Provides
-    fun provideReviewService(okHttpClient: OkHttpClient): ReviewService =
+    fun provideReviewService(
+        @NetworkModule.IpdamOkHttpClient okHttpClient: OkHttpClient
+    ): ReviewService =
         IpdamRetrofit.create(
             ReviewService::class.java,
-            okHttpClient, IpdamRetrofit.IPDAM_API_END_POINT
+            okHttpClient,
+            IpdamRetrofit.IPDAM_API_END_POINT
         )
 
     @Provides
-    fun provideKaKaoService(okHttpClient: OkHttpClient): KakaoService =
+    fun provideKaKaoService(
+        @NetworkModule.KaKaoOkHttpClient okHttpClient: OkHttpClient
+    ): KakaoService =
         IpdamRetrofit.create(
             KakaoService::class.java,
-            okHttpClient, IpdamRetrofit.KAKAO_API_END_POINT
+            okHttpClient,
+            IpdamRetrofit.KAKAO_API_END_POINT
         )
 }

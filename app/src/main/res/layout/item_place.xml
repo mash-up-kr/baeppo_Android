@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.mashup.ipdam.entity.kakao.Places" />
+        <import type="com.mashup.ipdam.entity.kakao.keyword.Place" />
 
         <variable
             name="document"
-            type="Places" />
+            type="com.mashup.ipdam.entity.kakao.keyword.Place" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

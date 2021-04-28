@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.entity.history.History
-import com.mashup.ipdam.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.keyword.Place
 import com.mashup.ipdam.ui.search.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -19,8 +19,8 @@ class SearchViewModel @Inject constructor(
     override var logTag: String = "SearchViewModel"
     val keyword = savedStateHandle.getLiveData<String>("keyword")
 
-    private val _placeList = MutableLiveData<List<Places>>(emptyList())
-    val placeList: LiveData<List<Places>> = _placeList
+    private val _placeList = MutableLiveData<List<Place>>(emptyList())
+    val placeList: LiveData<List<Place>> = _placeList
     private val _isKeywordEmptyOnSearching = MutableLiveData(false)
     val isKeywordEmptyOnSearching = _isKeywordEmptyOnSearching
     private val _historyList = MutableLiveData<List<History>>(emptyList())

@@ -1,4 +1,4 @@
-package com.mashup.ipdam.entity.kakao
+package com.mashup.ipdam.entity.kakao.keyword
 
 import com.google.gson.annotations.SerializedName
 
