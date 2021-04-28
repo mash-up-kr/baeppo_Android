@@ -44,7 +44,7 @@ object NetworkModule {
             .addInterceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader("KakaoAK", "KakaoAK cebbe69291069180ea7e957572c9998f")
+                    .addHeader("Authorization", " KakaoAK cebbe69291069180ea7e957572c9998f")
                     .build()
 
                 chain.proceed(request)

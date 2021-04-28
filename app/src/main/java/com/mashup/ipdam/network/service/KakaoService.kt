@@ -12,6 +12,7 @@ interface KakaoService {
         @Query("query") keyword: String,
     ): Single<KeywordResult>
 
+    @GET("/v2/local/geo/coord2regioncode.json")
     fun requestAddressByLocation(
         @Query("y") latitude: String,
         @Query("x") longitude: String
