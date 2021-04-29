@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.view.ViewCompat
@@ -41,6 +43,7 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.min
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
@@ -144,8 +147,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun initSpinner() {
-        val spinnerItems = resources.getStringArray(R.array.review_sort)
-        binding.bottomSheet.spSort.adapter
+        val spinner = binding.bottomSheet.spSort
+        context?.let {
+            spinner.adapter = ArrayAdapter.createFromResource(
+                it,
+                R.array.review_sort,
+                R.layout.item_spinner,
+            )
+        }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> homeViewModel.sortReviewByTime()
+                    else -> homeViewModel.sortReviewByStar()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                homeViewModel.sortReviewByTime()
+            }
+        }
     }
 
     override fun observeViewModel() {
@@ -188,6 +214,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     setOnClickListener { clickedMarker ->
                         if (clickedMarker.tag is Int) {
                             homeViewModel.getReviewByMarker(clickedMarker.tag as Int)
+                            homeViewModel.sortReviewByTime()
                         }
                         false
                     }
@@ -266,6 +293,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private fun initMapListener() {
         myMap.addOnCameraIdleListener {
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
+            homeViewModel.sortReviewByTime()
         }
     }
 

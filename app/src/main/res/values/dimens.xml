@@ -16,4 +16,5 @@
     <dimen name="bottom_sheet_marigin_top">8dp</dimen>
     <dimen name="height_marker">60dp</dimen>
     <dimen name="width_marker">44dp</dimen>
+    <dimen name="indicator_size">8dp</dimen>
 </resources>

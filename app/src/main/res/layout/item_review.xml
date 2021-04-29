@@ -24,9 +24,9 @@
         android:layout_height="280dp"
         android:layout_marginBottom="16dp">
 
-        <ImageView
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_photoViewPager"
-            loadImageWithRadius="@{review.images[0]}"
+            viewPagerReplaceList="@{review.images}"
             android:layout_width="match_parent"
             android:layout_height="203dp"
             android:layout_marginTop="4dp"
@@ -35,6 +35,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iv_resultNoneImage"
+            visible="@{review.images.empty}"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="67dp"
+            android:src="@drawable/ic_none"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/vp_photoViewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_photoViewPager"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_resultNoneTextView"
+            visible="@{review.images.empty}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/room_image_none"
+            android:textColor="@color/surface_color"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_resultNoneImage" />
+
+        <com.mashup.ipdam.ui.home.adapter.roomimage.CircleIndicator
+            android:id="@+id/cv_photoViewPagerIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/vp_photoViewPager"
+            app:layout_constraintEnd_toEndOf="@id/vp_photoViewPager"
+            app:layout_constraintStart_toStartOf="@id/vp_photoViewPager" />
 
         <View
             android:id="@+id/v_leftLine"

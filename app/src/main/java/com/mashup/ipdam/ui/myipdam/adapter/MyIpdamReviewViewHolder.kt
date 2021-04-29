@@ -1,7 +1,11 @@
 package com.mashup.ipdam.ui.myipdam.adapter
 
+import androidx.viewpager2.widget.ViewPager2
 import com.mashup.base.BaseRecyclerView
+import com.mashup.ipdam.R
+import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.databinding.ItemReviewBinding
+import com.mashup.ipdam.ui.home.adapter.roomimage.RoomImageViewPagerAdapter
 import com.mashup.ipdam.ui.myipdam.MyIpdamViewModel
 
 class MyIpdamReviewViewHolder(
@@ -12,14 +16,35 @@ class MyIpdamReviewViewHolder(
     binding,
     bindingVariableId
 ) {
+    private val roomImageViewPagerAdapter by lazy { RoomImageViewPagerAdapter() }
+
     init {
         binding.apply {
             isMyReview = true
             ivBookmark.setOnClickListener {
                 review?.let {
-                    //MyIpdamViewModel.toggleMyIpdam(it)
+                    //TODO MyIpdamViewModel.toggleMyIpdam(it)
                 }
             }
+            vpPhotoViewPager.adapter = roomImageViewPagerAdapter
+            vpPhotoViewPager.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    cvPhotoViewPagerIndicator.selectDot(position)
+                }
+            })
+        }
+    }
+
+    override fun bind(item: Any) {
+        super.bind(item)
+        if (item is Review) {
+            binding.cvPhotoViewPagerIndicator.createDotPanel(
+                item.images.size,
+                R.drawable.indicator_dot_off,
+                R.drawable.indicator_dot_on,
+                0
+            )
         }
     }
 }

@@ -3,14 +3,10 @@ package com.mashup.ipdam.ui.home.data
 import com.mashup.ipdam.data.ReviewMarker
 import com.mashup.ipdam.data.ReviewMarkersByMap
 import com.mashup.ipdam.data.map.MapBoundary
-import com.mashup.ipdam.network.service.ReviewService
 import io.reactivex.Single
-import retrofit2.http.Query
 import javax.inject.Inject
 
-class FakeHomeRepositoryImpl @Inject constructor(
-    private val reviewService: ReviewService
-) : HomeRepository {
+class FakeHomeRepositoryImpl @Inject constructor() : HomeRepository {
 
     override fun getReviewsInBoundary(mapBoundary: MapBoundary): Single<ReviewMarkersByMap> {
         val reviewMarkers = ReviewMarkersByMap().apply {
