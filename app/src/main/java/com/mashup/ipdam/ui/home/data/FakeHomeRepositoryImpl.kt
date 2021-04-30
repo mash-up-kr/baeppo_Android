@@ -7,7 +7,6 @@ import com.mashup.ipdam.entity.kakao.address.AddressResult
 import com.mashup.ipdam.network.service.KakaoService
 import com.mashup.ipdam.network.service.ReviewService
 import io.reactivex.Single
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class FakeHomeRepositoryImpl @Inject constructor(

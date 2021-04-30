@@ -68,6 +68,7 @@ class HomeViewModel @Inject constructor(
                     Log.e(logTag, it.toString())
                 }
             ).addToDisposable()
+        reviews.value = MockReview.getMockReviewList()
     }
 
     fun getAddressByLatLng(position: LatLng) {
@@ -110,7 +111,7 @@ class HomeViewModel @Inject constructor(
 
     fun toggleBookmark(review: Review) {
         updateReview(review.copy(bookmark = !review.bookmark))
-        if (bottomSheetState.value == BottomSheetState.MARKER_CLICKED){
+        if (bottomSheetState.value == BottomSheetState.MARKER_CLICKED) {
             val reviewId = savedStateHandle.get<Int>("marker")
             reviewId?.let { getReviewByMarker(it) }
         } else {
@@ -118,6 +119,18 @@ class HomeViewModel @Inject constructor(
             boundary?.let {
                 getReviewInBoundary(boundary)
             }
+        }
+    }
+
+    fun sortReviewByTime() {
+        reviews.apply {
+            value = value?.sortedByDescending { it.createdDate }
+        }
+    }
+
+    fun sortReviewByStar() {
+        reviews.apply {
+            value = value?.sortedByDescending { it.rating }
         }
     }
 }

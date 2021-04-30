@@ -10,12 +10,15 @@ import com.mashup.ipdam.data.Review
 import com.mashup.ipdam.databinding.ItemReviewBinding
 import com.mashup.ipdam.ui.home.HomeViewModel
 
-class HomeReviewAdapter(private val homeViewModel: HomeViewModel) :
+class HomeReviewAdapter(
+    private val homeViewModel: HomeViewModel
+) :
     BaseRecyclerView.Adapter<Review, ItemReviewBinding>(
         R.layout.item_review,
         BR.review,
         HomeReviewDiffCallback
     ) {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
