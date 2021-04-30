@@ -46,12 +46,9 @@ class HomeViewModel @Inject constructor(
     val isSearchingPlace: SingleLiveEvent<Unit> = _isSearchingPlace
 
     fun getReviewByMarker(reviewId: Int) {
-        //TODO: 파라미터로 symbolPosition: LatLng를 받을 것. MOCK DATA 파싱이나 서버 통신 결과를 받아올 예정
         savedStateHandle["marker"] = reviewId
         if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED) _bottomSheetState.value =
             BottomSheetState.MARKER_CLICKED
-        _name.value = "서울 빌딩"
-        _address.value = "서울시 광진구 광진로 55"
         reviews.value = MockReview.getMockReviewList()
     }
 
@@ -63,11 +60,8 @@ class HomeViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 { data ->
-                    //TODO: 화면 중앙의 주소 가져오기
                     if (_bottomSheetState.value != BottomSheetState.MAP_MOVED) _bottomSheetState.value =
                         BottomSheetState.MAP_MOVED
-                    _name.value = "안암동"
-                    _address.value = "서울시 광진구 광진로 55"
                     _reviewMarkersOnMap.value = data
                 },
                 {
@@ -75,6 +69,27 @@ class HomeViewModel @Inject constructor(
                 }
             ).addToDisposable()
         reviews.value = MockReview.getMockReviewList()
+    }
+
+    fun getAddressByLatLng(position: LatLng) {
+        homeRepository.getAddressByLocation(
+            latitude = position.latitude,
+            longitude = position.longitude
+        ).subscribeOn(SchedulerProvider.io())
+            .map { it.address }
+            .observeOn(SchedulerProvider.ui())
+            .subscribe(
+                { data ->
+                   if (!data.isEmpty()) {
+                       _address.value = data[0].addressName
+                       _name.value = data[0].region3DepthName
+                   }
+                },
+                {
+                    Log.e(logTag, it.toString())
+                }
+            ).addToDisposable()
+
     }
 
     fun getResultBySearchAddress() {

@@ -8,7 +8,7 @@ import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivitySearchBinding
-import com.mashup.ipdam.entity.kakao.Places
+import com.mashup.ipdam.entity.kakao.keyword.Place
 import com.mashup.ipdam.ui.search.adapter.history.HistoryAdapter
 import com.mashup.ipdam.ui.search.adapter.kakao.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,7 +69,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
         finish()
     }
 
-    private fun finishWithPlaceResult(place: Places) {
+    private fun finishWithPlaceResult(place: Place) {
         val intent = intent.apply {
             putExtra("latitude", place.y.toDouble())
             putExtra("longitude", place.x.toDouble())

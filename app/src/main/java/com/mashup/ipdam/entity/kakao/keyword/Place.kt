@@ -1,8 +1,8 @@
-package com.mashup.ipdam.entity.kakao
+package com.mashup.ipdam.entity.kakao.keyword
 
 import com.google.gson.annotations.SerializedName
 
-data class Places (
+data class Place (
     @SerializedName("place_name") val placeName : String,
     @SerializedName("distance") val distance : String,
     @SerializedName("place_url") val placeUrl : String,
