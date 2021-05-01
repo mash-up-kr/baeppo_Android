@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -112,6 +113,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             .addBottomSheetCallback(
                 object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                            setMapLocationButtonOnMapBottomSheet()
+                        }
                     }
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -165,8 +169,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         homeViewModel.bottomSheetState.observe(this, { state ->
             state?.let {
                 when (it) {
-                    BottomSheetState.MAP_MOVED -> showIpdamBottomSheetByMap()
-                    BottomSheetState.MARKER_CLICKED -> showIpdamBottomSheetByMarker()
+                    BottomSheetState.MAP_MOVED -> {
+                        showIpdamBottomSheetByMap()
+                        setMapLocationButtonOnMapBottomSheet()
+                    }
+                    BottomSheetState.MARKER_CLICKED ->  {
+                        showIpdamBottomSheetByMarker()
+                        setMapLocationButtonOnMarkerBottomSheet()
+                    }
                 }
             }
         })
@@ -307,6 +317,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         BottomSheetBehavior.from(binding.bottomSheet.root).run {
             peekHeight = resources.getDimensionPixelSize(R.dimen.peek_height_bottom_sheet_by_map)
             state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
+    private fun setMapLocationButtonOnMapBottomSheet() {
+        binding.locationView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom_location_button_by_map)
+        }
+    }
+
+    private fun setMapLocationButtonOnMarkerBottomSheet() {
+        binding.locationView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom_location_button_by_marker)
         }
     }
 
