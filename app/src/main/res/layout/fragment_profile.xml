@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.mashup.ipdam.ui.profile.ProfileViewModel"/>
+        <variable
+            name="viewModel"
+            type="ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +36,11 @@
             android:layout_marginTop="27dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileTitle"
-            app:srcCompat="@drawable/ic_profile_image_none"
+            android:src="@drawable/ic_not_active_good"
+            circleImageUrl="@{viewModel.profileImageUrl}"
+            errorImage="@{@drawable/ic_not_active_good}"
+            android:paddingTop="4dp"
+            android:paddingRight="3dp"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -58,6 +65,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@id/profileImageView"
             app:layout_constraintTop_toBottomOf="@id/profileName"
             tools:text="oo대학교" />
@@ -129,5 +137,13 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileVersionTitle" />
+
+        <ImageView
+            android:id="@+id/profileSelectPictureImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/profileImageView"
+            app:layout_constraintTop_toTopOf="@id/profileImageView"
+            app:srcCompat="@drawable/ic_select_picture" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
