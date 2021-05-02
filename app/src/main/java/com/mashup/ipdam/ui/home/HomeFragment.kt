@@ -344,7 +344,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 binding.root.height -
                         binding.searchView.height -
                         binding.searchView.marginTop -
-                        resources.getDimensionPixelSize(R.dimen.bottom_sheet_marigin_top)
+                        resources.getDimensionPixelSize(R.dimen.bottom_sheet_margin_top)
             height = bottomSheetHeight
         }
     }

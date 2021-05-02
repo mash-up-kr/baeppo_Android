@@ -24,8 +24,8 @@ class AddEditViewModel @Inject constructor(
     val showSearchResultEvent: SingleLiveEvent<Unit> = _showSearchResultEvent
     private val _reviewPointList = MutableLiveData<List<ReviewPoint>>(emptyList())
     val reviewPointList: LiveData<List<ReviewPoint>> = _reviewPointList
-    private val _reviewAreaList = MutableLiveData<List<ReviewAmenities>>(emptyList())
-    val reviewAmenitiesList: LiveData<List<ReviewAmenities>> = _reviewAreaList
+    private val _reviewAmenitiesList = MutableLiveData<List<ReviewAmenities>>(emptyList())
+    val reviewAmenitiesList: LiveData<List<ReviewAmenities>> = _reviewAmenitiesList
     private val _roomImageList = MutableLiveData<List<String>>(emptyList())
     val roomImageList: LiveData<List<String>> = _roomImageList
     private val _addReviewImageEvent = SingleLiveEvent<Unit>()
@@ -49,7 +49,7 @@ class AddEditViewModel @Inject constructor(
 
     private fun initDefaultValue() {
         _reviewPointList.value = ReviewMockData.geReviewPointMockData()
-        _reviewAreaList.value = ReviewMockData.getReviewAreaMockData()
+        _reviewAmenitiesList.value = ReviewMockData.getReviewAreaMockData()
     }
 
     fun setReviewType(position: Int, pointType: PointType) {
@@ -63,15 +63,25 @@ class AddEditViewModel @Inject constructor(
         _reviewPointList.postValue(newReviewPoint)
     }
 
-    fun changeSelectedArea(position: Int) {
-        val areaList = _reviewAreaList.value ?: emptyList()
+    fun changeSelectedAmenities(position: Int) {
+        val amenitiesList = _reviewAmenitiesList.value ?: emptyList()
         val newAreaList = mutableListOf<ReviewAmenities>().apply {
-            addAll(areaList)
+            addAll(amenitiesList)
 
             val oldItem = removeAt(position)
             add(position, ReviewAmenities(oldItem.name, !oldItem.isExist))
         }
-        _reviewAreaList.postValue(newAreaList)
+        _reviewAmenitiesList.postValue(newAreaList)
+    }
+
+    fun addSelectedAmenities(amenities: String) {
+        val amenitiesList = _reviewAmenitiesList.value ?: emptyList()
+        val newAreaList = mutableListOf<ReviewAmenities>().apply {
+            addAll(amenitiesList)
+
+            add(ReviewAmenities(amenities, true))
+        }
+        _reviewAmenitiesList.postValue(newAreaList)
     }
 
     fun eventAddReviewImage() {

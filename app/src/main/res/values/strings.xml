@@ -91,4 +91,10 @@
     <string name="my_ipdam_review_count">내가 작성한 리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
     <!--  에러 -->
     <string name="error_too_much_selected_image">최대 5개의 이미지를 선택할 수 있습니다.</string>
+    <!-- 주변지역 다이얼로그   -->
+    <string name="dialog_amenities_title">주변상권</string>
+    <string name="dialog_amenities_hint">8글자 내로 작성해주세요</string>
+    <string name="dialog_amenities_add">추가</string>
+
+
 </resources>
