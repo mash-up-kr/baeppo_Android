@@ -91,4 +91,7 @@
     <string name="my_ipdam_review_count">내가 작성한 리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
     <!--  에러 -->
     <string name="error_too_much_selected_image">최대 5개의 이미지를 선택할 수 있습니다.</string>
+    <!--  설정페이지  -->
+    <string name="profile_terms_message">이용약관이 준비되어 있지 않습니다.</string>
+    <string name="profile_logout_message">로그아웃 기능이 준비되어 있지 않습니다</string>
 </resources>

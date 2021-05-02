@@ -5,7 +5,8 @@
     <dimen name="height_review_description">124dp</dimen>
     <dimen name="elevation_search">4dp</dimen>
     <dimen name="margin_bottom_search">8dp</dimen>
-    <dimen name="margin_bottom_location_button">56dp</dimen>
+    <dimen name="margin_bottom_location_button_by_map">81dp</dimen>
+    <dimen name="margin_bottom_location_button_by_marker">135dp</dimen>
     <dimen name="peek_height_bottom_sheet_by_map">71dp</dimen>
     <dimen name="peek_height_bottom_sheet_by_marker">125dp</dimen>
     <dimen name="height_indicator">2dp</dimen>
