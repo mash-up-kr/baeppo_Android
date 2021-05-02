@@ -3,14 +3,17 @@ package com.mashup.ipdam.ui.home
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.PointF
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
@@ -23,6 +26,7 @@ import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
+import com.mashup.ipdam.data.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LATITUDE
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LONGITUDE
@@ -40,9 +44,12 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
+import ted.gun0912.clustering.naver.TedNaverClustering
 import kotlin.math.min
 
 
@@ -56,6 +63,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private val homeViewModel by activityViewModels<HomeViewModel>()
     private val reviewAdapter by lazy { HomeReviewAdapter(homeViewModel) }
     private val roomImageByMarkerAdapter by lazy { RoomImageByMarkerAdapter() }
+    private val clusteringMarkers: TedNaverClustering<ReviewMarker> by lazy {
+        initTedCluster()
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -94,6 +104,37 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         initBottomSheet()
         initSpinner()
         initSearchLayout()
+    }
+
+    private fun initTedCluster(): TedNaverClustering<ReviewMarker> {
+        val markerImage = OverlayImage.fromResource(R.drawable.ic_marker)
+
+        return TedNaverClustering.with<ReviewMarker>(requireContext(), myMap)
+            .customMarker { clusterItem ->
+                Marker(LatLng(clusterItem.latitude, clusterItem.longitude)).apply {
+                    icon = markerImage
+                    width = resources.getDimension(R.dimen.width_marker).toInt()
+                    height = resources.getDimension(R.dimen.height_marker).toInt()
+                }
+            }
+            .customCluster {
+                TextView(requireContext()).apply {
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.primary_color
+                        )
+                    )
+                    setTextColor(Color.WHITE)
+                    text = getString(R.string.cluster_marker_text, it.size)
+                    setPadding(10, 10, 10, 10)
+                }
+            }.markerClickListener {
+                homeViewModel.getReviewByMarker(it.id)
+                homeViewModel.getAddressByLatLng(LatLng(it.latitude, it.longitude))
+                homeViewModel.sortReviewByTime()
+            }
+            .make()
     }
 
     private fun initSearchLayout() {
@@ -199,7 +240,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                         showIpdamBottomSheetByMap()
                         setMapLocationButtonOnMapBottomSheet()
                     }
-                    BottomSheetState.MARKER_CLICKED ->  {
+                    BottomSheetState.MARKER_CLICKED -> {
                         showIpdamBottomSheetByMarker()
                         setMapLocationButtonOnMarkerBottomSheet()
                     }
@@ -214,31 +255,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             myMap.moveCamera(cameraUpdate)
         }
         homeViewModel.reviewMarkersOnMap.observe(this) {
-            val markerImage = OverlayImage.fromResource(R.drawable.ic_marker)
-            it.forEach { marker ->
-                marker.apply {
-                    icon = markerImage
-                    width = resources.getDimension(R.dimen.width_marker).toInt()
-                    height = resources.getDimension(R.dimen.height_marker).toInt()
-
-                    setOnClickListener { clickedMarker ->
-                        if (clickedMarker.tag is Int) {
-                            homeViewModel.getReviewByMarker(clickedMarker.tag as Int)
-                            homeViewModel.getAddressByLatLng(position)
-                            homeViewModel.sortReviewByTime()
-                        }
-                        false
-                    }
-
-                    map = myMap
-                }
-            }
+            createClusteringMarker(it)
         }
-        homeViewModel.deleteReviewMarkers.observe(this) {
-            it.forEach { marker ->
-                marker.map = null
-            }
-        }
+    }
+
+    private fun createClusteringMarker(item: List<ReviewMarker>) {
+        clusteringMarkers.addItems(item)
+    }
+
+    private fun hideClusteringMarker() {
+        clusteringMarkers.clearItems()
     }
 
     private fun observeSearchLiveData() {
@@ -303,6 +329,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initMapListener() {
         myMap.addOnCameraIdleListener {
+            hideClusteringMarker()
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
             homeViewModel.getAddressByLatLng(myMap.cameraPosition.target)
             homeViewModel.sortReviewByTime()
@@ -350,13 +377,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun setMapLocationButtonOnMapBottomSheet() {
         binding.locationView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-            bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom_location_button_by_map)
+            bottomMargin =
+                resources.getDimensionPixelSize(R.dimen.margin_bottom_location_button_by_map)
         }
     }
 
     private fun setMapLocationButtonOnMarkerBottomSheet() {
         binding.locationView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-            bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_bottom_location_button_by_marker)
+            bottomMargin =
+                resources.getDimensionPixelSize(R.dimen.margin_bottom_location_button_by_marker)
         }
     }
 

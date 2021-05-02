@@ -8,10 +8,10 @@ import com.mashup.base.BaseViewModel
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.SingleLiveEvent
 import com.mashup.ipdam.data.Review
+import com.mashup.ipdam.data.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.ui.home.data.HomeRepository
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -29,10 +29,8 @@ class HomeViewModel @Inject constructor(
     val name: LiveData<String> = _name
 
     val reviews = MutableLiveData<List<Review>>()
-    private val _reviewMarkersOnMap = MutableLiveData<List<Marker>>()
-    val reviewMarkersOnMap: LiveData<List<Marker>> = _reviewMarkersOnMap
-    private val _deleteReviewMarkers = SingleLiveEvent<List<Marker>>()
-    val deleteReviewMarkers: SingleLiveEvent<List<Marker>> = _deleteReviewMarkers
+    private val _reviewMarkersOnMap = MutableLiveData<List<ReviewMarker>>()
+    val reviewMarkersOnMap: LiveData<List<ReviewMarker>> = _reviewMarkersOnMap
 
     private val _mapCameraPosition = MutableLiveData<LatLng>()
     val mapCameraPosition = _mapCameraPosition
@@ -56,7 +54,6 @@ class HomeViewModel @Inject constructor(
         savedStateHandle["boundary"] = mapBoundary
         homeRepository.getReviewsInBoundary(mapBoundary)
             .subscribeOn(SchedulerProvider.io())
-            .map { it.toMarkerList() }
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 { data ->
@@ -80,10 +77,10 @@ class HomeViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 { data ->
-                   if (!data.isEmpty()) {
-                       _address.value = data[0].addressName
-                       _name.value = data[0].region3DepthName
-                   }
+                    if (!data.isEmpty()) {
+                        _address.value = data[0].addressName
+                        _name.value = data[0].region3DepthName
+                    }
                 },
                 {
                     Log.e(logTag, it.toString())
