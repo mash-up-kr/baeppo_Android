@@ -94,4 +94,5 @@ dependencies {
     // Third party libraries
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
     implementation 'gun0912.ted:tedimagepicker:1.1.0'
+    implementation 'gun0912.ted:tedclustering-naver:1.0.2'
 }
