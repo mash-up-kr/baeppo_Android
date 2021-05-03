@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mashup.ipdam.ui.reviewDetail.ReviewDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/item_review"
+            layout="@layout/item_review" />
+
+        <View
+            android:id="@+id/divider_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5.5dp"
+            android:background="@color/line_color"
+            app:layout_constraintTop_toBottomOf="@+id/item_review" />
+
+        <LinearLayout
+            android:id="@+id/level_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13.5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/divider_1">
+
+            <include
+                android:id="@+id/house_master_level"
+                layout="@layout/item_review_level" />
+
+            <include
+                android:id="@+id/safety_level"
+                layout="@layout/item_review_level" />
+
+            <include
+                android:id="@+id/length_to_school_level"
+                layout="@layout/item_review_level" />
+
+            <include
+                android:id="@+id/clean_level"
+                layout="@layout/item_review_level" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5.5dp"
+            android:background="@color/line_color"
+            app:layout_constraintTop_toBottomOf="@+id/level_container" />
+
+        <TextView
+            android:id="@+id/amenities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.5dp"
+            android:text="@string/add_edit_around"
+            android:textColor="@color/main_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/amenities_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="12.5dp"
+            app:layout_constraintStart_toEndOf="@+id/amenities"
+            app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+
+        <View
+            android:id="@+id/divider_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5.5dp"
+            android:background="@color/line_color"
+            app:layout_constraintTop_toBottomOf="@id/amenities_detail" />
+
+        <TextView
+            android:id="@+id/review_detail_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19.5dp"
+            android:textColor="@color/main_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_3" />
+
+        <TextView
+            android:id="@+id/reviewer_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11.5dp"
+            android:layout_marginBottom="19.5dp"
+            android:textColor="@color/main_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_detail_description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
