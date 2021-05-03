@@ -1,6 +1,5 @@
 package com.mashup.ipdam.ui.addedit.dialog
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,11 +11,12 @@ import androidx.fragment.app.DialogFragment
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.DialogAmenitiesBinding
 
-
-class AmenitiesDialog private constructor(): DialogFragment() {
+class AmenitiesDialog private constructor(
+    private val addListener: ((String) -> Unit)?,
+    private val cancelListener: (() -> Unit)?
+): DialogFragment() {
 
     private lateinit var binding: DialogAmenitiesBinding
-    private var addListener: ((String) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +29,7 @@ class AmenitiesDialog private constructor(): DialogFragment() {
                 dismiss()
             }
             dialogCancelButton.setOnClickListener {
+                cancelListener?.invoke()
                 dismiss()
             }
         }
@@ -50,20 +51,22 @@ class AmenitiesDialog private constructor(): DialogFragment() {
         }
     }
 
-    private fun setAddListener(listener: (String) -> Unit) {
-        addListener = listener
-    }
-
-    class Builder(val context: Context) {
-        private val dialog = AmenitiesDialog()
+    class Builder {
+        private var addListener: ((String) -> Unit)? = null
+        private var cancelListener: (() -> Unit)? = null
 
         fun setAddListener(listener: (String) -> Unit): Builder {
-            dialog.setAddListener(listener)
+            addListener = listener
+            return this
+        }
+
+        fun setCancelListener(listener: () -> Unit): Builder {
+            cancelListener = listener
             return this
         }
 
         fun build() : AmenitiesDialog {
-            return dialog
+            return AmenitiesDialog(addListener, cancelListener)
         }
     }
 }

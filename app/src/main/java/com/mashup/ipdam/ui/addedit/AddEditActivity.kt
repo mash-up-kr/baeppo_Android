@@ -112,7 +112,7 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
     }
 
     private fun showAmenitiesDialog() {
-        val dialog = AmenitiesDialog.Builder(this)
+        val dialog = AmenitiesDialog.Builder()
             .setAddListener {
                 viewModel.addSelectedAmenities(it)
             }.build()
