@@ -1,5 +1,6 @@
 package com.mashup.base.ext
 
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -41,11 +42,12 @@ fun ImageView.loadImageWithRadius(imageUrl: String?) {
     }
 }
 
-@BindingAdapter("circleImageUrl")
-fun ImageView.setCircleImageUrl(url: String?) {
+@BindingAdapter(value = ["circleImageUrl", "errorImage"], requireAll = false)
+fun ImageView.setCircleImageUrl(url: String?, errorImage: Drawable?) {
     url?.let {
         Glide.with(context)
             .load(url)
+            .error(errorImage)
             .apply(RequestOptions().circleCrop())
             .into(this)
     }
