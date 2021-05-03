@@ -16,6 +16,7 @@ import com.mashup.ipdam.ui.addedit.adapter.area.AddAmenitiesAdapter
 import com.mashup.ipdam.ui.addedit.adapter.area.AmenitiesAdapter
 import com.mashup.ipdam.ui.addedit.adapter.image.AddRoomImageAdapter
 import com.mashup.ipdam.ui.addedit.adapter.image.RoomImageAdapter
+import com.mashup.ipdam.ui.addedit.dialog.AmenitiesDialog
 import com.mashup.ipdam.ui.search.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedRxImagePicker
@@ -75,7 +76,7 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
             showImagePicker(selectedImageList)
         }
         viewModel.addReviewAreaEvent.observe(this) {
-            //TODO 주변 상권 추가
+            showAmenitiesDialog()
         }
         viewModel.reviewType.observe(this) {
             if (it == AddEditType.ADD) {
@@ -108,6 +109,14 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
             addEditTitle.text = getString(R.string.edit_title)
             addEditSaveButton.text = getString(R.string.edit_save_button)
         }
+    }
+
+    private fun showAmenitiesDialog() {
+        val dialog = AmenitiesDialog.Builder()
+            .setAddListener {
+                viewModel.addSelectedAmenities(it)
+            }.build()
+        dialog.show(supportFragmentManager, "dialog")
     }
 
     private fun showImagePicker(selectedImageList: List<String>?) {

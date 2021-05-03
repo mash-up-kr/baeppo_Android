@@ -39,7 +39,7 @@ class AmenitiesViewHolder(
     init {
         binding.apply {
             root.setOnClickListener {
-                viewModel.changeSelectedArea(bindingAdapterPosition)
+                viewModel.changeSelectedAmenities(bindingAdapterPosition)
             }
         }
     }
