@@ -3,7 +3,7 @@ package com.mashup.ipdam.ui.myipdam.adapter
 import androidx.viewpager2.widget.ViewPager2
 import com.mashup.base.BaseRecyclerView
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.Review
+import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.ItemReviewBinding
 import com.mashup.ipdam.ui.home.adapter.roomimage.RoomImageViewPagerAdapter
 import com.mashup.ipdam.ui.myipdam.MyIpdamViewModel

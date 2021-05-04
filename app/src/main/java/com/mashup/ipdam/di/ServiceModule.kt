@@ -1,8 +1,10 @@
 package com.mashup.ipdam.di
 
+import com.mashup.ipdam.data.api.UserServiceImpl
 import com.mashup.ipdam.network.IpdamRetrofit
 import com.mashup.ipdam.network.service.KakaoService
 import com.mashup.ipdam.network.service.ReviewService
+import com.mashup.ipdam.network.service.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,4 +34,8 @@ object ServiceModule {
             okHttpClient,
             IpdamRetrofit.KAKAO_API_END_POINT
         )
+
+    @Provides
+    fun provideUserService(): UserService =
+        UserServiceImpl()
 }

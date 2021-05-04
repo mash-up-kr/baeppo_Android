@@ -1,6 +1,6 @@
 package com.mashup.ipdam.ui.home.data
 
-import com.mashup.ipdam.data.ReviewMarkersByMap
+import com.mashup.ipdam.data.review.ReviewMarkersByMap
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.entity.kakao.address.AddressResult
 import com.mashup.ipdam.network.service.KakaoService

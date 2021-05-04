@@ -1,7 +1,7 @@
 package com.mashup.ipdam.network.service
 
-import com.mashup.ipdam.data.ReviewMarkersByMap
-import com.mashup.ipdam.data.ReviewsByMap
+import com.mashup.ipdam.data.review.ReviewMarkersByMap
+import com.mashup.ipdam.data.review.ReviewsByMap
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,6 +1,6 @@
 package com.mashup.ipdam.ui.home
 
-import com.mashup.ipdam.data.Review
+import com.mashup.ipdam.data.review.Review
 
 object MockReview {
     fun getMockReviewList() =

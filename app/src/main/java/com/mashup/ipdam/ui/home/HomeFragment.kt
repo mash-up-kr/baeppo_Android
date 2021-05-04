@@ -26,7 +26,7 @@ import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.ReviewMarker
+import com.mashup.ipdam.data.review.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LATITUDE
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LONGITUDE
@@ -47,11 +47,9 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
 import ted.gun0912.clustering.naver.TedNaverClustering
 import kotlin.math.min
-
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {

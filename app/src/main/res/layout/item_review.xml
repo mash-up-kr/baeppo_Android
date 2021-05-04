@@ -15,7 +15,7 @@
 
         <variable
             name="review"
-            type="com.mashup.ipdam.data.Review" />
+            type="com.mashup.ipdam.data.review.Review" />
 
     </data>
 

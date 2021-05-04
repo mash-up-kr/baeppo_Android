@@ -1,7 +1,7 @@
 package com.mashup.ipdam
 
 import com.google.gson.Gson
-import com.mashup.ipdam.data.ReviewMarkersByMap
+import com.mashup.ipdam.data.review.ReviewMarkersByMap
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

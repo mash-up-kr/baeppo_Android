@@ -1,4 +1,4 @@
-package com.mashup.ipdam.data
+package com.mashup.ipdam.data.review
 
 data class Review(
     val buildingName: String,

@@ -7,8 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.SingleLiveEvent
-import com.mashup.ipdam.data.Review
-import com.mashup.ipdam.data.ReviewMarker
+import com.mashup.ipdam.data.review.Review
+import com.mashup.ipdam.data.review.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.ui.home.data.HomeRepository
 import com.naver.maps.geometry.LatLng

@@ -1,4 +1,4 @@
-package com.mashup.ipdam.data
+package com.mashup.ipdam.data.review
 
 import ted.gun0912.clustering.clustering.TedClusterItem
 import ted.gun0912.clustering.geometry.TedLatLng
