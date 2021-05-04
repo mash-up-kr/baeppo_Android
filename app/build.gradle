@@ -85,6 +85,7 @@ dependencies {
     // DataStore
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
     implementation "androidx.datastore:datastore:$data_store_version"
+    implementation "androidx.datastore:datastore-rxjava2:1.0.0-beta01"
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 

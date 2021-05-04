@@ -28,6 +28,7 @@
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
     <string name="login_button">로그인하기</string>
+    <string name="login_find_not_working">이후 추가될 기능입니다.</string>
     <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
     <string name="login_register_account">&lt;u>입담 회원가입&lt;/u></string>
     <!--    회원 가입 페이지-->
