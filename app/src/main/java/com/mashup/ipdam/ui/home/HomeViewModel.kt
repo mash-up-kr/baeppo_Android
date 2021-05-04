@@ -24,7 +24,6 @@ class HomeViewModel @Inject constructor(
 
     private val _bottomSheetState = MutableLiveData(BottomSheetState.MAP_MOVED)
     val bottomSheetState: LiveData<BottomSheetState> = _bottomSheetState
-    var isClicking = true
 
     private val _name = MutableLiveData("")
     val name: LiveData<String> = _name
@@ -48,21 +47,24 @@ class HomeViewModel @Inject constructor(
         savedStateHandle["marker"] = reviewId
         if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
             _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
-        isClicking = true
+        savedStateHandle["isClicking"] = true
         reviews.value = MockReview.getMockReviewList()
     }
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
+        val isClicking = savedStateHandle.get<Boolean>("isClicking")
         homeRepository.getReviewsInBoundary(mapBoundary)
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 { data ->
-                    if (!isClicking) {
-                        _bottomSheetState.value = BottomSheetState.MAP_MOVED
+                    isClicking?.let {
+                        if (!isClicking) {
+                            _bottomSheetState.value = BottomSheetState.MAP_MOVED
+                        }
+                        savedStateHandle["isClicking"] = false
                     }
-                    isClicking = false
                     _reviewMarkersOnMap.value = data
                 },
                 {
