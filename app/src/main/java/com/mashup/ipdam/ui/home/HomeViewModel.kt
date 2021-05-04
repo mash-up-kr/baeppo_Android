@@ -24,6 +24,7 @@ class HomeViewModel @Inject constructor(
 
     private val _bottomSheetState = MutableLiveData(BottomSheetState.MAP_MOVED)
     val bottomSheetState: LiveData<BottomSheetState> = _bottomSheetState
+    var isClicking = true
 
     private val _name = MutableLiveData("")
     val name: LiveData<String> = _name
@@ -47,6 +48,7 @@ class HomeViewModel @Inject constructor(
         savedStateHandle["marker"] = reviewId
         if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
             _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
+        isClicking = true
         reviews.value = MockReview.getMockReviewList()
     }
 
@@ -57,8 +59,10 @@ class HomeViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 { data ->
-                    if (_bottomSheetState.value != BottomSheetState.MAP_MOVED)
+                    if (!isClicking) {
                         _bottomSheetState.value = BottomSheetState.MAP_MOVED
+                    }
+                    isClicking = false
                     _reviewMarkersOnMap.value = data
                 },
                 {
