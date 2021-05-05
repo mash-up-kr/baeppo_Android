@@ -39,6 +39,8 @@ class AddEditViewModel @Inject constructor(
     val isReviewSaveFailed: SingleLiveEvent<Unit> = _isReviewSaveFailed
     private val _isReviewInfoEmpty = SingleLiveEvent<Unit>()
     val isReviewInfoEmpty: SingleLiveEvent<Unit> = _isReviewInfoEmpty
+    private val _isLoading = SingleLiveEvent<Boolean>()
+    val isLoading: SingleLiveEvent<Boolean> = _isLoading
 
     val reviewAddress = MutableLiveData("")
     val reviewDetailAddress = MutableLiveData("")

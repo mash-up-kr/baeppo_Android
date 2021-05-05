@@ -7,6 +7,8 @@
 
         <import type="com.mashup.ipdam.ui.addedit.AddEditViewModel" />
 
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="AddEditViewModel" />
@@ -39,6 +41,7 @@
             android:background="@android:color/transparent"
             android:gravity="top|end"
             android:text="@string/add_save_button"
+            android:enabled="@{viewModel.isUploading() ? false : true}"
             android:onClick="@{() -> viewModel.requestSaveReview()}"
             android:textColor="@color/save_button_color"
             android:textSize="16sp"
@@ -351,6 +354,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/addEditImage"
                     app:spanCount="2" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE"
+                    android:layout_marginTop="20dp"
+                    android:indeterminateDrawable="@drawable/loading"
+                    android:indeterminateDuration="1000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

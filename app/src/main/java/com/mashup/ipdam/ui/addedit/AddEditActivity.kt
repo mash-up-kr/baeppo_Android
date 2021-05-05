@@ -106,6 +106,11 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
             isReviewSaveFailed.observe(this@AddEditActivity) {
                 toast(R.string.add_edit_upload_failed)
             }
+            isUploading.observe(this@AddEditActivity) { isUploading ->
+                if (isUploading) {
+                    binding.progressBar
+                }
+            }
         }
     }
 

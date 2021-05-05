@@ -94,7 +94,7 @@ class ReviewServiceImpl @Inject constructor(): ReviewService{
             "imageUrl" to imageUrl.toString()
         )
         val db = Firebase.firestore
-        db.collection("users")
+        db.collection("reviewImages")
             .add(reviewImageData)
             .addOnSuccessListener {
                 emitter.onComplete()

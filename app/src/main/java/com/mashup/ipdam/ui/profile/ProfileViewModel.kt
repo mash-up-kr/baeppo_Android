@@ -27,8 +27,11 @@ class ProfileViewModel @Inject constructor(
     val isLogoutSuccess: SingleLiveEvent<Unit> = _isLogoutSuccess
     private val _isNotFoundUser = SingleLiveEvent<Unit>()
     val isNotFoundUser: SingleLiveEvent<Unit> = _isNotFoundUser
+    private val _isLoading= SingleLiveEvent<Boolean>()
+    val isLoading: SingleLiveEvent<Boolean> = _isLoading
 
     fun initUser() {
+        _isLoading.value = true
         getPrimaryIdWithAction { primaryId ->
             loadUser(primaryId)
         }
@@ -46,6 +49,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun setProfileImage(imageUri: Uri) {
+        _isLoading.value = true
       getPrimaryIdWithAction { primaryId ->
           setImageUrl(primaryId, imageUri)
       }
@@ -58,6 +62,7 @@ class ProfileViewModel @Inject constructor(
             .subscribe({
                 action(it)
             }, { exception ->
+                _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
@@ -68,10 +73,12 @@ class ProfileViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe({
                 _userInfo.value = it
+                _isLoading.value = false
             }, { exception ->
                 if (exception is NotFoundUserException) {
                     _isNotFoundUser.value = Unit
                 }
+                _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
@@ -83,6 +90,7 @@ class ProfileViewModel @Inject constructor(
             .subscribe({
                loadUser(primaryId)
             }, { exception ->
+                _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
