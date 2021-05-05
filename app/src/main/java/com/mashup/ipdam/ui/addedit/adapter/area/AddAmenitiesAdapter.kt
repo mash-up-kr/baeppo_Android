@@ -22,7 +22,7 @@ class AddAmenitiesAdapter(
 }
 
 class AddAmenitiesViewHolder(
-    private val binding: ItemAreaBinding,
+    binding: ItemAreaBinding,
     private val viewModel: AddEditViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
 

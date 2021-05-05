@@ -45,27 +45,31 @@ class HomeViewModel @Inject constructor(
 
     fun getReviewByMarker(reviewId: Int) {
         savedStateHandle["marker"] = reviewId
-        if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED) _bottomSheetState.value =
-            BottomSheetState.MARKER_CLICKED
-
+        if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
+            _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
+        savedStateHandle["isClicking"] = true
     }
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
+//        val isClicking = savedStateHandle.get<Boolean>("isClicking")
 //        homeRepository.getReviewsInBoundary(mapBoundary)
 //            .subscribeOn(SchedulerProvider.io())
 //            .observeOn(SchedulerProvider.ui())
 //            .subscribe(
 //                { data ->
-//                    if (_bottomSheetState.value != BottomSheetState.MAP_MOVED) _bottomSheetState.value =
-//                        BottomSheetState.MAP_MOVED
+//                    isClicking?.let {
+//                        if (!isClicking) {
+//                            _bottomSheetState.value = BottomSheetState.MAP_MOVED
+//                        }
+//                        savedStateHandle["isClicking"] = false
+//                    }
 //                    _reviewMarkersOnMap.value = data
 //                },
 //                {
 //                    Log.e(logTag, it.toString())
 //                }
 //            ).addToDisposable()
-//        reviews.value = MockReview.getMockReviewList()
     }
 
     fun getAddressByLatLng(position: LatLng) {
@@ -77,7 +81,7 @@ class HomeViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 { data ->
-                    if (!data.isEmpty()) {
+                    if (data.isNotEmpty()) {
                         _address.value = data[0].addressName
                         _name.value = data[0].region3DepthName
                     }
@@ -86,13 +90,11 @@ class HomeViewModel @Inject constructor(
                     Log.e(logTag, it.toString())
                 }
             ).addToDisposable()
-
     }
 
     fun getResultBySearchAddress() {
         _isSearchingPlace.value = Unit
-        if (searchAddress.value.isNullOrEmpty()) {
-        } else {
+        if (!searchAddress.value.isNullOrEmpty()) {
             _showSearchResultEvent.value = Unit
         }
         searchAddress.value = ""
