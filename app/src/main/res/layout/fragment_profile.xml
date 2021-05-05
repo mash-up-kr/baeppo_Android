@@ -144,6 +144,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/profileImageView"
             app:layout_constraintTop_toTopOf="@id/profileImageView"
-            app:srcCompat="@drawable/ic_select_picture" />
+            app:srcCompat="@drawable/ic_select_picture"
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

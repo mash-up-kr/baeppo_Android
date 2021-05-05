@@ -12,7 +12,7 @@ import com.mashup.ipdam.entity.review.ReviewPoint
 import javax.inject.Inject
 
 class AddEditViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
     override var logTag: String = "add_editViewModel"
 
