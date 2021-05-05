@@ -47,25 +47,25 @@ class HomeViewModel @Inject constructor(
         savedStateHandle["marker"] = reviewId
         if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED) _bottomSheetState.value =
             BottomSheetState.MARKER_CLICKED
-        reviews.value = MockReview.getMockReviewList()
+
     }
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
-        homeRepository.getReviewsInBoundary(mapBoundary)
-            .subscribeOn(SchedulerProvider.io())
-            .observeOn(SchedulerProvider.ui())
-            .subscribe(
-                { data ->
-                    if (_bottomSheetState.value != BottomSheetState.MAP_MOVED) _bottomSheetState.value =
-                        BottomSheetState.MAP_MOVED
-                    _reviewMarkersOnMap.value = data
-                },
-                {
-                    Log.e(logTag, it.toString())
-                }
-            ).addToDisposable()
-        reviews.value = MockReview.getMockReviewList()
+//        homeRepository.getReviewsInBoundary(mapBoundary)
+//            .subscribeOn(SchedulerProvider.io())
+//            .observeOn(SchedulerProvider.ui())
+//            .subscribe(
+//                { data ->
+//                    if (_bottomSheetState.value != BottomSheetState.MAP_MOVED) _bottomSheetState.value =
+//                        BottomSheetState.MAP_MOVED
+//                    _reviewMarkersOnMap.value = data
+//                },
+//                {
+//                    Log.e(logTag, it.toString())
+//                }
+//            ).addToDisposable()
+//        reviews.value = MockReview.getMockReviewList()
     }
 
     fun getAddressByLatLng(position: LatLng) {
@@ -121,7 +121,7 @@ class HomeViewModel @Inject constructor(
 
     fun sortReviewByTime() {
         reviews.apply {
-            value = value?.sortedByDescending { it.createdDate }
+            value = value?.sortedByDescending { it.createdAt }
         }
     }
 

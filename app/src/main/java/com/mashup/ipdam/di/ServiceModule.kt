@@ -1,5 +1,6 @@
 package com.mashup.ipdam.di
 
+import com.mashup.ipdam.data.api.ReviewServiceImpl
 import com.mashup.ipdam.data.api.UserServiceImpl
 import com.mashup.ipdam.network.IpdamRetrofit
 import com.mashup.ipdam.network.service.KakaoService
@@ -15,15 +16,18 @@ import okhttp3.OkHttpClient
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
 
+//    @Provides
+//    fun provideReviewService(
+//        @NetworkModule.IpdamOkHttpClient okHttpClient: OkHttpClient
+//    ): ReviewService =
+//        IpdamRetrofit.create(
+//            ReviewService::class.java,
+//            okHttpClient,
+//            IpdamRetrofit.IPDAM_API_END_POINT
+//        )
     @Provides
-    fun provideReviewService(
-        @NetworkModule.IpdamOkHttpClient okHttpClient: OkHttpClient
-    ): ReviewService =
-        IpdamRetrofit.create(
-            ReviewService::class.java,
-            okHttpClient,
-            IpdamRetrofit.IPDAM_API_END_POINT
-        )
+    fun provideReviewService(): ReviewService =
+        ReviewServiceImpl()
 
     @Provides
     fun provideKaKaoService(

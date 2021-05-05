@@ -29,7 +29,7 @@ class ProfileViewModel @Inject constructor(
     val isNotFoundUser: SingleLiveEvent<Unit> = _isNotFoundUser
 
     fun initUser() {
-        getPrimaryId { primaryId ->
+        getPrimaryIdWithAction { primaryId ->
             loadUser(primaryId)
         }
     }
@@ -46,12 +46,12 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun setProfileImage(imageUri: Uri) {
-      getPrimaryId { primaryId ->
+      getPrimaryIdWithAction { primaryId ->
           setImageUrl(primaryId, imageUri)
       }
     }
 
-    private fun getPrimaryId(action: (String) -> Unit) {
+    private fun getPrimaryIdWithAction(action: (String) -> Unit) {
         userDataStore.getId()
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())

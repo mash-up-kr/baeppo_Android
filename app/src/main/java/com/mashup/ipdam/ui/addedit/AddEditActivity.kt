@@ -2,12 +2,15 @@ package com.mashup.ipdam.ui.addedit
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import com.mashup.base.BaseActivity
+import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
+import com.mashup.ipdam.data.map.MapConstants
 import com.mashup.ipdam.databinding.ActivityAddEditBinding
 import com.mashup.ipdam.extension.toStringList
 import com.mashup.ipdam.extension.toUriList
@@ -33,6 +36,10 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.run {
                     viewModel.setReviewAddress(getStringExtra("address") ?: "")
+                    viewModel.setReviewLocation(
+                        getDoubleExtra("latitude", MapConstants.DEFAULT_LATITUDE),
+                        getDoubleExtra("longitude", MapConstants.DEFAULT_LONGITUDE)
+                    )
                 }
             }
         }
@@ -88,6 +95,18 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
         viewModel.showSearchResultEvent.observe(this) {
             showSearchActivity(viewModel.reviewAddress.value ?: "")
         }
+        viewModel.apply {
+            isReviewSaveSuccess.observe(this@AddEditActivity) {
+                toast(R.string.add_edit_upload_success)
+                finish()
+            }
+            isReviewInfoEmpty.observe(this@AddEditActivity) {
+                toast(R.string.add_edit_info_empty)
+            }
+            isReviewSaveFailed.observe(this@AddEditActivity) {
+                toast(R.string.add_edit_upload_failed)
+            }
+        }
     }
 
     private fun showAddTypeView() {
@@ -119,15 +138,15 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
         dialog.show(supportFragmentManager, "dialog")
     }
 
-    private fun showImagePicker(selectedImageList: List<String>?) {
+    private fun showImagePicker(selectedImageList: List<Uri>?) {
         TedRxImagePicker.with(this)
-            .selectedUri(selectedImageList?.toUriList())
+            .selectedUri(selectedImageList)
             .buttonBackground(R.drawable.bg_corner_solid)
             .max(5, R.string.error_too_much_selected_image)
             .startMultiImage()
             .subscribe(
                 { uriList ->
-                    viewModel.setRoomImage(uriList.toStringList())
+                    viewModel.setRoomImage(uriList)
                 },
                 {
                     Log.e(logTag, it.stackTraceToString())

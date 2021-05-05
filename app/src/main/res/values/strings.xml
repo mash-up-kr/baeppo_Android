@@ -77,7 +77,7 @@
     <string name="add_title">마이리뷰 작성하기</string>
     <string name="edit_title">마이리뷰 수정하기</string>
     <string name="add_save_button">등록</string>
-    <string name="edit_save_button">등록</string>
+    <string name="edit_save_button">수정</string>
     <string name="add_edit_hint_search_address">리뷰를 남길 주소를 입력해주세요</string>
     <string name="add_edit_hint_detail_address">상세 주소 작성</string>
     <string name="add_edit_point">총 점수</string>
@@ -89,6 +89,9 @@
     <string name="add_edit_hint_image">최대5장까지 업로드가능합니다</string>
     <string name="add_edit_hint_content_title">제목을 작성하세요</string>
     <string name="add_edit_hint_content_description">자유롭게 후기를 작성하세요</string>
+    <string name="add_edit_info_empty">리뷰에 대한 정보를 모두 입력해주세요</string>
+    <string name="add_edit_upload_success">리뷰 업로드에 성공했습니다</string>
+    <string name="add_edit_upload_failed">리뷰 업로드에 실패했습니다</string>
     <!-- 관심리뷰 페이지   -->
     <string name="bookmark_review">관심리뷰</string>
     <string name="bookmark_review_none">관심리뷰가 없습니다</string>

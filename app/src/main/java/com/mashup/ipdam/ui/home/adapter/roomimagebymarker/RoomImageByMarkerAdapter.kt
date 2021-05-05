@@ -7,7 +7,6 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.ItemRoomImageByMarkerBinding
 
-
 class RoomImageByMarkerAdapter :
     BaseRecyclerView.Adapter<Review, ItemRoomImageByMarkerBinding>(
         R.layout.item_room_image_by_marker,

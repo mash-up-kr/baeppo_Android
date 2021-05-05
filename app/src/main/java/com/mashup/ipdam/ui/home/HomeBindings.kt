@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import com.mashup.base.ext.setHtmlText
 import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
+import java.sql.Timestamp
 
 @BindingAdapter(value = ["ipdamAddress", "ipdamCount"], requireAll = true)
 fun showIpdamHeader(view: TextView, address: String, count: Int) {
@@ -27,6 +28,11 @@ fun showIpdamHeader(view: TextView, address: String, count: Int) {
 @BindingAdapter("reviewCount")
 fun setReviewCount(view: TextView, count: Int) {
     view.text = view.context.getString(R.string.review_count, count)
+}
+
+@BindingAdapter("reviewDate")
+fun setReviewDate(view: TextView, date: Timestamp) {
+
 }
 
 @BindingAdapter("bookmark")

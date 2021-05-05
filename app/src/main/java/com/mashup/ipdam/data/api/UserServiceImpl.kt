@@ -20,14 +20,14 @@ import javax.inject.Inject
 
 class UserServiceImpl @Inject constructor() : UserService {
     override fun login(id: String, password: String): Single<User> =
-        Single.create { emit ->
+        Single.create { emitter ->
             Firebase.firestore.collection("users")
                 .whereEqualTo("userId", id)
                 .whereEqualTo("userPassword", password)
                 .get()
                 .addOnSuccessListener { snapshot ->
                     if (snapshot.documents.isEmpty()) {
-                        emit.onError(NotFoundUserException())
+                        emitter.onError(NotFoundUserException())
                     } else {
                         val userDocument = snapshot.documents[0]
                         val user = User(
@@ -36,10 +36,10 @@ class UserServiceImpl @Inject constructor() : UserService {
                             userPassword = userDocument.getString("userPassword"),
                             imageUrl = userDocument.getString("user")
                         )
-                        emit.onSuccess(user)
+                        emitter.onSuccess(user)
                     }
                 }.addOnFailureListener {
-                    emit.onError(it)
+                    emitter.onError(it)
                 }
         }
 
@@ -79,9 +79,9 @@ class UserServiceImpl @Inject constructor() : UserService {
     override fun setImageUrlWithUri(primaryId: String, newImageUri: Uri): Completable =
         Completable.create { emitter ->
             val imageRef = Firebase.storage.reference.child(
-                "images/${newImageUri.lastPathSegment}"
+                "userImages/${primaryId}"
             )
-            Log.d("imageUrl","images/${newImageUri.lastPathSegment}")
+            Log.d("imageUrl","userImages/${primaryId}")
             imageRef.putFile(newImageUri)
                 .continueWithTask { task ->
                     if (!task.isSuccessful) {
@@ -107,7 +107,6 @@ class UserServiceImpl @Inject constructor() : UserService {
         imageUrl: Uri,
         emitter: CompletableEmitter
     ) {
-        Log.d("imageUrl", imageUrl.toString())
         val db = Firebase.firestore
         val document = db.collection("users").document(primaryId)
 

@@ -41,7 +41,7 @@ class BookmarkReviewViewHolder(
         super.bind(item)
         if (item is Review) {
             binding.cvPhotoViewPagerIndicator.createDotPanel(
-                item.images.size,
+                item.images?.size ?: 0,
                 R.drawable.indicator_dot_off,
                 R.drawable.indicator_dot_on,
                 0
