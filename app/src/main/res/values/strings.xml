@@ -29,6 +29,7 @@
     <string name="login_password">비밀번호</string>
     <string name="login_button">로그인하기</string>
     <string name="login_find_not_working">이후 추가될 기능입니다.</string>
+    <string name="login_not_found_user">사용자를 찾을 수 없습니다.</string>
     <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
     <string name="login_register_account">&lt;u>입담 회원가입&lt;/u></string>
     <!--    회원 가입 페이지-->
@@ -42,6 +43,9 @@
     <string name="register_school_text">학교설정</string>
     <string name="register_school_hint">재학중인 학교를 선택해주세요</string>
     <string name="register_button">회원가입하기</string>
+    <string name="register_cancel">올바르게 입력해주세요!</string>
+    <string name="register_success">회원가입에 성공했습니다!</string>
+    <string name="register_duplicated_id">동일한 아이디를 가진 회원이 존재합니다!</string>
     <string name="register_id_result_failed">다시 만들어주세요!</string>
     <string name="register_id_result_success">멋진 아이디에요!</string>
     <string name="register_password_result_failed">다시 만들어주세요!</string>

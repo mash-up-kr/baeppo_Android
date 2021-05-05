@@ -1,21 +1,34 @@
 package com.mashup.ipdam.ui.register
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.mashup.base.BaseViewModel
+import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.SingleLiveEvent
+import com.mashup.ipdam.error.DuplicatedUserException
+import com.mashup.ipdam.network.service.UserService
 import com.mashup.ipdam.utils.RegexUtil
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RegisterViewModel : BaseViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val userService: UserService
+) : BaseViewModel() {
     override var logTag: String = "RegisterViewModel"
 
     val id = MutableLiveData("")
     val password = MutableLiveData("")
     val passwordCheck = MutableLiveData("")
-    val searchSchool = MutableLiveData("")
-    private val _requestSearchSchool = SingleLiveEvent<Unit>()
-    val requestSearchSchool: SingleLiveEvent<Unit> = _requestSearchSchool
+    private val _isRegisterSuccess = SingleLiveEvent<Unit>()
+    val isRegisterSuccess: SingleLiveEvent<Unit> = _isRegisterSuccess
+    private val _isRegisterCancel = SingleLiveEvent<Unit>()
+    val isRegisterCancel: SingleLiveEvent<Unit> = _isRegisterCancel
+    private val _isDuplicatedIdError = SingleLiveEvent<Unit>()
+    val isDuplicatedIdError: SingleLiveEvent<Unit> = _isDuplicatedIdError
+
     val idInputType: LiveData<RegisterInputType> =
         Transformations.map(id) { id ->
             isIdCorrect(id)
@@ -29,8 +42,26 @@ class RegisterViewModel : BaseViewModel() {
             isPasswordCheckCorrect(passwordCheck)
         }
 
-    fun showSearchSchoolResult() {
-        _requestSearchSchool.value = Unit
+    fun register() {
+        if (RegisterInputType.SAFE != idInputType.value ||
+            RegisterInputType.SAFE != passwordInputType.value
+        ) {
+            return
+        }
+        val id = id.value ?: return
+        val password = password.value ?: return
+
+        userService.register(id, password)
+            .subscribeOn(SchedulerProvider.io())
+            .observeOn(SchedulerProvider.ui())
+            .subscribe({
+                _isRegisterSuccess.value = Unit
+            }, { exception ->
+                if (exception is DuplicatedUserException) {
+                    _isDuplicatedIdError.value = Unit
+                }
+                Log.e(logTag, exception.stackTraceToString())
+            }).addToDisposable()
     }
 
     private fun isIdCorrect(id: String): RegisterInputType {

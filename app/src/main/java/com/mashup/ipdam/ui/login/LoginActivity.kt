@@ -17,11 +17,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private val loginViewModel: LoginViewModel by viewModels()
 
     override fun initLayout() {
-        binding.loginRegisterAccount.setOnClickListener {
-            showRegisterView()
-        }
-        binding.loginFindAccount.setOnClickListener {
-            toast(R.string.login_find_not_working)
+        binding.apply {
+            viewModel = loginViewModel
+            loginRegisterAccount.setOnClickListener {
+                showRegisterView()
+            }
+            loginFindAccount.setOnClickListener {
+                toast(R.string.login_find_not_working)
+            }
         }
     }
 
@@ -29,6 +32,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         loginViewModel.apply {
             showMainViewEvent.observe(this@LoginActivity) {
                 showMainView()
+            }
+            isUserNotFound.observe(this@LoginActivity) {
+                toast(R.string.login_not_found_user)
             }
         }
     }

@@ -84,8 +84,7 @@ dependencies {
 
     // DataStore
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
-    implementation "androidx.datastore:datastore:$data_store_version"
-    implementation "androidx.datastore:datastore-rxjava2:1.0.0-beta01"
+    implementation "androidx.datastore:datastore-preferences-rxjava2:$data_store_version"
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
@@ -96,6 +95,7 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.1.2'
 
     // Third party libraries
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'

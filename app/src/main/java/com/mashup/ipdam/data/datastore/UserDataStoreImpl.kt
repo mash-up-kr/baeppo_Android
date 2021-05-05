@@ -8,36 +8,35 @@ import androidx.datastore.rxjava2.RxDataStore
 import io.reactivex.Flowable
 import io.reactivex.Single
 
-object AuthorizationDataStoreImpl : AuthorizationDataStore {
+object UserDataStoreImpl : UserDataStore {
 
-    private const val TAG: String = "AuthorizationDataStore"
-    private const val AUTHORIZATION_DATA_STORE_NAME = "authorization_data_store_name"
+    private const val TAG: String = "UserDataStore"
+    private const val USER_DATA_STORE_NAME = "user_data_store_name"
 
     private object PreferencesKeys {
-        val AUTHORIZATION_ACCESS_TOKEN = stringPreferencesKey("authorization")
+        val ID_ACCESS_TOKEN = stringPreferencesKey("id")
     }
 
     private lateinit var authorizationDataStore: RxDataStore<Preferences>
 
-    override fun saveAccessToken(accessToken: String): Single<Preferences> =
+    override fun saveId(id: String): Single<Preferences> =
         authorizationDataStore.updateDataAsync { preferences ->
             val mutablePreferences = preferences.toMutablePreferences().apply {
-                set(PreferencesKeys.AUTHORIZATION_ACCESS_TOKEN, accessToken)
+                set(PreferencesKeys.ID_ACCESS_TOKEN, id)
             }
             Single.just(mutablePreferences)
         }
 
-    override fun getAccessToken(): Flowable<String> =
+    override fun getId(): Flowable<String> =
         authorizationDataStore
             .data()
             .map { preferences ->
-                preferences[PreferencesKeys.AUTHORIZATION_ACCESS_TOKEN]
+                preferences[PreferencesKeys.ID_ACCESS_TOKEN]
             }
 
 
-    fun initAuthorizationDataStore(context: Context) {
+    fun initUserDataStore(context: Context) {
         authorizationDataStore =
-            RxPreferenceDataStoreBuilder(context, AUTHORIZATION_DATA_STORE_NAME).build()
-
+            RxPreferenceDataStoreBuilder(context, USER_DATA_STORE_NAME).build()
     }
 }
