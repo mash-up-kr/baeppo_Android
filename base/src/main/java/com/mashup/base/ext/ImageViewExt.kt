@@ -47,6 +47,7 @@ fun ImageView.setCircleImageUrl(url: String?, errorImage: Drawable?) {
     url?.let {
         Glide.with(context)
             .load(url)
+            .thumbnail(0.25f)
             .error(errorImage)
             .apply(RequestOptions().circleCrop())
             .into(this)
