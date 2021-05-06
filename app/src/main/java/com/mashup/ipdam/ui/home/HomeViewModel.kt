@@ -7,12 +7,12 @@ import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.SingleLiveEvent
-import com.mashup.ipdam.data.datastore.UserDataStore
 import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.ui.home.data.HomeRepository
 import com.naver.maps.geometry.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +28,8 @@ class HomeViewModel @Inject constructor(
     private val _name = MutableLiveData("")
     val name: LiveData<String> = _name
 
-    val reviews = MutableLiveData<List<Review>>()
+    private val _reviews = MutableLiveData<List<Review>>()
+    val reviews: LiveData<List<Review>> = _reviews
     private val _reviewMarkersOnMap = MutableLiveData<List<Review>>()
     val reviewMarkersOnMap: LiveData<List<Review>> = _reviewMarkersOnMap
 
@@ -43,12 +44,7 @@ class HomeViewModel @Inject constructor(
     private val _isSearchingPlace = SingleLiveEvent<Unit>()
     val isSearchingPlace: SingleLiveEvent<Unit> = _isSearchingPlace
 
-    fun getReviewByMarker(reviewId: String?) {
-        savedStateHandle["marker"] = reviewId
-        if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
-            _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
-        savedStateHandle["isClicking"] = true
-    }
+    var loadReviewDisposable: Disposable? = null
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
@@ -65,6 +61,7 @@ class HomeViewModel @Inject constructor(
                         savedStateHandle["isClicking"] = false
                     }
                     _reviewMarkersOnMap.value = data
+
                 },
                 {
                     Log.e(logTag, it.toString())
@@ -105,14 +102,15 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun updateReview(review: Review) {
-        //TODO: 서버와의 통신으로 review update
+
     }
 
     fun toggleBookmark(review: Review) {
         updateReview(review.copy(isBookmark = !review.isBookmark))
         if (bottomSheetState.value == BottomSheetState.MARKER_CLICKED) {
-            val reviewId = savedStateHandle.get<String>("marker")
-            reviewId?.let { getReviewByMarker(it) }
+            _reviews.value?.let {
+                setClusterClick(it)
+            }
         } else {
             val boundary = savedStateHandle.get<MapBoundary>("boundary")
             boundary?.let {
@@ -122,16 +120,24 @@ class HomeViewModel @Inject constructor(
     }
 
     fun sortReviewByTime() {
-        reviews.apply {
+        _reviews.apply {
             value = value?.sortedByDescending { it.createdAt }
         }
     }
 
     fun sortReviewByStar() {
-        reviews.apply {
+        _reviews.apply {
             value = value?.sortedByDescending { it.rating }
         }
     }
+
+    fun setClusterClick(reviews: List<Review>) {
+        _reviews.value = reviews
+        if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
+            _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
+        savedStateHandle["isClicking"] = true
+    }
+
 }
 
 enum class BottomSheetState {

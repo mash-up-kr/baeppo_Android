@@ -11,6 +11,7 @@ import com.mashup.base.ext.setHtmlText
 import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
 import com.mashup.ipdam.utils.DateUtil
+import java.text.DecimalFormat
 
 @BindingAdapter(value = ["ipdamAddress", "ipdamCount"], requireAll = true)
 fun showIpdamHeader(view: TextView, address: String, count: Int) {
@@ -34,6 +35,13 @@ fun setReviewCount(view: TextView, count: Int) {
 @BindingAdapter("reviewDate")
 fun setReviewDate(view: TextView, date: Timestamp) {
     view.text = DateUtil.getDateFormatter().format(date.toDate())
+}
+
+@BindingAdapter("ratingWhenLoad")
+fun TextView.setTextWithRating(ratingValue: Double) {
+    val decimalFormat = DecimalFormat("#.#")
+    val htmlText = context.getString(R.string.home_review_rating, decimalFormat.format(ratingValue))
+    setHtmlText(htmlText)
 }
 
 @BindingAdapter("bookmark")

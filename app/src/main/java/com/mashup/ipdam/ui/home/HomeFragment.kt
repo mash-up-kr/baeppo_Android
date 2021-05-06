@@ -1,11 +1,12 @@
 package com.mashup.ipdam.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PointF
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -105,6 +106,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         initSearchLayout()
     }
 
+    @SuppressLint("InflateParams")
     private fun initTedCluster(): TedNaverClustering<Review> {
         val markerImage = OverlayImage.fromResource(R.drawable.ic_marker)
 
@@ -118,24 +120,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 }
             }
             .customCluster {
-                TextView(requireContext()).apply {
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.primary_color
-                        )
-                    )
-                    setTextColor(Color.WHITE)
-                    text = getString(R.string.cluster_marker_text, it.size)
-                    setPadding(10, 10, 10, 10)
+                val clusterView = LayoutInflater.from(requireContext())
+                    .inflate(R.layout.item_cluster, null)
+                if (clusterView is TextView) {
+                    clusterView.text = it.size.toString()
                 }
+                clusterView
             }.markerClickListener { review ->
-                homeViewModel.getReviewByMarker(review.id)
+                homeViewModel.setClusterClick(mutableListOf(review))
                 homeViewModel.getAddressByLatLng(
                     LatLng(review.latitude ?: DEFAULT_LATITUDE,
                     review.longitude ?: DEFAULT_LONGITUDE)
                 )
                 homeViewModel.sortReviewByTime()
+            }.clusterClickListener { reviews ->
+                homeViewModel.setClusterClick(reviews.items.toList())
             }
             .make()
     }
@@ -263,6 +262,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun createClusteringMarker(item: List<Review>) {
+        hideClusteringMarker()
         clusteringMarkers.addItems(item)
     }
 
@@ -332,7 +332,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initMapListener() {
         myMap.addOnCameraIdleListener {
-            hideClusteringMarker()
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
             homeViewModel.getAddressByLatLng(myMap.cameraPosition.target)
             homeViewModel.sortReviewByTime()
