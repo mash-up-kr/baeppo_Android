@@ -20,12 +20,16 @@ class BookmarkFragment : BaseFragment<FragmentBookmarksBinding>(R.layout.fragmen
 
     override fun initLayout() {
         super.initLayout()
-        binding.viewModel = bookmarkViewModel
         initRecyclerView()
+        binding.viewModel = bookmarkViewModel
     }
 
     private fun initRecyclerView(){
         binding.rvBookmarkReview.adapter = bookmarkReviewAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
         bookmarkViewModel.getBookmarkReviews()
     }
 }

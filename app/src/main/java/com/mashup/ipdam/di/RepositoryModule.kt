@@ -1,5 +1,7 @@
 package com.mashup.ipdam.di
 
+import com.mashup.ipdam.ui.bookmark.data.BookmarkRepository
+import com.mashup.ipdam.ui.bookmark.data.BookmarkRepositoryImpl
 import com.mashup.ipdam.ui.home.data.HomeRepository
 import com.mashup.ipdam.ui.home.data.HomeRepositoryImpl
 import com.mashup.ipdam.ui.myipdam.data.MyIpdamRepository
@@ -29,4 +31,9 @@ abstract class RepositoryModule {
     abstract fun bindMyIpdamRepository(
         myIpdamRepositoryImpl: MyIpdamRepositoryImpl
     ): MyIpdamRepository
+
+    @Binds
+    abstract fun bindBookmarkRepository(
+        bookmarkRepositoryImpl: BookmarkRepositoryImpl
+    ): BookmarkRepository
 }

@@ -17,9 +17,9 @@ interface ReviewService {
 
     fun saveReviewImage(reviewId: String, imageUri: Uri): Completable
 
-//    fun getReviewsInMyBookmark(primaryId: String): Single<List<ReviewMarker>>
-//
+    fun getReviewsInMyBookmark(userPrimaryId: String): Single<List<Review>>
+
     fun getMyReviews(userPrimaryId: String): Single<List<Review>>
 
-//    fun getReview(reviewId: String): Single<Review>
+   // fun getReview(reviewId: String): Single<Review>
 }

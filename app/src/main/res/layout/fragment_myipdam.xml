@@ -106,7 +106,7 @@
             android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_myIpdamHeader" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
