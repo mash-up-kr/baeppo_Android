@@ -10,7 +10,7 @@ interface UserService {
 
     fun register(id: String, password: String): Single<User>
 
-    fun getUser(primaryId: String): Single<User>
+    fun getUser(userPrimaryId: String): Single<User>
 
-    fun setImageUrlWithUri(primaryId: String, newImageUri: Uri): Completable
+    fun setImageUrlWithUri(userPrimaryId: String, newImageUri: Uri): Completable
 }

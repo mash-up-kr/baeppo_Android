@@ -2,21 +2,16 @@ package com.mashup.ipdam.network.service
 
 import android.net.Uri
 import com.mashup.ipdam.data.review.Review
-import com.mashup.ipdam.data.review.ReviewMarker
-import com.mashup.ipdam.data.review.Reviews
+import com.naver.maps.geometry.LatLng
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ReviewService {
-//    @GET("/v1/map")
-//    fun getReviewInBoundary(
-//        @Query("leftLatitude") leftLatitude: Double,
-//        @Query("topLongitude") topLongitude: Double,
-//        @Query("rightLatitude") rightLatitude: Double,
-//        @Query("bottomLongitude") bottomLongitude: Double,
-//    ): Single<List<ReviewMarker>>
+    fun getReviewInBoundary(
+        userPrimaryId: String,
+        topLeftLatLng: LatLng,
+        bottomRightLatLng: LatLng
+    ): Single<List<Review>>
 
     fun createAndUpdateReview(reviewId: String? = null, review: Review): Single<Review>
 

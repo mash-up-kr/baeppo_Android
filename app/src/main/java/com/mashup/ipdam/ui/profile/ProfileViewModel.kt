@@ -60,7 +60,9 @@ class ProfileViewModel @Inject constructor(
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
             .subscribe({
-                action(it)
+                it?.let {
+                    action(it)
+                }
             }, { exception ->
                 _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())

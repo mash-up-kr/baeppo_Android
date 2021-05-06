@@ -60,12 +60,12 @@ class UserServiceImpl @Inject constructor() : UserService {
                 }
         }
 
-    override fun getUser(primaryId: String): Single<User> = Single.create { emit ->
-        Firebase.firestore.collection("users").document(primaryId)
+    override fun getUser(userPrimaryId: String): Single<User> = Single.create { emit ->
+        Firebase.firestore.collection("users").document(userPrimaryId)
             .get()
             .addOnSuccessListener { document ->
                 val user = User(
-                    id = primaryId,
+                    id = userPrimaryId,
                     userId = document.getString("userId"),
                     userPassword = document.getString("userPassword"),
                     imageUrl = document.getString("imageUrl")
@@ -76,12 +76,12 @@ class UserServiceImpl @Inject constructor() : UserService {
             }
     }
 
-    override fun setImageUrlWithUri(primaryId: String, newImageUri: Uri): Completable =
+    override fun setImageUrlWithUri(userPrimaryId: String, newImageUri: Uri): Completable =
         Completable.create { emitter ->
             val imageRef = Firebase.storage.reference.child(
-                "userImages/${primaryId}"
+                "userImages/${userPrimaryId}"
             )
-            Log.d("imageUrl","userImages/${primaryId}")
+            Log.d("imageUrl","userImages/${userPrimaryId}")
             imageRef.putFile(newImageUri)
                 .continueWithTask { task ->
                     if (!task.isSuccessful) {
@@ -93,7 +93,7 @@ class UserServiceImpl @Inject constructor() : UserService {
                 }.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val downloadUri = task.result
-                        setImageUrlInUserInfo(primaryId, downloadUri, emitter)
+                        setImageUrlInUserInfo(userPrimaryId, downloadUri, emitter)
                     } else {
                         task.exception?.let {
                             emitter.onError(it)

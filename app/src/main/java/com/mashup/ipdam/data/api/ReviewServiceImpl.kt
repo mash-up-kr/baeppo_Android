@@ -2,27 +2,57 @@ package com.mashup.ipdam.data.api
 
 import android.net.Uri
 import android.util.Log
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.mashup.ipdam.data.review.Review
+import com.mashup.ipdam.data.review.ReviewImage
 import com.mashup.ipdam.network.service.ReviewService
-import io.reactivex.Completable
-import io.reactivex.CompletableEmitter
-import io.reactivex.Single
-import java.util.*
+import com.naver.maps.geometry.LatLng
+import io.reactivex.*
+import io.reactivex.Observable
 import javax.inject.Inject
 
-class ReviewServiceImpl @Inject constructor(): ReviewService{
+class ReviewServiceImpl @Inject constructor() : ReviewService {
 
-//    override fun getReviewInBoundary(
-//        leftLatitude: Double,
-//        topLongitude: Double,
-//        rightLatitude: Double,
-//        bottomLongitude: Double
-//    ): Single<List<ReviewMarker>> {
-//
-//    }
+    override fun getReviewInBoundary(
+        userPrimaryId: String,
+        topLeftLatLng: LatLng,
+        bottomRightLatLng: LatLng
+    ): Single<List<Review>> =
+        getReviewImageDocuments(topLeftLatLng, bottomRightLatLng)
+            .flatMap { document ->
+                loadReviewImagesWithReviewId(document, document.id)
+            }.flatMap { (document, images, reviewId) ->
+                getIsBookmarkWithImages(
+                    userPrimaryId,
+                    document,
+                    images,
+                    reviewId
+                )
+            }.map { (document, images, isBookmark) ->
+                Review(
+                    id = document.id,
+                    title = document.getString("title"),
+                    description = document.getString("description"),
+                    amenities = document.getString("amenities"),
+                    safety = document.getLong("safety")?.toInt(),
+                    owner = document.getLong("owner")?.toInt(),
+                    clean = document.getLong("clean")?.toInt(),
+                    distance = document.getLong("distance")?.toInt(),
+                    userId = userPrimaryId,
+                    address = document.getString("address"),
+                    buildingName = document.getString("buildingName"),
+                    latitude = document.getDouble("latitude"),
+                    longitude = document.getDouble("longitude"),
+                    rating = document.getDouble("rating"),
+                    createdAt = document.getTimestamp("createdAt"),
+                    updatedAt = document.getTimestamp("updatedAt"),
+                    images = images,
+                    isBookmark = isBookmark
+                )
+            }.toList()
 
     override fun createAndUpdateReview(reviewId: String?, review: Review): Single<Review> =
         Single.create { emitter ->
@@ -88,7 +118,8 @@ class ReviewServiceImpl @Inject constructor(): ReviewService{
     private fun saveImageInFireStore(
         reviewId: String,
         imageUrl: Uri,
-        emitter: CompletableEmitter) {
+        emitter: CompletableEmitter
+    ) {
         val reviewImageData = hashMapOf(
             "reviewId" to reviewId,
             "imageUrl" to imageUrl.toString()
@@ -102,6 +133,89 @@ class ReviewServiceImpl @Inject constructor(): ReviewService{
                 emitter.onError(e)
             }
     }
+
+    private fun getReviewImageDocuments(
+        topLeftLatLng: LatLng,
+        bottomRightLatLng: LatLng
+    ): Observable<DocumentSnapshot> =
+        Observable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("reviews")
+                .whereGreaterThan("latitude", bottomRightLatLng.latitude)
+                .get()
+                .addOnSuccessListener { documents ->
+                    documents.filter {
+                        // Firestore 에서 오직 한 필드에게만 쿼리 가능
+                        val latitude = it.getDouble("latitude")
+                        val longitude = it.getDouble("longitude")
+                        if (longitude == null || latitude == null) {
+                            false
+                        } else {
+                            Log.d("LatLng", "latitude=$latitude, longitude=$longitude")
+                            longitude >= topLeftLatLng.longitude
+                                    && longitude <= bottomRightLatLng.longitude &&
+                                    latitude <= topLeftLatLng.latitude
+                        }
+                    }.forEach { document ->
+                        emitter.onNext(document)
+                    }
+                    emitter.onComplete()
+                }
+                .addOnFailureListener { exception ->
+                    emitter.onError(exception)
+                }
+        }
+
+    private fun loadReviewImagesWithReviewId(
+        reviewDocument: DocumentSnapshot,
+        reviewId: String
+    ): Observable<Triple<DocumentSnapshot, List<ReviewImage>, String>> =
+        Observable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("reviewImages")
+                .whereEqualTo("reviewId", reviewId)
+                .get()
+                .addOnSuccessListener { snapshot ->
+                    val images = mutableListOf<ReviewImage>()
+                    snapshot.forEach { document ->
+                        val image = ReviewImage(
+                            id = document.id,
+                            imageUrl = document.getString("imageUrl"),
+                            reviewId = reviewId
+                        )
+                        images.add(image)
+                    }
+                    emitter.onNext(Triple(reviewDocument, images, reviewId))
+                    emitter.onComplete()
+                }.addOnFailureListener {
+                    emitter.onError(it)
+                }
+        }
+
+    private fun getIsBookmarkWithImages(
+        userPrimaryId: String,
+        reviewDocument: DocumentSnapshot,
+        images: List<ReviewImage>,
+        reviewId: String
+    ): Observable<Triple<DocumentSnapshot, List<ReviewImage>, Boolean>> =
+        Observable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("bookmarks")
+                .whereEqualTo("reviewId", reviewId)
+                .whereEqualTo("userPk", userPrimaryId)
+                .get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot.documents.isEmpty()) {
+                        emitter.onNext(Triple(reviewDocument, images, false))
+                    } else {
+                        emitter.onNext(Triple(reviewDocument, images, true))
+                    }
+                    emitter.onComplete()
+                }.addOnFailureListener {
+                    emitter.onNext(Triple(reviewDocument, images, false))
+                    emitter.onComplete()
+                }
+        }
 
 //    override fun getReviewsInMyBookmark(primaryId: String): Single<List<ReviewMarker>> {
 //

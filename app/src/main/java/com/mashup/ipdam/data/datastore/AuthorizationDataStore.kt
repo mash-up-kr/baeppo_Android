@@ -6,5 +6,5 @@ import io.reactivex.Single
 
 interface AuthorizationDataStore {
     fun saveAccessToken(accessToken: String): Single<Preferences>
-    fun getAccessToken(): Flowable<String>
+    fun getAccessToken(): Single<String?>
 }
