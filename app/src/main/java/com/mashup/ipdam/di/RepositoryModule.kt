@@ -1,7 +1,7 @@
 package com.mashup.ipdam.di
 
-import com.mashup.ipdam.ui.home.data.FakeHomeRepositoryImpl
 import com.mashup.ipdam.ui.home.data.HomeRepository
+import com.mashup.ipdam.ui.home.data.HomeRepositoryImpl
 import com.mashup.ipdam.ui.search.data.repository.SearchRepository
 import com.mashup.ipdam.ui.search.data.repository.SearchRepositoryImpl
 import dagger.Binds
@@ -20,6 +20,6 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindHomeRepository(
-        fakeHomeRepositoryImpl: FakeHomeRepositoryImpl
+        fakeHomeRepositoryImpl: HomeRepositoryImpl
     ): HomeRepository
 }

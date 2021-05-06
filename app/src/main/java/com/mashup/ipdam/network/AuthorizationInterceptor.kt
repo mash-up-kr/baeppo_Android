@@ -1,5 +1,6 @@
 package com.mashup.ipdam.network
 
+import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.data.datastore.AuthorizationDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -20,13 +21,11 @@ class AuthorizationInterceptor @Inject constructor(
         chain.request()
             .newBuilder()
             .apply {
-                runBlocking(Dispatchers.IO) {
-                    val accessToken = authorizationDataStore.getAccessToken().first()
-                    if (accessToken.isNotEmpty()) {
-                        header(KEY_ACCESS_TOKEN, accessToken)
-                    }
+                    val token = authorizationDataStore.getAccessToken()
+                        .subscribeOn(SchedulerProvider.io())
+                        .blockingFirst()
+                    header(KEY_ACCESS_TOKEN, token)
                 }
-            }
             .build()
     )
 }

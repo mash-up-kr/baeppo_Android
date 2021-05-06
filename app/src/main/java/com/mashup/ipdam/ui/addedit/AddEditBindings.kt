@@ -1,6 +1,7 @@
 package com.mashup.ipdam.ui.addedit
 
 import android.graphics.Typeface
+import android.net.Uri
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
@@ -37,12 +38,12 @@ fun setAreaItem(view: RecyclerView, amenitiesList: List<ReviewAmenities>) {
 }
 
 @BindingAdapter("imageList")
-fun setImageItem(view: RecyclerView, imageList: List<String>) {
+fun setImageItem(view: RecyclerView, imageList: List<Uri>) {
     val concatAdapter = view.adapter
     if (concatAdapter is ConcatAdapter) {
         val imageAdapter = concatAdapter.adapters[1]
         if (imageAdapter is RoomImageAdapter) {
-            imageAdapter.submitList(imageList)
+            imageAdapter.submitList(imageList.map { uri -> uri.toString() })
         }
     }
 }

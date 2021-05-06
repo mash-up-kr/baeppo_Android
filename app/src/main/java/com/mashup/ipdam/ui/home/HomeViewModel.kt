@@ -7,8 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import com.mashup.base.BaseViewModel
 import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.SingleLiveEvent
-import com.mashup.ipdam.data.Review
-import com.mashup.ipdam.data.ReviewMarker
+import com.mashup.ipdam.data.review.Review
+import com.mashup.ipdam.data.review.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.ui.home.data.HomeRepository
 import com.naver.maps.geometry.LatLng
@@ -48,30 +48,28 @@ class HomeViewModel @Inject constructor(
         if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
             _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
         savedStateHandle["isClicking"] = true
-        reviews.value = MockReview.getMockReviewList()
     }
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
-        val isClicking = savedStateHandle.get<Boolean>("isClicking")
-        homeRepository.getReviewsInBoundary(mapBoundary)
-            .subscribeOn(SchedulerProvider.io())
-            .observeOn(SchedulerProvider.ui())
-            .subscribe(
-                { data ->
-                    isClicking?.let {
-                        if (!isClicking) {
-                            _bottomSheetState.value = BottomSheetState.MAP_MOVED
-                        }
-                        savedStateHandle["isClicking"] = false
-                    }
-                    _reviewMarkersOnMap.value = data
-                },
-                {
-                    Log.e(logTag, it.toString())
-                }
-            ).addToDisposable()
-        reviews.value = MockReview.getMockReviewList()
+//        val isClicking = savedStateHandle.get<Boolean>("isClicking")
+//        homeRepository.getReviewsInBoundary(mapBoundary)
+//            .subscribeOn(SchedulerProvider.io())
+//            .observeOn(SchedulerProvider.ui())
+//            .subscribe(
+//                { data ->
+//                    isClicking?.let {
+//                        if (!isClicking) {
+//                            _bottomSheetState.value = BottomSheetState.MAP_MOVED
+//                        }
+//                        savedStateHandle["isClicking"] = false
+//                    }
+//                    _reviewMarkersOnMap.value = data
+//                },
+//                {
+//                    Log.e(logTag, it.toString())
+//                }
+//            ).addToDisposable()
     }
 
     fun getAddressByLatLng(position: LatLng) {
@@ -95,9 +93,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getResultBySearchAddress() {
-        _isSearchingPlace.value = Unit
+        _isSearchingPlace.call()
         if (!searchAddress.value.isNullOrEmpty()) {
-            _showSearchResultEvent.value = Unit
+            _showSearchResultEvent.call()
         }
         searchAddress.value = ""
     }
@@ -125,7 +123,7 @@ class HomeViewModel @Inject constructor(
 
     fun sortReviewByTime() {
         reviews.apply {
-            value = value?.sortedByDescending { it.createdDate }
+            value = value?.sortedByDescending { it.createdAt }
         }
     }
 

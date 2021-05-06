@@ -2,17 +2,19 @@ package com.mashup.ipdam
 
 import android.app.Application
 import com.mashup.ipdam.data.datastore.AuthorizationDataStoreImpl
+import com.mashup.ipdam.data.datastore.UserDataStoreImpl
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class IpdamApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        initializeAuthorizationDataStore()
+        initializeDataStore()
     }
 
-    private fun initializeAuthorizationDataStore() {
-        AuthorizationDataStoreImpl.authorizationDataStoreInit(this)
+    private fun initializeDataStore() {
+        AuthorizationDataStoreImpl.initAuthorizationDataStore(this)
+        UserDataStoreImpl.initUserDataStore(this)
     }
 }
 

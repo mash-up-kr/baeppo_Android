@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="com.mashup.ipdam.ui.login.LoginViewModel" />
+
+        <variable
+            name="viewModel"
+            type="LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,15 +46,16 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="72dp"
             android:layout_marginEnd="18dp"
+            android:autofillHints="username"
             android:background="@drawable/bg_corner_stroke"
             android:ems="10"
             android:hint="@string/login_id"
             android:inputType="text"
             android:lines="1"
-            android:autofillHints="username"
             android:minHeight="@dimen/height_edittext"
             android:paddingStart="11dp"
             android:paddingEnd="78dp"
+            android:text="@={viewModel.inputId}"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -63,15 +69,16 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="18dp"
+            android:autofillHints="password"
             android:background="@drawable/bg_corner_stroke"
             android:ems="10"
             android:hint="@string/login_password"
             android:inputType="textPassword"
             android:lines="1"
-            android:autofillHints="password"
             android:minHeight="@dimen/height_edittext"
             android:paddingStart="11dp"
             android:paddingEnd="78dp"
+            android:text="@={viewModel.inputPassword}"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +93,7 @@
             android:layout_marginEnd="18dp"
             android:background="@drawable/bg_corner_solid"
             android:backgroundTint="@color/primary_color"
+            android:onClick="@{() -> viewModel.login()}"
             android:text="@string/login_button"
             android:textSize="16sp"
             android:textStyle="bold"

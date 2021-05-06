@@ -4,9 +4,8 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.DiffUtil
 import com.mashup.base.BaseRecyclerView
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.Review
+import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.ItemRoomImageByMarkerBinding
-
 
 class RoomImageByMarkerAdapter :
     BaseRecyclerView.Adapter<Review, ItemRoomImageByMarkerBinding>(

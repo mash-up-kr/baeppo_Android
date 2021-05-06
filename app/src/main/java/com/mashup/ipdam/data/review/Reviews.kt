@@ -1,6 +1,6 @@
-package com.mashup.ipdam.data
+package com.mashup.ipdam.data.review
 
-data class ReviewsByMap(
+data class Reviews(
     val count: String,
     val filter: String,
     val reviews: List<Review>

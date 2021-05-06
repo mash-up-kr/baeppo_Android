@@ -3,11 +3,14 @@ package com.mashup.ipdam.ui.register
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.mashup.base.BaseActivity
+import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.databinding.ActivityRegisterBinding
 import com.mashup.ipdam.ui.register.RegisterInputType.SAFE
 import com.mashup.ipdam.ui.register.RegisterInputType.WRONG
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
     override var logTag: String = "RegisterActivity"
     private val registerViewModel: RegisterViewModel by viewModels()
@@ -18,14 +21,10 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
             registerBackButton.setOnClickListener {
                 finish()
             }
-            registerButton.setOnClickListener {
-                //TODO: 회원가입 로직 작성
-            }
         }
     }
 
     override fun observeViewModel() {
-        super.observeViewModel()
         registerViewModel.idInputType.observe(this) { type ->
             when (type) {
                 SAFE -> showIdSuccessLayout()
@@ -50,13 +49,16 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
                 }
             }
         }
-        registerViewModel.requestSearchSchool.observe(this) {
-            showSearchSchoolView()
+        registerViewModel.isRegisterSuccess.observe(this) {
+            toast(R.string.register_success)
+            finish()
         }
-    }
-
-    private fun showSearchSchoolView() {
-        //TODO: 학교 검색 화면
+        registerViewModel.isRegisterCancel.observe(this) {
+            toast(R.string.register_cancel)
+        }
+        registerViewModel.isDuplicatedIdError.observe(this) {
+            toast(R.string.register_duplicated_id)
+        }
     }
 
     private fun showIdSuccessLayout() {

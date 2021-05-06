@@ -5,6 +5,9 @@
 
     <data>
         <import type="com.mashup.ipdam.ui.profile.ProfileViewModel"/>
+
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="ProfileViewModel" />
@@ -37,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileTitle"
             android:src="@drawable/ic_not_active_good"
-            circleImageUrl="@{viewModel.profileImageUrl}"
+            circleImageUrl="@{viewModel.userInfo.imageUrl}"
             errorImage="@{@drawable/ic_not_active_good}"
             android:paddingTop="4dp"
             android:paddingRight="3dp"
@@ -52,6 +55,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:text="@{viewModel.userInfo.userId ?? @string/profile_unknown_user}"
             app:layout_constraintStart_toEndOf="@id/profileImageView"
             app:layout_constraintTop_toBottomOf="@id/profileTitle"
             tools:text="ooo 님" />
@@ -133,6 +137,7 @@
             android:layout_marginTop="23dp"
             android:text="@string/profile_logout"
             android:textColor="@color/black"
+            android:onClick="@{() -> viewModel.logOut()}"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,5 +151,19 @@
             app:layout_constraintTop_toTopOf="@id/profileImageView"
             app:srcCompat="@drawable/ic_select_picture"
             tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:indeterminateDrawable="@drawable/loading"
+            android:indeterminateDuration="1000"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileTitle" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

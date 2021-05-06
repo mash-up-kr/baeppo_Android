@@ -23,11 +23,15 @@
     <string name="profile_creator">만든이</string>
     <string name="profile_version">버전</string>
     <string name="profile_logout">로그아웃</string>
+    <string name="profile_unknown_user">알수없는 유저</string>
+    <string name="profile_terms_message">이용약관이 준비되어 있지 않습니다.</string>
     <string name="profile_not_found_version">버전 내용을 알 수 없습니다.</string>
     <!--    로그인 화면-->
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
     <string name="login_button">로그인하기</string>
+    <string name="login_find_not_working">이후 추가될 기능입니다.</string>
+    <string name="login_not_found_user">사용자를 찾을 수 없습니다.</string>
     <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
     <string name="login_register_account">&lt;u>입담 회원가입&lt;/u></string>
     <!--    회원 가입 페이지-->
@@ -41,6 +45,9 @@
     <string name="register_school_text">학교설정</string>
     <string name="register_school_hint">재학중인 학교를 선택해주세요</string>
     <string name="register_button">회원가입하기</string>
+    <string name="register_cancel">올바르게 입력해주세요!</string>
+    <string name="register_success">회원가입에 성공했습니다!</string>
+    <string name="register_duplicated_id">동일한 아이디를 가진 회원이 존재합니다!</string>
     <string name="register_id_result_failed">다시 만들어주세요!</string>
     <string name="register_id_result_success">멋진 아이디에요!</string>
     <string name="register_password_result_failed">다시 만들어주세요!</string>
@@ -70,7 +77,7 @@
     <string name="add_title">마이리뷰 작성하기</string>
     <string name="edit_title">마이리뷰 수정하기</string>
     <string name="add_save_button">등록</string>
-    <string name="edit_save_button">등록</string>
+    <string name="edit_save_button">수정</string>
     <string name="add_edit_hint_search_address">리뷰를 남길 주소를 입력해주세요</string>
     <string name="add_edit_hint_detail_address">상세 주소 작성</string>
     <string name="add_edit_point">총 점수</string>
@@ -82,6 +89,9 @@
     <string name="add_edit_hint_image">최대5장까지 업로드가능합니다</string>
     <string name="add_edit_hint_content_title">제목을 작성하세요</string>
     <string name="add_edit_hint_content_description">자유롭게 후기를 작성하세요</string>
+    <string name="add_edit_info_empty">리뷰에 대한 정보를 모두 입력해주세요</string>
+    <string name="add_edit_upload_success">리뷰 업로드에 성공했습니다</string>
+    <string name="add_edit_upload_failed">리뷰 업로드에 실패했습니다</string>
     <!-- 관심리뷰 페이지   -->
     <string name="bookmark_review">관심리뷰</string>
     <string name="bookmark_review_none">관심리뷰가 없습니다</string>
@@ -92,11 +102,9 @@
     <string name="my_ipdam_review_count">내가 작성한 리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
     <!--  에러 -->
     <string name="error_too_much_selected_image">최대 5개의 이미지를 선택할 수 있습니다.</string>
+    <string name="error_not_found_user">사용자 정보를 찾을 수 없습니다.</string>
     <!-- 주변지역 다이얼로그   -->
     <string name="dialog_amenities_title">주변상권</string>
     <string name="dialog_amenities_hint">8글자 내로 작성해주세요</string>
     <string name="dialog_amenities_add">추가</string>
-    <!--  설정페이지  -->
-    <string name="profile_terms_message">이용약관이 준비되어 있지 않습니다.</string>
-    <string name="profile_logout_message">로그아웃 기능이 준비되어 있지 않습니다</string>
 </resources>

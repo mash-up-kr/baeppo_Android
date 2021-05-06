@@ -3,7 +3,7 @@ package com.mashup.ipdam.ui.myipdam.adapter
 import androidx.viewpager2.widget.ViewPager2
 import com.mashup.base.BaseRecyclerView
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.Review
+import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.ItemReviewBinding
 import com.mashup.ipdam.ui.home.adapter.roomimage.RoomImageViewPagerAdapter
 import com.mashup.ipdam.ui.myipdam.MyIpdamViewModel
@@ -40,7 +40,7 @@ class MyIpdamReviewViewHolder(
         super.bind(item)
         if (item is Review) {
             binding.cvPhotoViewPagerIndicator.createDotPanel(
-                item.images.size,
+                item.images?.size ?: 0,
                 R.drawable.indicator_dot_off,
                 R.drawable.indicator_dot_on,
                 0
