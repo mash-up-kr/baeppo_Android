@@ -39,8 +39,8 @@ class AddEditViewModel @Inject constructor(
     val isReviewSaveFailed: SingleLiveEvent<Unit> = _isReviewSaveFailed
     private val _isReviewInfoEmpty = SingleLiveEvent<Unit>()
     val isReviewInfoEmpty: SingleLiveEvent<Unit> = _isReviewInfoEmpty
-    private val _isLoading = SingleLiveEvent<Boolean>()
-    val isLoading: SingleLiveEvent<Boolean> = _isLoading
+    private val _isUploading = SingleLiveEvent<Boolean>()
+    val isUploading: SingleLiveEvent<Boolean> = _isUploading
 
     val reviewAddress = MutableLiveData("")
     val reviewDetailAddress = MutableLiveData("")
@@ -80,7 +80,7 @@ class AddEditViewModel @Inject constructor(
     }
 
     fun requestSaveReview() {
-        _isLoading.value = true
+        _isUploading.value = true
         getPrimaryIdWithAction {
             saveReview(it)
         }
@@ -181,7 +181,7 @@ class AddEditViewModel @Inject constructor(
                 saveImageList(reviewResult.id)
             }, { exception ->
                 _isReviewSaveFailed.value = Unit
-                _isLoading.value = false
+                _isUploading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
@@ -203,10 +203,10 @@ class AddEditViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe({
                 _isReviewSaveSuccess.value = Unit
-                _isLoading.value = false
+                _isUploading.value = false
             }, { exception ->
                 _isReviewSaveFailed.value = Unit
-                _isLoading.value = false
+                _isUploading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
@@ -238,7 +238,7 @@ class AddEditViewModel @Inject constructor(
             .subscribe({
                 action(it)
             }, { exception ->
-                _isLoading.value = false
+                _isUploading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
