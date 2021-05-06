@@ -320,6 +320,8 @@ Thumbs.db
 # Mongo Explorer plugin
 .idea/mongoSettings.xml
 
+app/google-services.json
+
 # Crashlytics plugin (for Android Studio and IntelliJ)
 
 ### AndroidStudio Patch ###
