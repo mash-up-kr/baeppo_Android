@@ -19,7 +19,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -98,6 +98,8 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="12dp"
             android:text="@{review.buildingName}"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/vp_photoViewPager"
             app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
 
@@ -107,7 +109,7 @@
             android:layout_height="19dp"
             android:layout_marginStart="6dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintStart_toEndOf="@id/tv_starRate"
+            app:layout_constraintStart_toEndOf="@id/tv_starRate_value"
             app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
             app:srcCompat="@drawable/star"
             tools:ignore="ContentDescription" />
@@ -132,6 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/v_rightLine"
             app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
 
@@ -141,18 +145,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
             android:layout_marginTop="12dp"
-            android:lines="1"
-            android:text="@{review.description}"
+            android:layout_marginBottom="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{review.title}"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_buildingName"
             tools:text="여러분 제가 살아봤는데요, 이 집은 진짜 아니에요..." />
 
         <TextView
-            android:id="@+id/tv_starRate"
-            ratingToString="@{review.rating}"
+            android:id="@+id/tv_starRate_value"
+            ratingWhenLoad="@{review.rating}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

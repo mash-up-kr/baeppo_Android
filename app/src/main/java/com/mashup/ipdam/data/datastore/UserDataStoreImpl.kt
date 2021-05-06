@@ -27,12 +27,12 @@ object UserDataStoreImpl : UserDataStore {
             Single.just(mutablePreferences)
         }
 
-    override fun getId(): Flowable<String> =
+    override fun getId(): Single<String?> =
         authorizationDataStore
             .data()
             .map { preferences ->
                 preferences[PreferencesKeys.ID_ACCESS_TOKEN]
-            }
+            }.firstOrError()
 
 
     fun initUserDataStore(context: Context) {

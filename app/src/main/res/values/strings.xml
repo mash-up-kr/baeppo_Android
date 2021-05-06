@@ -12,7 +12,7 @@
     <string name="ipdam_header_text">%1$s 자취방 리뷰 &lt;font color=\"%2$s\">%3$d&lt;/font>개</string>
     <string name="review_count">리뷰 %1$d개</string>
     <string name="star_count">%1$.1f/5</string>
-    <string name="cluster_marker_text">%1$d개</string>
+    <string name="home_review_rating">&lt;font color=\"#000000\">%1$s&lt;/font>/5</string>
     <string name="here_review_none">이 장소에는 리뷰가 없습니다</string>
     <string name="room_image_none">이미지가 없습니다</string>
     <!-- Splash 화면 -->

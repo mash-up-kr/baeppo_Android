@@ -16,7 +16,6 @@
 
         <ImageView
             android:id="@+id/iv_thumbnail"
-            loadImageWithRadius="@{review.images[0]}"
             android:layout_width="67dp"
             android:layout_height="67dp"
             android:layout_marginStart="2dp"
