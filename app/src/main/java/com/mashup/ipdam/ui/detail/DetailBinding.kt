@@ -20,9 +20,9 @@ fun setSpeechBubble(view: AppCompatButton, reviewPoint: ReviewPoint) {
 @BindingAdapter("setFeeling")
 fun setFeeling(view: ImageView, point: Int) {
     when (point) {
-        0 -> view.setImageResource(R.drawable.ic_active_bad)
-        1 -> view.setImageResource(R.drawable.ic_active_normal)
-        2 -> view.setImageResource(R.drawable.ic_active_good)
+        1 -> view.setImageResource(R.drawable.ic_active_bad)
+        2 -> view.setImageResource(R.drawable.ic_active_normal)
+        3 -> view.setImageResource(R.drawable.ic_active_good)
     }
 }
 
