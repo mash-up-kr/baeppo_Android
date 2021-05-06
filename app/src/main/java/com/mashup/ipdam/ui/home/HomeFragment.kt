@@ -1,10 +1,12 @@
 package com.mashup.ipdam.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PointF
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -26,7 +28,6 @@ import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.review.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LATITUDE
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LONGITUDE
@@ -35,6 +36,7 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_PERMISSION_REQUEST_CODE
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
+import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.FragmentHomeBinding
 import com.mashup.ipdam.ui.home.adapter.review.HomeReviewAdapter
 import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapter
@@ -61,7 +63,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     private val homeViewModel by activityViewModels<HomeViewModel>()
     private val reviewAdapter by lazy { HomeReviewAdapter(homeViewModel) }
     private val roomImageByMarkerAdapter by lazy { RoomImageByMarkerAdapter() }
-    private val clusteringMarkers: TedNaverClustering<ReviewMarker> by lazy {
+    private val clusteringMarkers: TedNaverClustering<Review> by lazy {
         initTedCluster()
     }
 
@@ -104,33 +106,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         initSearchLayout()
     }
 
-    private fun initTedCluster(): TedNaverClustering<ReviewMarker> {
+    @SuppressLint("InflateParams")
+    private fun initTedCluster(): TedNaverClustering<Review> {
         val markerImage = OverlayImage.fromResource(R.drawable.ic_marker)
 
-        return TedNaverClustering.with<ReviewMarker>(requireContext(), myMap)
+        return TedNaverClustering.with<Review>(requireContext(), myMap)
             .customMarker { clusterItem ->
-                Marker(LatLng(clusterItem.latitude, clusterItem.longitude)).apply {
+                Marker(LatLng(clusterItem.latitude ?: DEFAULT_LATITUDE,
+                    clusterItem.longitude ?: DEFAULT_LONGITUDE)).apply {
                     icon = markerImage
                     width = resources.getDimension(R.dimen.width_marker).toInt()
                     height = resources.getDimension(R.dimen.height_marker).toInt()
                 }
             }
             .customCluster {
-                TextView(requireContext()).apply {
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.primary_color
-                        )
-                    )
-                    setTextColor(Color.WHITE)
-                    text = getString(R.string.cluster_marker_text, it.size)
-                    setPadding(10, 10, 10, 10)
+                val clusterView = LayoutInflater.from(requireContext())
+                    .inflate(R.layout.item_cluster, null)
+                if (clusterView is TextView) {
+                    clusterView.text = it.size.toString()
                 }
-            }.markerClickListener {
-                homeViewModel.getReviewByMarker(it.id)
-                homeViewModel.getAddressByLatLng(LatLng(it.latitude, it.longitude))
+                clusterView
+            }.markerClickListener { review ->
+                homeViewModel.setClusterClick(mutableListOf(review))
+                homeViewModel.getAddressByLatLng(
+                    LatLng(review.latitude ?: DEFAULT_LATITUDE,
+                    review.longitude ?: DEFAULT_LONGITUDE)
+                )
                 homeViewModel.sortReviewByTime()
+            }.clusterClickListener { reviews ->
+                homeViewModel.setClusterClick(reviews.items.toList())
             }
             .make()
     }
@@ -257,7 +261,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
     }
 
-    private fun createClusteringMarker(item: List<ReviewMarker>) {
+    private fun createClusteringMarker(item: List<Review>) {
+        hideClusteringMarker()
         clusteringMarkers.addItems(item)
     }
 
@@ -327,7 +332,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initMapListener() {
         myMap.addOnCameraIdleListener {
-            hideClusteringMarker()
             homeViewModel.getReviewInBoundary(getMapBoundaryOnScreen())
             homeViewModel.getAddressByLatLng(myMap.cameraPosition.target)
             homeViewModel.sortReviewByTime()

@@ -48,7 +48,7 @@ fun setImageItem(view: RecyclerView, imageList: List<Uri>) {
     }
 }
 
-@BindingAdapter("ratingToString")
+@BindingAdapter("ratingWhenCreate")
 fun TextView.setTextWithRating(ratingValue: Double) {
     val decimalFormat = DecimalFormat("#.#")
     text = context.getString(R.string.add_edit_point_rating, decimalFormat.format(ratingValue))

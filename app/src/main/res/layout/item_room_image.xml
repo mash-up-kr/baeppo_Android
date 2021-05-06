@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.mashup.ipdam.data.review.ReviewImage"/>
 
         <variable
-            name="reviewUrl"
-            type="String" />
+            name="reviewImage"
+            type="ReviewImage" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +17,7 @@
 
         <ImageView
             android:id="@+id/iv_roomImage"
-            loadImageWithRadius="@{reviewUrl}"
+            loadImageWithRadius="@{reviewImage.imageUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -8,7 +8,7 @@ import com.mashup.ipdam.databinding.ItemRoomImageBinding
 
 class RoomImageViewPagerAdapter : BaseRecyclerView.Adapter<String, ItemRoomImageBinding>(
     R.layout.item_room_image,
-    BR.reviewUrl,
+    BR.reviewImage,
     RoomImageDiffCallback
 ) {
 

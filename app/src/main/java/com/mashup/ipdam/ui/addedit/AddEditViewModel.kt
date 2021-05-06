@@ -235,8 +235,10 @@ class AddEditViewModel @Inject constructor(
         userDataStore.getId()
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
-            .subscribe({
-                action(it)
+            .subscribe({ userPrimaryId ->
+                userPrimaryId?.let {
+                    action(it)
+                }
             }, { exception ->
                 _isUploading.value = false
                 Log.e(logTag, exception.stackTraceToString())

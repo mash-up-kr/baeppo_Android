@@ -27,17 +27,15 @@ object AuthorizationDataStoreImpl : AuthorizationDataStore {
             Single.just(mutablePreferences)
         }
 
-    override fun getAccessToken(): Flowable<String> =
+    override fun getAccessToken(): Single<String?> =
         authorizationDataStore
             .data()
             .map { preferences ->
                 preferences[PreferencesKeys.AUTHORIZATION_ACCESS_TOKEN]
-            }
-
+            }.firstOrError()
 
     fun initAuthorizationDataStore(context: Context) {
         authorizationDataStore =
             RxPreferenceDataStoreBuilder(context, AUTHORIZATION_DATA_STORE_NAME).build()
-
     }
 }
