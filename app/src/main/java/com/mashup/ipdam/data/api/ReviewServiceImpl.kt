@@ -178,6 +178,52 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                 )
             }.toList()
 
+    override fun deleteMyReview(reviewId: String): Completable =
+        Completable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("reviews")
+                .document(reviewId)
+                .delete()
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }
+                .addOnFailureListener {
+                    emitter.onError(it)
+                }
+        }
+
+    override fun deleteBookMarkReview(reviewId: String, userPrimaryId: String): Completable =
+        Completable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("bookmarks")
+                .document(reviewId)
+                .delete()
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }
+                .addOnFailureListener {
+                    emitter.onError(it)
+                }
+        }
+
+    override fun createBookmarkReview(reviewId: String, userPrimaryId: String): Completable {
+        val bookmarkData = hashMapOf(
+            "reviewId" to reviewId,
+            "userId" to userPrimaryId
+        )
+
+        return Completable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("bookmarks")
+                .add(bookmarkData)
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }.addOnFailureListener { e ->
+                    emitter.onError(e)
+                }
+        }
+    }
+
     private fun saveImageInFireStore(
         reviewId: String,
         imageUrl: Uri,

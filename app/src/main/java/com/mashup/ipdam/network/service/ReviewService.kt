@@ -21,5 +21,9 @@ interface ReviewService {
 
     fun getMyReviews(userPrimaryId: String): Single<List<Review>>
 
-   // fun getReview(reviewId: String): Single<Review>
+    fun deleteMyReview(reviewId: String): Completable
+
+    fun deleteBookMarkReview(reviewId: String, userPrimaryId: String): Completable
+
+    fun createBookmarkReview(reviewId: String, userPrimaryId: String): Completable
 }
