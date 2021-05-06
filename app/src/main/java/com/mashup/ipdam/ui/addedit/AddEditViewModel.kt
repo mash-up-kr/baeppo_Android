@@ -80,6 +80,7 @@ class AddEditViewModel @Inject constructor(
     }
 
     fun requestSaveReview() {
+        _isLoading.value = true
         getPrimaryIdWithAction {
             saveReview(it)
         }
@@ -180,6 +181,7 @@ class AddEditViewModel @Inject constructor(
                 saveImageList(reviewResult.id)
             }, { exception ->
                 _isReviewSaveFailed.value = Unit
+                _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
@@ -201,8 +203,10 @@ class AddEditViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe({
                 _isReviewSaveSuccess.value = Unit
+                _isLoading.value = false
             }, { exception ->
                 _isReviewSaveFailed.value = Unit
+                _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
@@ -234,6 +238,7 @@ class AddEditViewModel @Inject constructor(
             .subscribe({
                 action(it)
             }, { exception ->
+                _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
     }
