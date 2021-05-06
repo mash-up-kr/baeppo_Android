@@ -26,7 +26,6 @@ import com.mashup.base.ext.hideSoftKeyBoard
 import com.mashup.base.ext.shouldShowRequestPermissionRationaleCompat
 import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
-import com.mashup.ipdam.data.review.ReviewMarker
 import com.mashup.ipdam.data.map.MapBoundary
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LATITUDE
 import com.mashup.ipdam.data.map.MapConstants.DEFAULT_LONGITUDE
@@ -35,6 +34,7 @@ import com.mashup.ipdam.data.map.MapConstants.LOCATION_PERMISSION_REQUEST_CODE
 import com.mashup.ipdam.data.map.MapConstants.LOCATION_TRACKING_MODE
 import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
+import com.mashup.ipdam.data.review.ReviewMarker
 import com.mashup.ipdam.databinding.FragmentHomeBinding
 import com.mashup.ipdam.ui.home.adapter.review.HomeReviewAdapter
 import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapter

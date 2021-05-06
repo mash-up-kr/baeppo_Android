@@ -15,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ipdam">
         <activity
+            android:name=".ui.detail.DetailActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.addedit.AddEditActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -43,13 +52,7 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash.Ipdam">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Splash.Ipdam" />
     </application>
 
 </manifest>
