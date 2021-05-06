@@ -25,12 +25,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
         initBinding()
     }
 
-    private fun initBinding(){
+    private fun initBinding() {
         binding.apply {
+            ivBack.setOnClickListener { finish() }
             rvReviewValues.adapter = detailReviewPointAdapter
             viewModel = detailViewModel
             itemReview.review = detailViewModel.review.value
-            detailViewModel.review.observe(this@DetailActivity){
+            detailViewModel.review.observe(this@DetailActivity) {
                 itemReview.cvPhotoViewPagerIndicator.createDotPanel(
                     it.images?.size ?: 0,
                     R.drawable.indicator_dot_off,
