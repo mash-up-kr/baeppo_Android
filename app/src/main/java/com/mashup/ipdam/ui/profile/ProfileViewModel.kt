@@ -42,7 +42,7 @@ class ProfileViewModel @Inject constructor(
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
             .subscribe({
-                _isLogoutSuccess.value = Unit
+                _isLogoutSuccess.call()
             }, { exception ->
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
@@ -76,7 +76,7 @@ class ProfileViewModel @Inject constructor(
                 _isLoading.value = false
             }, { exception ->
                 if (exception is NotFoundUserException) {
-                    _isNotFoundUser.value = Unit
+                    _isNotFoundUser.call()
                 }
                 _isLoading.value = false
                 Log.e(logTag, exception.stackTraceToString())

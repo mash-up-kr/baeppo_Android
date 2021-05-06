@@ -38,7 +38,7 @@ class LoginViewModel @Inject constructor(
                     setIdWhenLoginSuccess(user)
                 }, { exception ->
                     if (exception is NotFoundUserException) {
-                        _isUserNotFound.value = Unit
+                        _isUserNotFound.call()
                     }
                     Log.e(logTag, exception.stackTraceToString())
                 }
@@ -51,7 +51,7 @@ class LoginViewModel @Inject constructor(
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 {
-                    _showMainViewEvent.value = Unit
+                    _showMainViewEvent.call()
                 }, { exception ->
                     Log.e(logTag, exception.stackTraceToString())
                 }

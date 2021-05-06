@@ -93,9 +93,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getResultBySearchAddress() {
-        _isSearchingPlace.value = Unit
+        _isSearchingPlace.call()
         if (!searchAddress.value.isNullOrEmpty()) {
-            _showSearchResultEvent.value = Unit
+            _showSearchResultEvent.call()
         }
         searchAddress.value = ""
     }

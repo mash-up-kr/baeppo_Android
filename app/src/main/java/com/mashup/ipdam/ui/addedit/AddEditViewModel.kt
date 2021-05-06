@@ -120,11 +120,11 @@ class AddEditViewModel @Inject constructor(
     }
 
     fun eventAddReviewImage() {
-        _addReviewImageEvent.value = Unit
+        _addReviewImageEvent.call()
     }
 
     fun eventAddReviewArea() {
-        _addReviewAreaEvent.value = Unit
+        _addReviewAreaEvent.call()
     }
 
     fun setRoomImage(newRoomImageList: List<Uri>) {
@@ -146,7 +146,7 @@ class AddEditViewModel @Inject constructor(
     }
 
     fun getReviewAddressBySearch() {
-        _showSearchResultEvent.value = Unit
+        _showSearchResultEvent.call()
     }
 
     fun setReviewLocation(latitude: Double, longitude: Double) {
@@ -170,7 +170,7 @@ class AddEditViewModel @Inject constructor(
     private fun saveReview(primaryId: String) {
         val review = getReview(primaryId)
         if (review == null || review.isEmpty()) {
-            _isReviewInfoEmpty.value = Unit
+            _isReviewInfoEmpty.call()
             return
         }
         val reviewId = savedStateHandle.get<String>("reviewId")
@@ -180,7 +180,7 @@ class AddEditViewModel @Inject constructor(
             .subscribe({ reviewResult ->
                 saveImageList(reviewResult.id)
             }, { exception ->
-                _isReviewSaveFailed.value = Unit
+                _isReviewSaveFailed.call()
                 _isUploading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
@@ -188,7 +188,7 @@ class AddEditViewModel @Inject constructor(
 
     private fun saveImageList(reviewId: String?) {
         if (reviewId == null) {
-            _isReviewSaveFailed.value = Unit
+            _isReviewSaveFailed.call()
             return
         }
 
@@ -202,10 +202,10 @@ class AddEditViewModel @Inject constructor(
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
             .subscribe({
-                _isReviewSaveSuccess.value = Unit
+                _isReviewSaveSuccess.call()
                 _isUploading.value = false
             }, { exception ->
-                _isReviewSaveFailed.value = Unit
+                _isReviewSaveFailed.call()
                 _isUploading.value = false
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()

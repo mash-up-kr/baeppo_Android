@@ -55,10 +55,10 @@ class RegisterViewModel @Inject constructor(
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
             .subscribe({
-                _isRegisterSuccess.value = Unit
+                _isRegisterSuccess.call()
             }, { exception ->
                 if (exception is DuplicatedUserException) {
-                    _isDuplicatedIdError.value = Unit
+                    _isDuplicatedIdError.call()
                 }
                 Log.e(logTag, exception.stackTraceToString())
             }).addToDisposable()
