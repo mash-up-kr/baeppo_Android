@@ -19,7 +19,7 @@ interface ReviewService {
 
 //    fun getReviewsInMyBookmark(primaryId: String): Single<List<ReviewMarker>>
 //
-//    fun getMyReviews(primaryId: String): Single<List<ReviewMarker>>
-//
+    fun getMyReviews(userPrimaryId: String): Single<List<Review>>
+
 //    fun getReview(reviewId: String): Single<Review>
 }

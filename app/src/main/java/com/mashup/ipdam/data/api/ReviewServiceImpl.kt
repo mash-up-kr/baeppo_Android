@@ -115,6 +115,40 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                 }
         }
 
+    override fun getMyReviews(userPrimaryId: String): Single<List<Review>> =
+        getMyReviewsDocument(userPrimaryId)
+            .flatMap { document ->
+                loadReviewImagesWithReviewId(document, document.id)
+            }.flatMap { (document, images, reviewId) ->
+                getIsBookmarkWithImages(
+                    userPrimaryId,
+                    document,
+                    images,
+                    reviewId
+                )
+            }.map { (document, images, isBookmark) ->
+                Review(
+                    id = document.id,
+                    title = document.getString("title"),
+                    description = document.getString("description"),
+                    amenities = document.getString("amenities"),
+                    safety = document.getLong("safety")?.toInt(),
+                    owner = document.getLong("owner")?.toInt(),
+                    clean = document.getLong("clean")?.toInt(),
+                    distance = document.getLong("distance")?.toInt(),
+                    userId = userPrimaryId,
+                    address = document.getString("address"),
+                    buildingName = document.getString("buildingName"),
+                    latitude = document.getDouble("latitude"),
+                    longitude = document.getDouble("longitude"),
+                    rating = document.getDouble("rating"),
+                    createdAt = document.getTimestamp("createdAt"),
+                    updatedAt = document.getTimestamp("updatedAt"),
+                    images = images,
+                    isBookmark = isBookmark
+                )
+            }.toList()
+
     private fun saveImageInFireStore(
         reviewId: String,
         imageUrl: Uri,
@@ -157,6 +191,25 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                                     latitude <= topLeftLatLng.latitude
                         }
                     }.forEach { document ->
+                        emitter.onNext(document)
+                    }
+                    emitter.onComplete()
+                }
+                .addOnFailureListener { exception ->
+                    emitter.onError(exception)
+                }
+        }
+
+    private fun getMyReviewsDocument(
+        userPrimaryId: String
+    ): Observable<DocumentSnapshot> =
+        Observable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("reviews")
+                .whereEqualTo("userId", userPrimaryId)
+                .get()
+                .addOnSuccessListener { documents ->
+                    documents.forEach { document ->
                         emitter.onNext(document)
                     }
                     emitter.onComplete()

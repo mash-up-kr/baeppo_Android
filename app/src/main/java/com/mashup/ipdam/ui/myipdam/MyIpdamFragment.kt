@@ -20,12 +20,16 @@ class MyIpdamFragment : BaseFragment<FragmentMyipdamBinding>(R.layout.fragment_m
 
     override fun initLayout() {
         super.initLayout()
-        binding.viewModel = myIpdamViewModel
         initRecyclerView()
+        binding.viewModel = myIpdamViewModel
     }
 
-    private fun initRecyclerView(){
-        binding.rvMyIpdamReview.adapter = myIpdamReviewAdapter
+    override fun onResume() {
+        super.onResume()
         myIpdamViewModel.getMyIpdamReviews()
+    }
+
+    private fun initRecyclerView() {
+        binding.rvMyIpdamReview.adapter = myIpdamReviewAdapter
     }
 }

@@ -49,7 +49,9 @@ class HomeViewModel @Inject constructor(
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
         val isClicking = savedStateHandle.get<Boolean>("isClicking")
-        homeRepository.getReviewsByMapBoundary(mapBoundary)
+
+        loadReviewDisposable?.dispose()
+        loadReviewDisposable = homeRepository.getReviewsByMapBoundary(mapBoundary)
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
             .subscribe(
@@ -66,7 +68,9 @@ class HomeViewModel @Inject constructor(
                 {
                     Log.e(logTag, it.toString())
                 }
-            ).addToDisposable()
+            ).apply {
+                addToDisposable()
+            }
     }
 
     fun getAddressByLatLng(position: LatLng) {
