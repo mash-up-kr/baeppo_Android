@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.mashup.ipdam.entity.review.ReviewPoint"/>
+        <import type="com.mashup.ipdam.entity.review.PointType"/>
+        <variable
+            name="item"
+            type="ReviewPoint" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/pointGoodImage"
+            imageButtonDrawable="@{item.pointType.equals(PointType.GOOD) ? @drawable/ic_active_good : @drawable/ic_not_active_good}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="18dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/pointGoodText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            tools:text="가까워요"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#9c9c9c"
+            app:layout_constraintEnd_toEndOf="@id/pointGoodImage"
+            app:layout_constraintStart_toStartOf="@id/pointGoodImage"
+            app:layout_constraintTop_toBottomOf="@id/pointGoodImage" />
+
+        <ImageButton
+            android:id="@+id/pointNormalImage"
+            imageButtonDrawable="@{item.pointType.equals(PointType.NORMAL) ? @drawable/ic_active_normal : @drawable/ic_not_active_normal}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="40dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toStartOf="@id/pointGoodImage"
+            app:layout_constraintStart_toEndOf="@+id/pointBadImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/pointNormalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            tools:text="괜찮아요"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#9c9c9c"
+            app:layout_constraintEnd_toEndOf="@id/pointNormalImage"
+            app:layout_constraintStart_toStartOf="@id/pointNormalImage"
+            app:layout_constraintTop_toBottomOf="@id/pointNormalImage" />
+
+        <ImageButton
+            android:id="@+id/pointBadImage"
+            imageButtonDrawable="@{item.pointType.equals(PointType.BAD) ? @drawable/ic_active_bad : @drawable/ic_not_active_bad}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="21dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toEndOf="@+id/pointTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/pointBadText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            tools:text="멀어요"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#9c9c9c"
+            app:layout_constraintEnd_toEndOf="@id/pointBadImage"
+            app:layout_constraintStart_toStartOf="@id/pointBadImage"
+            app:layout_constraintTop_toBottomOf="@id/pointBadImage" />
+
+        <TextView
+            android:id="@+id/pointTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="52dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/pointBadImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/pointBadImage"
+            tools:text="통학거리" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

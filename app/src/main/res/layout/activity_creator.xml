@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.creator.CreatorActivity">
+
+        <ImageView
+            android:id="@+id/creatorBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_x_mark"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/creatorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/creator_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/creator_design"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/creator_design"
+            android:textColor="#212226"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/creatorBackButton" />
+
+        <TextView
+            android:id="@+id/creator_design_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/creator_design_member"
+            android:textColor="#212226"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/creator_design"
+            app:layout_constraintTop_toBottomOf="@id/creator_design" />
+
+        <TextView
+            android:id="@+id/creator_android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/creator_android"
+            android:textColor="#212226"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/creator_design_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_design_member" />
+
+        <TextView
+            android:id="@+id/creator_android_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/creator_android_member"
+            android:textColor="#212226"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/creator_android"
+            app:layout_constraintTop_toBottomOf="@id/creator_android" />
+
+        <TextView
+            android:id="@+id/creator_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/creator_web"
+            android:textColor="#212226"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/creator_android_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_android_member" />
+
+        <TextView
+            android:id="@+id/creator_web_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/creator_web_member"
+            android:textColor="#212226"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/creator_web"
+            app:layout_constraintTop_toBottomOf="@id/creator_web" />
+
+        <TextView
+            android:id="@+id/creator_spring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/creator_spring"
+            android:textColor="#212226"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/creator_web_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_web_member" />
+
+        <TextView
+            android:id="@+id/creator_spring_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/creator_spring_member"
+            android:textColor="#212226"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/creator_spring"
+            app:layout_constraintTop_toBottomOf="@id/creator_spring" />
+
+        <TextView
+            android:id="@+id/creator_mashup"
+            setHtmlText="@{@string/creator_mashup}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:textColor="#212226"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/creator_spring_member"
+            app:layout_constraintTop_toBottomOf="@id/creator_spring_member" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

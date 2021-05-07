@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_corner_solid"
+        android:backgroundTint="@color/white">
+
+
+        <TextView
+            android:id="@+id/dialogAmenitiesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/dialog_amenities_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/dialogCancelButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_x_mark"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/dialogAmenitiesEdit"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/bg_corner_stroke"
+            android:hint="@string/dialog_amenities_hint"
+            android:inputType="textPersonName"
+            android:maxLength="8"
+            android:paddingStart="9dp"
+            android:paddingTop="9dp"
+            android:paddingEnd="60dp"
+            android:paddingBottom="9dp"
+            android:textColor="#9c9c9c"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialogAmenitiesTitle" />
+
+        <Button
+            android:id="@+id/dialogAmenitiesButton"
+            android:layout_width="47dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_dialog_add"
+            android:padding="0dp"
+            android:text="@string/dialog_amenities_add"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:backgroundTint="@color/surface_color"
+            app:layout_constraintBottom_toBottomOf="@id/dialogAmenitiesEdit"
+            app:layout_constraintEnd_toEndOf="@id/dialogAmenitiesEdit"
+            app:layout_constraintTop_toTopOf="@id/dialogAmenitiesEdit" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

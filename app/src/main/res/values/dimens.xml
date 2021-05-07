@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="radius_corner">8dp</dimen>
+    <dimen name="dialog_radius">12dp</dimen>
+    <dimen name="dialog_width">274dp</dimen>
+    <dimen name="dialog_height">126dp</dimen>
+    <dimen name="height_edittext">48dp</dimen>
+    <dimen name="height_review_description">124dp</dimen>
+    <dimen name="elevation_search">4dp</dimen>
+    <dimen name="margin_bottom_search">8dp</dimen>
+    <dimen name="margin_bottom_location_button_by_map">81dp</dimen>
+    <dimen name="margin_bottom_location_button_by_marker">135dp</dimen>
+    <dimen name="peek_height_bottom_sheet_by_map">71dp</dimen>
+    <dimen name="peek_height_bottom_sheet_by_marker">125dp</dimen>
+    <dimen name="height_indicator">2dp</dimen>
+    <dimen name="padding_indicator">10dp</dimen>
+    <dimen name="size_navigation_icon">20dp</dimen>
+    <dimen name="size_add_button">50dp</dimen>
+    <dimen name="space_room_image">8dp</dimen>
+    <dimen name="bottom_sheet_margin_top">8dp</dimen>
+    <dimen name="height_marker">60dp</dimen>
+    <dimen name="width_marker">44dp</dimen>
+    <dimen name="indicator_size">8dp</dimen>
+    <dimen name="cluster_size">45dp</dimen>
+</resources>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isMyReview"
+            type="Boolean" />
+
+        <variable
+            name="review"
+            type="com.mashup.ipdam.data.review.Review" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_photoViewPager"
+            viewPagerReplaceList="@{review.images}"
+            android:layout_width="match_parent"
+            android:layout_height="203dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iv_resultNoneImage"
+            visible="@{review.images.empty}"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="67dp"
+            android:src="@drawable/ic_none"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/vp_photoViewPager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vp_photoViewPager"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_resultNoneTextView"
+            visible="@{review.images.empty}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/room_image_none"
+            android:textColor="@color/surface_color"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_resultNoneImage" />
+
+        <com.mashup.ipdam.ui.home.adapter.roomimage.CircleIndicator
+            android:id="@+id/cv_photoViewPagerIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/vp_photoViewPager"
+            app:layout_constraintEnd_toEndOf="@id/vp_photoViewPager"
+            app:layout_constraintStart_toStartOf="@id/vp_photoViewPager" />
+
+        <View
+            android:id="@+id/v_leftLine"
+            android:layout_width="0.5dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="80dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_buildingName" />
+
+        <View
+            android:id="@+id/v_rightLine"
+            android:layout_width="0.5dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="80dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
+            app:layout_constraintStart_toEndOf="@id/v_leftLine"
+            app:layout_constraintTop_toTopOf="@id/tv_buildingName" />
+
+        <TextView
+            android:id="@+id/tv_buildingName"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="12dp"
+            android:text="@{review.buildingName}"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/vp_photoViewPager"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
+
+        <ImageView
+            android:id="@+id/iv_star"
+            android:layout_width="20dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@id/tv_starRate_value"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
+            app:srcCompat="@drawable/star"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/iv_bookmark"
+            bookmark="@{review.bookmark}"
+            visible="@{!isMyReview}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toEndOf="@id/vp_photoViewPager"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
+            app:srcCompat="@drawable/bookmark"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            reviewDate="@{review.createdAt}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/v_rightLine"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
+
+        <TextView
+            android:id="@+id/tv_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{review.title}"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_buildingName"
+            tools:text="여러분 제가 살아봤는데요, 이 집은 진짜 아니에요..." />
+
+        <TextView
+            android:id="@+id/tv_starRate_value"
+            ratingWhenLoad="@{review.rating}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@id/v_leftLine"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            visible="@{isMyReview}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager"
+            app:srcCompat="@drawable/gear"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
+
+        <import type="com.mashup.ipdam.ui.home.BottomSheetState" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_corner"
+        android:backgroundTint="@android:color/white"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="@dimen/peek_height_bottom_sheet_by_map"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <include
+            android:id="@+id/lo_bottomSheetByMarker"
+            layout="@layout/bottomsheet_by_marker"
+            visible="@{viewModel.bottomSheetState==BottomSheetState.MARKER_CLICKED}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_bottomSheetHeader"
+            ipdamAddress="@{viewModel.name}"
+            ipdamCount="@{viewModel.reviews.size()}"
+            visible="@{viewModel.bottomSheetState==BottomSheetState.MAP_MOVED}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_line" />
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="50dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:alpha="1"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </View>
+
+        <TextView
+            android:id="@+id/tv_placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:alpha="0"
+            android:text="@{viewModel.name}"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_marker"
+            app:layout_constraintStart_toEndOf="@id/iv_marker"
+            app:layout_constraintTop_toTopOf="@id/iv_marker" />
+
+        <ImageView
+            android:id="@+id/iv_marker"
+            android:layout_width="16dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="46dp"
+            android:alpha="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/marker"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_placeNameAndCount"
+            ipdamAddress="@{viewModel.name}"
+            ipdamCount="@{viewModel.reviews.size()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="18dp"
+            android:alpha="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_marker" />
+
+        <Spinner
+            android:id="@+id/sp_sort"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="82dp"
+            android:layout_marginEnd="18dp"
+            android:alpha="0"
+            android:background="@drawable/bg_spinner_background"
+            android:divider="@color/stroke_color"
+            android:dividerHeight="10dp"
+            android:popupBackground="@drawable/bg_spinner_dropdown_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_reviews"
+            replaceList="@{viewModel.reviews}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_placeNameAndCount"
+            app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/iv_resultNoneImage"
+            visible="@{viewModel.reviews.empty}"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_none"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_resultNoneTextView"
+            visible="@{viewModel.reviews.empty}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/here_review_none"
+            android:textColor="@color/surface_color"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_resultNoneImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

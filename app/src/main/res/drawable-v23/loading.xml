@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item android:gravity="center">
+        <rotate
+            android:drawable="@drawable/loading_outer"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:fromDegrees="0"
+            android:toDegrees="360" />
+    </item>
+    <item
+        android:drawable="@drawable/ic_active_good"
+        android:width="24dp"
+        android:height="24dp"
+        android:gravity="center" />
+</layer-list>

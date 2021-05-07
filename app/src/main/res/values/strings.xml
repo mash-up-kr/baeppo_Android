@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">Ipdam</string>
+    <string name="menu_home">홈</string>
+    <string name="menu_bookmarks">관심리뷰</string>
+    <string name="menu_myipdam">마이리뷰</string>
+    <string name="menu_profile">마이페이지</string>
+    <string name="clientid_navermap">uj5pdp7rc1</string>
+    <string name="hint_main_search">어느 곳의 입담 리뷰를 찾아볼까요?</string>
+    <string name="hint_address_search">장소, 빌딩명, 주소 검색</string>
+    <string name="location_access_required">현재 위치를 알기 위해서는 Fine Location 퍼미션이 필요합니다.</string>
+    <string name="location_access_denied">Fine Location 퍼미션 권한을 사용하지 않아 현재 위치를 알 수 없습니다.</string>
+    <string name="ipdam_header_text">%1$s 자취방 리뷰 &lt;font color=\"%2$s\">%3$d&lt;/font>개</string>
+    <string name="review_count">리뷰 %1$d개</string>
+    <string name="star_count">%1$.1f/5</string>
+    <string name="home_review_rating">&lt;font color=\"#000000\">%1$s&lt;/font>/5</string>
+    <string name="here_review_none">이 장소에는 리뷰가 없습니다</string>
+    <string name="room_image_none">이미지가 없습니다</string>
+    <!-- Splash 화면 -->
+    <string name="splash_text">입주자들의 솔직한 이야기를 만나보세요</string>
+    <!--    마이페이지-->
+    <string name="profile_title">마이페이지</string>
+    <string name="profile_terms">이용약관</string>
+    <string name="profile_creator">만든이</string>
+    <string name="profile_version">버전</string>
+    <string name="profile_logout">로그아웃</string>
+    <string name="profile_unknown_user">알수없는 유저</string>
+    <string name="profile_terms_message">이용약관이 준비되어 있지 않습니다.</string>
+    <string name="profile_not_found_version">버전 내용을 알 수 없습니다.</string>
+    <!--    로그인 화면-->
+    <string name="login_id">아이디</string>
+    <string name="login_password">비밀번호</string>
+    <string name="login_button">로그인하기</string>
+    <string name="login_find_not_working">이후 추가될 기능입니다.</string>
+    <string name="login_not_found_user">사용자를 찾을 수 없습니다.</string>
+    <string name="login_find_account">&lt;u>아이디 혹은 비밀번호를 잊으셨나요?&lt;/u></string>
+    <string name="login_register_account">&lt;u>입담 회원가입&lt;/u></string>
+    <!--    회원 가입 페이지-->
+    <string name="register_title">회원가입</string>
+    <string name="register_id_text">아이디</string>
+    <string name="register_id_hint">6~12자 영문, 숫자 조합하여 만들어주세요. </string>
+    <string name="register_password_text">비밀번호</string>
+    <string name="register_password_hint">6~20자 영문, 숫자, 특수문자를 조합해주세요.</string>
+    <string name="register_password_check_text">비밀번호 확인</string>
+    <string name="register_password_check_hint">비밀 번호 확인을 위해 한번 더 입력해주세요.</string>
+    <string name="register_school_text">학교설정</string>
+    <string name="register_school_hint">재학중인 학교를 선택해주세요</string>
+    <string name="register_button">회원가입하기</string>
+    <string name="register_cancel">올바르게 입력해주세요!</string>
+    <string name="register_success">회원가입에 성공했습니다!</string>
+    <string name="register_duplicated_id">동일한 아이디를 가진 회원이 존재합니다!</string>
+    <string name="register_id_result_failed">다시 만들어주세요!</string>
+    <string name="register_id_result_success">멋진 아이디에요!</string>
+    <string name="register_password_result_failed">다시 만들어주세요!</string>
+    <string name="register_password_result_success">안전한 비밀번호입니다!</string>
+    <string name="register_password_check_result_failed">비밀번호가 달라요!</string>
+    <string name="register_password_check_result_success">확인되었습니다!</string>
+    <!--    만든이-->
+    <string name="creator_title">만든이</string>
+    <string name="creator_design">Design</string>
+    <string name="creator_design_member">박수아 황지은</string>
+    <string name="creator_android">Android</string>
+    <string name="creator_android_member">강다현 최민정 양민욱</string>
+    <string name="creator_web">WEB</string>
+    <string name="creator_web_member">김지혜 박민수 박영진</string>
+    <string name="creator_spring">Spring</string>
+    <string name="creator_spring_member">김승현 김종현 김대윤 김지희</string>
+    <string name="creator_mashup">MASH UP 10기&lt;br>
+        Team 6 배뽀&lt;br>
+        2021.02.27</string>
+    <!--    검색 페이지-->
+    <string name="search_place_header">%1$s 검색결과</string>
+    <string name="search_result_none">검색한 결과가 없습니다.</string>
+    <string name="empty_search_address">검색할 장소를 입력해주세요</string>
+    <string name="history_header">최근 검색어</string>
+    <string name="history_clear">모두 지우기</string>
+    <!-- 리뷰 생성 페이지   -->
+    <string name="add_title">마이리뷰 작성하기</string>
+    <string name="edit_title">마이리뷰 수정하기</string>
+    <string name="add_save_button">등록</string>
+    <string name="edit_save_button">수정</string>
+    <string name="add_edit_hint_search_address">리뷰를 남길 주소를 입력해주세요</string>
+    <string name="add_edit_hint_detail_address">상세 주소 작성</string>
+    <string name="add_edit_point">총 점수</string>
+    <string name="add_edit_point_rating">%1$s점</string>
+    <string name="add_edit_around">주변 상권</string>
+    <string name="add_edit_content">후기 쓰기</string>
+    <string name="add_edit_image">사진 등록</string>
+    <string name="add_edit_add_area">추가+</string>
+    <string name="add_edit_hint_image">최대5장까지 업로드가능합니다</string>
+    <string name="add_edit_hint_content_title">제목을 작성하세요</string>
+    <string name="add_edit_hint_content_description">자유롭게 후기를 작성하세요</string>
+    <string name="add_edit_info_empty">리뷰에 대한 정보를 모두 입력해주세요</string>
+    <string name="add_edit_upload_success">리뷰 업로드에 성공했습니다</string>
+    <string name="add_edit_upload_failed">리뷰 업로드에 실패했습니다</string>
+    <!-- 관심리뷰 페이지   -->
+    <string name="bookmark_review">관심리뷰</string>
+    <string name="bookmark_review_none">관심리뷰가 없습니다</string>
+    <string name="bookmark_review_count">관심리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
+    <!-- 마이리뷰 페이지   -->
+    <string name="my_review">마이리뷰</string>
+    <string name="my_review_none">마이리뷰가 없습니다</string>
+    <string name="my_ipdam_review_count">내가 작성한 리뷰 &lt;font color=\"%2$s\">%1$d&lt;/font>개</string>
+    <!--  에러 -->
+    <string name="error_too_much_selected_image">최대 5개의 이미지를 선택할 수 있습니다.</string>
+    <string name="error_not_found_user">사용자 정보를 찾을 수 없습니다.</string>
+    <!-- 주변지역 다이얼로그   -->
+    <string name="dialog_amenities_title">주변상권</string>
+    <string name="dialog_amenities_hint">8글자 내로 작성해주세요</string>
+    <string name="dialog_amenities_add">추가</string>
+    <!-- 상세리뷰 페이지   -->
+    <string name="amenities">주변상권</string>
+</resources>
