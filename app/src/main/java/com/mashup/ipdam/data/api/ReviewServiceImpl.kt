@@ -125,9 +125,11 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                 getReviewsDocumentWithReviewId(it)
             }.flatMap { document ->
                 getReviewImagesWithReviewId(document, document.id)
-            }.map { (document, images, reviewId) ->
+            }.flatMap { (document, images, _) ->
+                getUserId(userPrimaryId, document, images, true)
+            }.map { (document, triple) ->
                 Review(
-                    id = reviewId,
+                    id = document.id,
                     title = document.getString("title"),
                     description = document.getString("description"),
                     amenities = document.getString("amenities"),
@@ -135,7 +137,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     owner = document.getLong("owner")?.toInt(),
                     clean = document.getLong("clean")?.toInt(),
                     distance = document.getLong("distance")?.toInt(),
-                    userPrimaryId = document.getString("userId"),
+                    userPrimaryId = document.getString("userPrimaryId"),
                     address = document.getString("address"),
                     buildingName = document.getString("buildingName"),
                     latitude = document.getDouble("latitude"),
@@ -143,8 +145,9 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     rating = document.getDouble("rating"),
                     createdAt = document.getTimestamp("createdAt"),
                     updatedAt = document.getTimestamp("updatedAt"),
-                    images = images,
-                    isBookmark = true
+                    images = triple.first,
+                    isBookmark = triple.second,
+                    userId = triple.third
                 )
             }.toList()
 
@@ -288,7 +291,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
         Observable.create { emitter ->
             val db = Firebase.firestore
             db.collection("reviews")
-                .whereEqualTo("userId", userPrimaryId)
+                .whereEqualTo("userPrimaryId", userPrimaryId)
                 .get()
                 .addOnSuccessListener { documents ->
                     documents.forEach { document ->
@@ -398,12 +401,16 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                 .document(userPrimaryId)
                 .get()
                 .addOnSuccessListener { document ->
-                    emitter.onNext(reviewDocument to
-                            Triple(images, isBookmark, document.getString("userId")))
+                    emitter.onNext(
+                        reviewDocument to
+                                Triple(images, isBookmark, document.getString("userId"))
+                    )
                     emitter.onComplete()
                 }.addOnFailureListener {
-                    emitter.onNext(reviewDocument to
-                            Triple(images, isBookmark, "unknown user"))
+                    emitter.onNext(
+                        reviewDocument to
+                                Triple(images, isBookmark, "unknown user")
+                    )
                     emitter.onComplete()
                 }
         }
