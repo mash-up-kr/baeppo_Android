@@ -124,6 +124,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     .inflate(R.layout.item_cluster, null)
                 if (clusterView is TextView) {
                     clusterView.text = it.size.toString()
+                    clusterView.width = resources.getDimension(R.dimen.cluster_size).toInt()
+                    clusterView.height = resources.getDimension(R.dimen.cluster_size).toInt()
                 }
                 clusterView
             }.markerClickListener { review ->

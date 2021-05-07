@@ -21,4 +21,5 @@
     <dimen name="height_marker">60dp</dimen>
     <dimen name="width_marker">44dp</dimen>
     <dimen name="indicator_size">8dp</dimen>
+    <dimen name="cluster_size">45dp</dimen>
 </resources>
