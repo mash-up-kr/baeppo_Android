@@ -39,6 +39,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
                     R.drawable.indicator_dot_on,
                     0
                 )
+                itemReview.review = it
             }
             itemReview.vpPhotoViewPager.adapter = roomImageViewPagerAdapter
             itemReview.vpPhotoViewPager.registerOnPageChangeCallback(object :
@@ -47,6 +48,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
                     itemReview.cvPhotoViewPagerIndicator.selectDot(position)
                 }
             })
+            itemReview.ivBookmark.setOnClickListener {
+                detailViewModel.onOffBookmark()
+            }
         }
     }
 }

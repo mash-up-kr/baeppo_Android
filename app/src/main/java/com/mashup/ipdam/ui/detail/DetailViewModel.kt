@@ -5,18 +5,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Timestamp
 import com.mashup.base.BaseViewModel
+import com.mashup.base.schedulers.SchedulerProvider
 import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.data.review.ReviewImage
 import com.mashup.ipdam.entity.review.PointType
 import com.mashup.ipdam.entity.review.ReviewPoint
 import com.mashup.ipdam.entity.review.ReviewType
+import com.mashup.ipdam.network.service.ReviewService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor() : BaseViewModel() {
+class DetailViewModel @Inject constructor(private val reviewService: ReviewService) :
+    BaseViewModel() {
 
     override var logTag: String = "DetailViewModel"
 
@@ -35,6 +38,19 @@ class DetailViewModel @Inject constructor() : BaseViewModel() {
                 ReviewPoint(ReviewType.DISTANCE, PointType.from(it.distance ?: -1)),
                 ReviewPoint(ReviewType.CLEANNESS, PointType.from(it.clean ?: -1))
             )
+        }
+    }
+
+    fun onOffBookmark() {
+        review.value?.let {
+            reviewService.createAndUpdateReview(it.id, it.copy(isBookmark = !it.isBookmark))
+                .subscribeOn(SchedulerProvider.io())
+                .observeOn(SchedulerProvider.ui())
+                .subscribe({ reviewResult ->
+                    _review.value = reviewResult
+                }, { exception ->
+                    Log.e(logTag, exception.stackTraceToString())
+                }).addToDisposable()
         }
     }
 }
