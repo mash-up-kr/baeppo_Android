@@ -33,8 +33,10 @@ fun setTitle(view: TextView, reviewPoint: ReviewPoint) {
 
 @BindingAdapter("setAmenities")
 fun setChipGroup(chipGroup: ChipGroup, amenitiesString: String) {
+    chipGroup.removeAllViews()
     val amenities = amenitiesString.split(",")
     amenities.forEach { amenity ->
+        if(amenity.isEmpty()) return@forEach
         val amenitiesChip = Chip(chipGroup.context)
         amenitiesChip.text = amenity
         chipGroup.addView(amenitiesChip)

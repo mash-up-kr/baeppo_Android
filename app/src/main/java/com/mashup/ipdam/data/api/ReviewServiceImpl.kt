@@ -71,6 +71,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
             }.addOnCompleteListener {
                 val newReview = Review(
                     id = document.id,
+                    isBookmark = review.isBookmark,
                     title = review.title,
                     description = review.description,
                     amenities = review.amenities,
@@ -85,6 +86,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     longitude = review.longitude,
                     rating = review.rating,
                     userId = review.userId,
+                    images = review.images,
                     createdAt = review.createdAt,
                     updatedAt = review.updatedAt
                 )
