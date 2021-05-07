@@ -107,4 +107,6 @@
     <string name="dialog_amenities_title">주변상권</string>
     <string name="dialog_amenities_hint">8글자 내로 작성해주세요</string>
     <string name="dialog_amenities_add">추가</string>
+    <!-- 상세리뷰 페이지   -->
+    <string name="amenities">주변상권</string>
 </resources>

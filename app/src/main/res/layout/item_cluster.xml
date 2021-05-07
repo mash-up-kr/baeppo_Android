@@ -4,6 +4,6 @@
     android:layout_height="30dp"
     android:background="@drawable/bg_circle"
     android:backgroundTint="@color/primary_color"
-    android:padding="10dp"
+    android:gravity="center"
     android:textColor="@color/white"
     android:textSize="16sp" />

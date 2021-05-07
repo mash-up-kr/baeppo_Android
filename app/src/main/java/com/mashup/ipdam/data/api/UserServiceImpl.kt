@@ -15,6 +15,7 @@ import io.reactivex.Completable
 import io.reactivex.CompletableEmitter
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
+import org.mindrot.jbcrypt.BCrypt
 import java.util.*
 import javax.inject.Inject
 
@@ -23,13 +24,15 @@ class UserServiceImpl @Inject constructor() : UserService {
         Single.create { emitter ->
             Firebase.firestore.collection("users")
                 .whereEqualTo("userId", id)
-                .whereEqualTo("userPassword", password)
                 .get()
                 .addOnSuccessListener { snapshot ->
                     if (snapshot.documents.isEmpty()) {
                         emitter.onError(NotFoundUserException())
                     } else {
                         val userDocument = snapshot.documents[0]
+                        if (!BCrypt.checkpw(password, userDocument.getString("userPassword"))) {
+                            emitter.onError(NotFoundUserException())
+                        }
                         val user = User(
                             id = userDocument.id,
                             userId = userDocument.getString("userId"),
@@ -81,7 +84,7 @@ class UserServiceImpl @Inject constructor() : UserService {
             val imageRef = Firebase.storage.reference.child(
                 "userImages/${userPrimaryId}"
             )
-            Log.d("imageUrl","userImages/${userPrimaryId}")
+            Log.d("imageUrl", "userImages/${userPrimaryId}")
             imageRef.putFile(newImageUri)
                 .continueWithTask { task ->
                     if (!task.isSuccessful) {
@@ -128,7 +131,7 @@ class UserServiceImpl @Inject constructor() : UserService {
     ) {
         val userData = hashMapOf(
             "userId" to id,
-            "userPassword" to password,
+            "userPassword" to BCrypt.hashpw(password, BCrypt.gensalt()),
             "createdAt" to Timestamp(Date()),
             "updatedAt" to Timestamp(Date())
         )
@@ -138,7 +141,7 @@ class UserServiceImpl @Inject constructor() : UserService {
                 val user = User(
                     id = documentReference.id,
                     userId = id,
-                    userPassword = password
+                    userPassword = BCrypt.hashpw(password, BCrypt.gensalt())
                 )
                 emitter.onSuccess(user)
             }.addOnFailureListener { e ->

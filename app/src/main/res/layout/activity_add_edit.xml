@@ -42,7 +42,6 @@
             android:gravity="top|end"
             android:text="@string/add_save_button"
             android:enabled="@{viewModel.isUploading() ? false : true}"
-            android:onClick="@{() -> viewModel.requestSaveReview()}"
             android:textColor="@color/save_button_color"
             android:textSize="16sp"
             android:textStyle="bold"
