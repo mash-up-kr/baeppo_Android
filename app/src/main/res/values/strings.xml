@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ipdam</string>
+    <string name="app_name">입담</string>
     <string name="menu_home">홈</string>
     <string name="menu_bookmarks">관심리뷰</string>
     <string name="menu_myipdam">마이리뷰</string>
