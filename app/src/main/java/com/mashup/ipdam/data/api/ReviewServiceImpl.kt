@@ -31,7 +31,9 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     images,
                     reviewId
                 )
-            }.map { (document, images, isBookmark) ->
+            }.flatMap { (document, images, isBookmark) ->
+                getUserId(userPrimaryId, document, images, isBookmark)
+            }.map { (document, triple) ->
                 Review(
                     id = document.id,
                     title = document.getString("title"),
@@ -41,7 +43,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     owner = document.getLong("owner")?.toInt(),
                     clean = document.getLong("clean")?.toInt(),
                     distance = document.getLong("distance")?.toInt(),
-                    userId = userPrimaryId,
+                    userPrimaryId = userPrimaryId,
                     address = document.getString("address"),
                     buildingName = document.getString("buildingName"),
                     latitude = document.getDouble("latitude"),
@@ -49,8 +51,9 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     rating = document.getDouble("rating"),
                     createdAt = document.getTimestamp("createdAt"),
                     updatedAt = document.getTimestamp("updatedAt"),
-                    images = images,
-                    isBookmark = isBookmark
+                    images = triple.first,
+                    isBookmark = triple.second,
+                    userId = triple.third
                 )
             }.toList()
 
@@ -75,12 +78,13 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     owner = review.owner,
                     clean = review.clean,
                     distance = review.distance,
-                    userId = review.userId,
+                    userPrimaryId = review.userId,
                     address = review.address,
                     buildingName = review.buildingName,
                     latitude = review.latitude,
                     longitude = review.longitude,
                     rating = review.rating,
+                    userId = review.userId,
                     createdAt = review.createdAt,
                     updatedAt = review.updatedAt
                 )
@@ -121,9 +125,11 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                 getReviewsDocumentWithReviewId(it)
             }.flatMap { document ->
                 getReviewImagesWithReviewId(document, document.id)
-            }.map { (document, images, reviewId) ->
+            }.flatMap { (document, images, _) ->
+                getUserId(userPrimaryId, document, images, true)
+            }.map { (document, triple) ->
                 Review(
-                    id = reviewId,
+                    id = document.id,
                     title = document.getString("title"),
                     description = document.getString("description"),
                     amenities = document.getString("amenities"),
@@ -131,7 +137,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     owner = document.getLong("owner")?.toInt(),
                     clean = document.getLong("clean")?.toInt(),
                     distance = document.getLong("distance")?.toInt(),
-                    userId = document.getString("userId"),
+                    userPrimaryId = document.getString("userPrimaryId"),
                     address = document.getString("address"),
                     buildingName = document.getString("buildingName"),
                     latitude = document.getDouble("latitude"),
@@ -139,8 +145,9 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     rating = document.getDouble("rating"),
                     createdAt = document.getTimestamp("createdAt"),
                     updatedAt = document.getTimestamp("updatedAt"),
-                    images = images,
-                    isBookmark = true
+                    images = triple.first,
+                    isBookmark = triple.second,
+                    userId = triple.third
                 )
             }.toList()
 
@@ -155,7 +162,9 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     images,
                     reviewId
                 )
-            }.map { (document, images, isBookmark) ->
+            }.flatMap { (document, images, isBookmark) ->
+                getUserId(userPrimaryId, document, images, isBookmark)
+            }.map { (document, triple) ->
                 Review(
                     id = document.id,
                     title = document.getString("title"),
@@ -165,7 +174,8 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     owner = document.getLong("owner")?.toInt(),
                     clean = document.getLong("clean")?.toInt(),
                     distance = document.getLong("distance")?.toInt(),
-                    userId = userPrimaryId,
+                    userPrimaryId = userPrimaryId,
+                    userId = triple.third,
                     address = document.getString("address"),
                     buildingName = document.getString("buildingName"),
                     latitude = document.getDouble("latitude"),
@@ -173,10 +183,56 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     rating = document.getDouble("rating"),
                     createdAt = document.getTimestamp("createdAt"),
                     updatedAt = document.getTimestamp("updatedAt"),
-                    images = images,
-                    isBookmark = isBookmark
+                    images = triple.first,
+                    isBookmark = triple.second
                 )
             }.toList()
+
+    override fun deleteMyReview(reviewId: String): Completable =
+        Completable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("reviews")
+                .document(reviewId)
+                .delete()
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }
+                .addOnFailureListener {
+                    emitter.onError(it)
+                }
+        }
+
+    override fun deleteBookMarkReview(reviewId: String, userPrimaryId: String): Completable =
+        Completable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("bookmarks")
+                .document(reviewId)
+                .delete()
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }
+                .addOnFailureListener {
+                    emitter.onError(it)
+                }
+        }
+
+    override fun createBookmarkReview(reviewId: String, userPrimaryId: String): Completable {
+        val bookmarkData = hashMapOf(
+            "reviewId" to reviewId,
+            "userId" to userPrimaryId
+        )
+
+        return Completable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("bookmarks")
+                .add(bookmarkData)
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }.addOnFailureListener { e ->
+                    emitter.onError(e)
+                }
+        }
+    }
 
     private fun saveImageInFireStore(
         reviewId: String,
@@ -235,7 +291,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
         Observable.create { emitter ->
             val db = Firebase.firestore
             db.collection("reviews")
-                .whereEqualTo("userId", userPrimaryId)
+                .whereEqualTo("userPrimaryId", userPrimaryId)
                 .get()
                 .addOnSuccessListener { documents ->
                     documents.forEach { document ->
@@ -329,6 +385,32 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     emitter.onComplete()
                 }.addOnFailureListener {
                     emitter.onNext(Triple(reviewDocument, images, false))
+                    emitter.onComplete()
+                }
+        }
+
+    private fun getUserId(
+        userPrimaryId: String,
+        reviewDocument: DocumentSnapshot,
+        images: List<ReviewImage>,
+        isBookmark: Boolean
+    ): Observable<Pair<DocumentSnapshot, Triple<List<ReviewImage>, Boolean, String?>>> =
+        Observable.create { emitter ->
+            val db = Firebase.firestore
+            db.collection("users")
+                .document(userPrimaryId)
+                .get()
+                .addOnSuccessListener { document ->
+                    emitter.onNext(
+                        reviewDocument to
+                                Triple(images, isBookmark, document.getString("userId"))
+                    )
+                    emitter.onComplete()
+                }.addOnFailureListener {
+                    emitter.onNext(
+                        reviewDocument to
+                                Triple(images, isBookmark, "unknown user")
+                    )
                     emitter.onComplete()
                 }
         }

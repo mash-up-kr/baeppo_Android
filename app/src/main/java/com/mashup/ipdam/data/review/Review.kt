@@ -22,7 +22,8 @@ data class Review(
     val clean: Int?,
     val distance: Int?,
     val amenities: String?,
-    val userId: String?,
+    val userPrimaryId: String?,
+    val userId: String? = null,
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null,
     val images: List<ReviewImage>? = null,
@@ -41,6 +42,7 @@ data class Review(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         Timestamp(parcel.readLong(), parcel.readInt()),
@@ -89,6 +91,7 @@ data class Review(
         parcel.writeInt(clean ?: 0)
         parcel.writeInt(distance ?: 0)
         parcel.writeString(amenities)
+        parcel.writeString(userPrimaryId)
         parcel.writeString(userId)
         parcel.writeLong(createdAt?.seconds ?: 0)
         parcel.writeInt(createdAt?.nanoseconds ?: 0)

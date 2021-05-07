@@ -225,7 +225,7 @@ class AddEditViewModel @Inject constructor(
             safety = safetyValue.value ?: return null,
             distance = distanceValue.value ?: return null,
             clean = cleanValue.value ?: return null,
-            userId = primaryId,
+            userPrimaryId = primaryId,
             createdAt = review.value?.createdAt ?: Timestamp(Date()),
             updatedAt = Timestamp(Date())
         )
