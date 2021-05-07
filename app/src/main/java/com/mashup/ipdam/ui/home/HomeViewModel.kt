@@ -51,29 +51,27 @@ class HomeViewModel @Inject constructor(
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
         savedStateHandle["boundary"] = mapBoundary
-        val isClicking = savedStateHandle.get<Boolean>("isClicking")
+        val isClicking = savedStateHandle.get<Boolean>("isClicking") ?: false
 
-        loadReviewDisposable?.dispose()
-        loadReviewDisposable = homeRepository.getReviewsByMapBoundary(mapBoundary)
-            .subscribeOn(SchedulerProvider.io())
-            .observeOn(SchedulerProvider.ui())
-            .subscribe(
-                { data ->
-                    isClicking?.let {
-                        if (!isClicking) {
-                            _bottomSheetState.value = BottomSheetState.MAP_MOVED
-                        }
+        if (!isClicking) {
+            loadReviewDisposable?.dispose()
+            loadReviewDisposable = homeRepository.getReviewsByMapBoundary(mapBoundary)
+                .subscribeOn(SchedulerProvider.io())
+                .observeOn(SchedulerProvider.ui())
+                .subscribe(
+                    { data ->
+                        _bottomSheetState.value = BottomSheetState.MAP_MOVED
                         savedStateHandle["isClicking"] = false
+                        _reviewMarkersOnMap.value = data
+                        _reviews.value = data
+                    },
+                    {
+                        Log.e(logTag, it.toString())
                     }
-                    _reviewMarkersOnMap.value = data
-
-                },
-                {
-                    Log.e(logTag, it.toString())
+                ).apply {
+                    addToDisposable()
                 }
-            ).apply {
-                addToDisposable()
-            }
+        }
     }
 
     fun getAddressByLatLng(position: LatLng) {
@@ -143,6 +141,10 @@ class HomeViewModel @Inject constructor(
         if (_bottomSheetState.value != BottomSheetState.MARKER_CLICKED)
             _bottomSheetState.value = BottomSheetState.MARKER_CLICKED
         savedStateHandle["isClicking"] = true
+    }
+
+    fun moveCameraByUser() {
+        savedStateHandle["isClicking"] = false
     }
 
     fun showDetailView(id: String) {

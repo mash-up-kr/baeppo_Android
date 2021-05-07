@@ -24,12 +24,19 @@ class LoginViewModel @Inject constructor(
     val showMainViewEvent: SingleLiveEvent<Unit> = _showMainViewEvent
     private val _isUserNotFound = SingleLiveEvent<Unit>()
     val isUserNotFound: SingleLiveEvent<Unit> = _isUserNotFound
+    private val _isLogin = SingleLiveEvent<Boolean>()
+    val isLogin: SingleLiveEvent<Boolean> = _isLogin
     val inputId = MutableLiveData("")
     val inputPassword = MutableLiveData("")
 
     fun login() {
-        val id = inputId.value ?: return
-        val password = inputPassword.value ?: return
+        _isLogin.value = true
+        val id = inputId.value
+        val password = inputPassword.value
+
+        if (id == null || password == null) {
+            _isLogin.value = false
+        } else {
         userService.login(id, password)
             .subscribeOn(SchedulerProvider.io())
             .observeOn(SchedulerProvider.ui())
@@ -40,9 +47,11 @@ class LoginViewModel @Inject constructor(
                     if (exception is NotFoundUserException) {
                         _isUserNotFound.call()
                     }
+                    _isLogin.value = false
                     Log.e(logTag, exception.stackTraceToString())
                 }
             ).addToDisposable()
+        }
     }
 
     private fun setIdWhenLoginSuccess(user: User) {
@@ -52,7 +61,9 @@ class LoginViewModel @Inject constructor(
             .subscribe(
                 {
                     _showMainViewEvent.call()
+                    _isLogin.value = false
                 }, { exception ->
+                    _isLogin.value = false
                     Log.e(logTag, exception.stackTraceToString())
                 }
             ).addToDisposable()

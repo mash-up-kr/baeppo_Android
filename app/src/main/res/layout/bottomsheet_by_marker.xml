@@ -5,6 +5,7 @@
     <data>
 
         <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
+        <import type="java.util.List"/>
 
         <variable
             name="viewModel"
@@ -17,7 +18,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_thumbnail"
-            replaceList="@{viewModel.reviews.get(0).images}"
+            replaceList="@{viewModel.reviews.empty ? null : viewModel.reviews.get(0).images}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

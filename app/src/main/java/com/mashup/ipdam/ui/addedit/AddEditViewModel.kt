@@ -171,6 +171,7 @@ class AddEditViewModel @Inject constructor(
         val review = getReview(primaryId)
         if (review == null || review.isEmpty()) {
             _isReviewInfoEmpty.call()
+            _isUploading.value = false
             return
         }
         val reviewId = savedStateHandle.get<String>("reviewId")
@@ -189,6 +190,7 @@ class AddEditViewModel @Inject constructor(
     private fun saveImageList(reviewId: String?) {
         if (reviewId == null) {
             _isReviewSaveFailed.call()
+            _isUploading.value = false
             return
         }
 

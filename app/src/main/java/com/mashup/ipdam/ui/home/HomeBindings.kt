@@ -12,6 +12,7 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.utils.ColorUtils
 import com.mashup.ipdam.utils.DateUtil
 import java.text.DecimalFormat
+import java.util.*
 
 @BindingAdapter(value = ["ipdamAddress", "ipdamCount"], requireAll = true)
 fun showIpdamHeader(view: TextView, address: String, count: Int) {
@@ -33,8 +34,9 @@ fun setReviewCount(view: TextView, count: Int) {
 }
 
 @BindingAdapter("reviewDate")
-fun setReviewDate(view: TextView, date: Timestamp) {
-    view.text = DateUtil.getDateFormatter().format(date.toDate())
+fun setReviewDate(view: TextView, date: Timestamp?) {
+
+    view.text = DateUtil.getDateFormatter().format(date?.toDate() ?: Date())
 }
 
 @BindingAdapter("ratingWhenLoad")

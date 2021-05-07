@@ -7,6 +7,8 @@
 
         <import type="com.mashup.ipdam.ui.login.LoginViewModel" />
 
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="LoginViewModel" />
@@ -94,6 +96,7 @@
             android:background="@drawable/bg_corner_solid"
             android:backgroundTint="@color/primary_color"
             android:onClick="@{() -> viewModel.login()}"
+            android:enabled="@{viewModel.isLogin() ? false : true}"
             android:text="@string/login_button"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -123,5 +126,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginFindAccount" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:indeterminateDrawable="@drawable/loading"
+            android:indeterminateDuration="1000"
+            android:visibility="@{viewModel.isLogin() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginLogo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
