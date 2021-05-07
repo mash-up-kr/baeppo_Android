@@ -44,6 +44,7 @@ data class Review(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         Timestamp(parcel.readLong(), parcel.readInt()),
         Timestamp(parcel.readLong(), parcel.readInt()),
         parcel.createTypedArray(ReviewImage.CREATOR)?.asList(),
@@ -90,6 +91,7 @@ data class Review(
         parcel.writeInt(clean ?: 0)
         parcel.writeInt(distance ?: 0)
         parcel.writeString(amenities)
+        parcel.writeString(userPrimaryId)
         parcel.writeString(userId)
         parcel.writeLong(createdAt?.seconds ?: 0)
         parcel.writeInt(createdAt?.nanoseconds ?: 0)
