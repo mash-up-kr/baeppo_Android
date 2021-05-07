@@ -43,8 +43,8 @@ data class Review(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readParcelable<Timestamp>(Timestamp::class.java.classLoader),
-        parcel.readParcelable<Timestamp>(Timestamp::class.java.classLoader),
+        Timestamp(parcel.readLong(), parcel.readInt()),
+        Timestamp(parcel.readLong(), parcel.readInt()),
         parcel.createTypedArray(ReviewImage.CREATOR)?.asList(),
         parcel.readByte() != 0.toByte()
     )
@@ -81,17 +81,19 @@ data class Review(
         parcel.writeString(description)
         parcel.writeString(buildingName)
         parcel.writeString(address)
-        parcel.writeValue(latitude)
-        parcel.writeValue(longitude)
-        parcel.writeValue(rating)
-        parcel.writeValue(owner)
-        parcel.writeValue(safety)
-        parcel.writeValue(clean)
-        parcel.writeValue(distance)
+        parcel.writeDouble(latitude ?: 0.0)
+        parcel.writeDouble(longitude ?: 0.0)
+        parcel.writeDouble(rating ?: 0.0)
+        parcel.writeInt(owner ?: 0)
+        parcel.writeInt(safety ?: 0)
+        parcel.writeInt(clean ?: 0)
+        parcel.writeInt(distance ?: 0)
         parcel.writeString(amenities)
         parcel.writeString(userId)
-        parcel.writeParcelable(createdAt, flags)
-        parcel.writeParcelable(updatedAt, flags)
+        parcel.writeLong(createdAt?.seconds ?: 0)
+        parcel.writeInt(createdAt?.nanoseconds ?: 0)
+        parcel.writeLong(updatedAt?.seconds ?: 0)
+        parcel.writeInt(updatedAt?.nanoseconds ?: 0)
         parcel.writeTypedArray(images?.toTypedArray(), flags)
         parcel.writeByte(if (isBookmark) 1 else 0)
     }

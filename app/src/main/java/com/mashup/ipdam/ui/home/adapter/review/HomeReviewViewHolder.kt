@@ -34,6 +34,9 @@ class HomeReviewViewHolder(
                     cvPhotoViewPagerIndicator.selectDot(position)
                 }
             })
+            root.setOnClickListener {
+                review?.id?.let { homeViewModel.showDetailView(it) }
+            }
         }
     }
 

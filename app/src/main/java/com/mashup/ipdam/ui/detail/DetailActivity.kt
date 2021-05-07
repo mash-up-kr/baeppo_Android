@@ -7,6 +7,7 @@ import com.mashup.ipdam.R
 import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.ActivityDetailBinding
 import com.mashup.ipdam.ui.detail.adapter.DetailReviewPointAdapter
+import com.mashup.ipdam.ui.home.HomeFragment.Companion.REVIEW
 import com.mashup.ipdam.ui.home.adapter.roomimage.RoomImageViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +22,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
     private val detailReviewPointAdapter by lazy { DetailReviewPointAdapter() }
 
     override fun initLayout() {
-        detailViewModel.setReview(intent?.getParcelableExtra("review"))
+        detailViewModel.setReview(intent?.getParcelableExtra(REVIEW))
         initBinding()
     }
 
