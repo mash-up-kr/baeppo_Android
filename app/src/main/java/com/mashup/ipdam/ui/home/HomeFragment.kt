@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PointF
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ import com.mashup.ipdam.data.map.MapConstants.MAP_MAX_ZOOM
 import com.mashup.ipdam.data.map.MapConstants.MIN_MAX_ZOOM
 import com.mashup.ipdam.data.review.Review
 import com.mashup.ipdam.databinding.FragmentHomeBinding
+import com.mashup.ipdam.ui.detail.DetailActivity
 import com.mashup.ipdam.ui.home.adapter.review.HomeReviewAdapter
 import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapter
 import com.mashup.ipdam.ui.search.SearchActivity
@@ -112,8 +114,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
         return TedNaverClustering.with<Review>(requireContext(), myMap)
             .customMarker { clusterItem ->
-                Marker(LatLng(clusterItem.latitude ?: DEFAULT_LATITUDE,
-                    clusterItem.longitude ?: DEFAULT_LONGITUDE)).apply {
+                Marker(
+                    LatLng(
+                        clusterItem.latitude ?: DEFAULT_LATITUDE,
+                        clusterItem.longitude ?: DEFAULT_LONGITUDE
+                    )
+                ).apply {
                     icon = markerImage
                     width = resources.getDimension(R.dimen.width_marker).toInt()
                     height = resources.getDimension(R.dimen.height_marker).toInt()
@@ -124,13 +130,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     .inflate(R.layout.item_cluster, null)
                 if (clusterView is TextView) {
                     clusterView.text = it.size.toString()
+                    clusterView.width = resources.getDimension(R.dimen.cluster_size).toInt()
+                    clusterView.height = resources.getDimension(R.dimen.cluster_size).toInt()
                 }
                 clusterView
             }.markerClickListener { review ->
                 homeViewModel.setClusterClick(mutableListOf(review))
                 homeViewModel.getAddressByLatLng(
-                    LatLng(review.latitude ?: DEFAULT_LATITUDE,
-                    review.longitude ?: DEFAULT_LONGITUDE)
+                    LatLng(
+                        review.latitude ?: DEFAULT_LATITUDE,
+                        review.longitude ?: DEFAULT_LONGITUDE
+                    )
                 )
                 homeViewModel.sortReviewByTime()
             }.clusterClickListener { reviews ->
@@ -225,6 +235,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         observeBottomSheet()
         observeMapLiveData()
         observeSearchLiveData()
+        observeDetailLiveData()
     }
 
     private fun showSearchActivity(searchingAddress: String) {
@@ -276,6 +287,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
         homeViewModel.isSearchingPlace.observe(this) {
             requireActivity().hideSoftKeyBoard()
+        }
+    }
+
+    private fun observeDetailLiveData() {
+        homeViewModel.showDetailReview.observe(this) {
+            showDetailView(it)
         }
     }
 
@@ -402,9 +419,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         }
     }
 
+    private fun showDetailView(id: String) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(
+            REVIEW,
+            homeViewModel.reviews.value?.filter { review -> review.id == id }?.get(0)
+        )
+        startActivity(intent)
+    }
+
     companion object {
         private const val ALPHA_MAX = 1F
         private const val ALPHA_CHANGED_VALUE = 0.15F
+        const val REVIEW = "review"
         fun getInstance() = HomeFragment()
     }
 }

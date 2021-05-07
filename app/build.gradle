@@ -102,4 +102,7 @@ dependencies {
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
     implementation 'gun0912.ted:tedimagepicker:1.1.0'
     implementation 'gun0912.ted:tedclustering-naver:1.0.2'
+
+    // jBCrypt
+    implementation group: 'de.svenkubiak', name: 'jBCrypt', version: '0.4.1'
 }

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ipdam">
         <activity
+            android:name=".ui.detail.DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.addedit.AddEditActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="com.mashup.ipdam.ui.home.HomeViewModel" />
-
         <import type="android.view.View" />
 
         <variable
@@ -77,7 +75,7 @@
             android:id="@+id/v_leftLine"
             android:layout_width="0.5dp"
             android:layout_height="10dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="80dp"
             android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/tv_buildingName"
             app:layout_constraintStart_toStartOf="parent"

@@ -12,8 +12,6 @@ import com.mashup.base.ext.toast
 import com.mashup.ipdam.R
 import com.mashup.ipdam.data.map.MapConstants
 import com.mashup.ipdam.databinding.ActivityAddEditBinding
-import com.mashup.ipdam.extension.toStringList
-import com.mashup.ipdam.extension.toUriList
 import com.mashup.ipdam.ui.addedit.adapter.PointAdapter
 import com.mashup.ipdam.ui.addedit.adapter.area.AddAmenitiesAdapter
 import com.mashup.ipdam.ui.addedit.adapter.area.AmenitiesAdapter
@@ -21,6 +19,7 @@ import com.mashup.ipdam.ui.addedit.adapter.image.AddRoomImageAdapter
 import com.mashup.ipdam.ui.addedit.adapter.image.RoomImageAdapter
 import com.mashup.ipdam.ui.addedit.dialog.AmenitiesDialog
 import com.mashup.ipdam.ui.search.SearchActivity
+import com.mashup.ipdam.utils.ClickUtil
 import dagger.hilt.android.AndroidEntryPoint
 import gun0912.tedimagepicker.builder.TedRxImagePicker
 
@@ -28,6 +27,8 @@ import gun0912.tedimagepicker.builder.TedRxImagePicker
 class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_add_edit) {
     override var logTag: String = "add_editActivity"
     private val viewModel: AddEditViewModel by viewModels()
+
+    private val click by lazy { ClickUtil(this.lifecycle) }
 
     private val searchActivityResultLauncher =
         registerForActivityResult(
@@ -50,6 +51,15 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding>(R.layout.activity_a
         initPointRecyclerView()
         initAreaRecyclerView()
         initImageRecyclerView()
+        initAddEditSaveButtonEvent()
+    }
+
+    private fun initAddEditSaveButtonEvent() {
+        binding.addEditSaveButton.setOnClickListener {
+            click.run {
+                viewModel.requestSaveReview()
+            }
+        }
     }
 
     private fun initPointRecyclerView() {

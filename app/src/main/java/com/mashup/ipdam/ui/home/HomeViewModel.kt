@@ -44,6 +44,9 @@ class HomeViewModel @Inject constructor(
     private val _isSearchingPlace = SingleLiveEvent<Unit>()
     val isSearchingPlace: SingleLiveEvent<Unit> = _isSearchingPlace
 
+    private val _showDetailReview = SingleLiveEvent<String>()
+    val showDetailReview: SingleLiveEvent<String> = _showDetailReview
+
     var loadReviewDisposable: Disposable? = null
 
     fun getReviewInBoundary(mapBoundary: MapBoundary) {
@@ -142,6 +145,9 @@ class HomeViewModel @Inject constructor(
         savedStateHandle["isClicking"] = true
     }
 
+    fun showDetailView(id: String) {
+        _showDetailReview.value = id
+    }
 }
 
 enum class BottomSheetState {
