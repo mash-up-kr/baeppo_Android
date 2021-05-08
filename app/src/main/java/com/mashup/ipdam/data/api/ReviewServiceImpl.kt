@@ -79,7 +79,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
                     owner = review.owner,
                     clean = review.clean,
                     distance = review.distance,
-                    userPrimaryId = review.userId,
+                    userPrimaryId = review.userPrimaryId,
                     address = review.address,
                     buildingName = review.buildingName,
                     latitude = review.latitude,
@@ -123,8 +123,8 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
 
     override fun getReviewsInMyBookmark(userPrimaryId: String): Single<List<Review>> =
         getIsBookmarkSameUserId(userPrimaryId)
-            .flatMap {
-                getReviewsDocumentWithReviewId(it)
+            .flatMap { reviewId ->
+                getReviewsDocumentWithReviewId(reviewId)
             }.flatMap { document ->
                 getReviewImagesWithReviewId(document, document.id)
             }.flatMap { (document, images, _) ->
@@ -354,11 +354,13 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
         Observable.create { emitter ->
             val db = Firebase.firestore
             db.collection("bookmarks")
-                .whereEqualTo("userPk", userPrimaryId)
+                .whereEqualTo("userId", userPrimaryId)
                 .get()
                 .addOnSuccessListener { documents ->
                     documents.forEach { document ->
-                        emitter.onNext(document.id)
+                        document.getString("reviewId")?.let { reviewId ->
+                            emitter.onNext(reviewId)
+                        }
                     }
                     emitter.onComplete()
                 }.addOnFailureListener {
@@ -376,7 +378,7 @@ class ReviewServiceImpl @Inject constructor() : ReviewService {
             val db = Firebase.firestore
             db.collection("bookmarks")
                 .whereEqualTo("reviewId", reviewId)
-                .whereEqualTo("userPk", userPrimaryId)
+                .whereEqualTo("userId", userPrimaryId)
                 .get()
                 .addOnSuccessListener { snapshot ->
                     if (snapshot.documents.isEmpty()) {

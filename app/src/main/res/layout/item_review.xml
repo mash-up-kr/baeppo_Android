@@ -93,13 +93,17 @@
 
         <TextView
             android:id="@+id/tv_buildingName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="21dp"
-            android:layout_marginStart="1dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
             android:text="@{review.buildingName}"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/v_leftLine"
             app:layout_constraintStart_toStartOf="@id/vp_photoViewPager"
             app:layout_constraintTop_toBottomOf="@id/vp_photoViewPager" />
 

@@ -45,6 +45,7 @@ import com.mashup.ipdam.ui.home.adapter.roomimagebymarker.RoomImageByMarkerAdapt
 import com.mashup.ipdam.ui.search.SearchActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.CameraUpdate.REASON_GESTURE
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
@@ -145,8 +146,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 homeViewModel.sortReviewByTime()
             }.clusterClickListener { reviews ->
                 homeViewModel.setClusterClick(reviews.items.toList())
-            }
-            .make()
+            }.make()
     }
 
     private fun initSearchLayout() {
@@ -353,6 +353,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             homeViewModel.getAddressByLatLng(myMap.cameraPosition.target)
             homeViewModel.sortReviewByTime()
         }
+        myMap.addOnCameraChangeListener { reason, _ ->
+          if (reason == REASON_GESTURE) {
+              homeViewModel.moveCameraByUser()
+          }
+        }
     }
 
     private fun initMapUi() {
@@ -360,6 +365,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             isZoomControlEnabled = false
             isScaleBarEnabled = false
             isLocationButtonEnabled = false
+            isRotateGesturesEnabled = false
+            isTiltGesturesEnabled = false
         }
         binding.locationView.map = myMap
     }
